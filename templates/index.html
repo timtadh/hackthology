@@ -1,0 +1,63 @@
+    <style>
+/*         body { margin:20px 0; } */
+        .container  { border:20px solid #eee; }
+        /*#container {  padding: 0px; }
+        #blog { background: #ccf; }
+        #project { background: #fcc; }
+        #stream { background: #cfc; }
+        #about { background: #ffc; }
+        #resume { background: #cff; }*/
+
+        .big { font-size: 60px; position: relative; top: -10px }
+
+        #blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
+        #project { border:10px solid #ddd; left: -10px; }
+        #stream, #about { border:10px solid #ddd; right:-10px; }
+        #resume { border:10px solid #ddd; right:-10px; text-align:right; }
+        #copyright { background: #fff; text-align:right;}
+        /*#leftcol, #rightcol  { height: 150px;  }*/
+        #blog     { height: 270px;  }
+        #project  { height: 160px;  position: relative; top: 10px; }
+        #stream   { height: 195px; float: right; position: relative; top: -10px; }
+        #about    { height: 50px;  float: right; position: relative; top: -60px; }
+        #resume   { height: 50px; float: right; position: relative; top: -35px; }
+        #copyright { height: 20px;  float: right; position: relative; top: 0px; right: 0px;}
+    </style>
+</head>
+<body>
+    <div class="container showgrid">
+        <h1>Hackthology.com</h1>
+        <div class="span-24 last" id="container">
+<!--             <h2>This is a combined header that includes the left and right columns.</h2> -->
+            <div row1>
+                <div class="span-14" id="blog">
+                    <h2>blog</h2>
+                </div>
+                <div class="span-1">
+                    &nbsp;
+                </div>
+                <div class="span-9 last" id="stream">
+                    <h2>stream</h2>
+                </div>
+            </div>
+
+            <div row2>
+                <div class="span-14" id="project">
+                    <h2>project</h2>
+                </div>
+                <div class="span-1">
+                    &nbsp;
+                </div>
+                <div class=" span-9 last" id="about">
+                    <h1 class="big">about me</h1>
+                </div>
+            </div>
+
+            <div class="span-9 last" id="resume">
+                <h1 class="big">r&nbsp;e&nbsp;s&nbsp;u&nbsp;m&nbsp;e</h1>
+            </div>
+            <div class="span-9 last" id="copyright">
+                <strong>Copyright 2010 Tim Henderson</strong> &nbsp; &nbsp; All Rights Reserved.
+            </div>
+        </div>
+    </div>
