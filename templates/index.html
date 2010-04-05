@@ -1,69 +1,132 @@
     <style>
 /*         body { margin:20px 0; } */
-/*         .container  { border:20px solid #eee; } */
-        /*#container {  padding: 0px; }
-        #blog { background: #ccf; }
-        #project { background: #fcc; }
-        #stream { background: #cfc; }
-        #about { background: #ffc; }
-        #resume { background: #cff; }*/
+/*         .container  { border:10px solid #eee; }  */
+        .container  { padding: 20px 20px 30px 20px; font-size: 16px;}
+/*         .boxpadding { padding: 10px; } */
 
-        .titlebar { text-align: center; }
-        .title { font-size: 60px; line-height: 60px; }
+        hr { margin:5px; border:1px solid #ccc; }
+
+        a {
+            color:#0a0;
+            font-weight:bold;
+            text-decoration:none;
+        }
+        a:hover {
+            color:#0c0;
+        }
+
+        .bloglink {
+            font-size: 20px;
+            line-height: 20px;
+            text-align: left;
+        }
+        .streamlink {
+            font-size: 20px;
+            line-height: 20px;
+            text-align: right;
+        }
+
+        .postlink {
+            font-size: 40px;
+            line-height: 40px;
+            color:#005;
+        }
+        a.postlink:hover {
+            color:#00a;
+        }
+
+/*         #titlebar {  background: #ccf; }  */
+        #titlebar { text-align: center; }
+        .title { font-size: 60px; line-height: 65px; }
         .subtitle { font-size: 20px; line-height: 20px; }
-        .big { font-size: 60px; position: relative; top: -10px }
+        .big { font-size: 60px; line-height: 65px; position: relative; top: -10px;  }
 
-        #blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
-        #project { border:10px solid #ddd; left: -10px; }
-        #stream, #about { border:10px solid #ddd; right:-10px; }
-        #resume { border:10px solid #ddd; right:-10px; text-align:right; }
-        #copyright { background: #fff; text-align:right;}
+/*         #titlebar { border:10px solid #ddd; position: relative; left: -10px; top: -10px} */
+/*         #blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px} */
+/*         #project { border:10px solid #ddd; left: -10px; } */
+/*         #stream { border:10px solid #ddd; right:-10px; } */
+/*         #about     { border:10px solid #ddd; right:-10px; } */
+/*         #resume    { border:10px solid #ddd; right:-10px; } */
+        #copyright { background: #fff; text-align:center;}
         /*#leftcol, #rightcol  { height: 150px;  }*/
-        #blog     { height: 270px;  }
-        #project  { height: 160px;  position: relative; top: 20px; }
-        #stream   { height: 195px; float: right; position: relative; top: -10px; }
-        #about    { height: 50px;  float: right; position: relative; top: -60px; }
-        #resume   { height: 50px; float: right; position: relative; top: -35px; }
-        #copyright { height: 20px;  float: right; position: relative; top: 20px; right: 0px;}
+        #blog      { height: 230px; margin-bottom: 3em; }
+        #project   { height: 240px; position: relative; }
+        #stream    { height: 215px; position: relative; margin-bottom: 3em; }
+        #about     { height: 50px; float: right; position: relative; }
+        #resume    { height: 50px; float: right; position: relative; text-align:right;
+                     margin-top: 3em; margin-bottom: 3em;}
+        #copyright { height: 50px; float: right;}
     </style>
 </head>
 <body>
 <!--     <div class="container showgrid"> -->
     <div class="container">
-        <div class="append-bottom span-24 last titlebar">
+        <div class="append-bottom span-24 last" id="titlebar">
             <div class="title">Hackthology</div>
-            <div class="subtitle">Tim Henderson's Anthology of Thoughts</div>
+            <div class="subtitle">Collected Sayings by Tim Henderson</div>
         </div>
         <div class="span-24 last" id="container">
             <div row1>
                 <div class="span-14" id="blog">
-                    <h2>blog</h2>
+                    <div class="boxpadding">
+                        <div class="bloglink">
+                            go to the <a href="http://blog.hackthology.com">Hackthology Blog</a>
+                        </div>
+                        <hr />
+                        <img style="float:left; margin: 0px 10px 10px 0px" src="imgs/akbar.jpeg" height=200 width=200/>
+                        <a class="postlink" href="#">
+                            Regular Expression Matching: the Virtual Machine Approach
+                        </a>
+                    </div>
                 </div>
                 <div class="span-1">
                     &nbsp;
                 </div>
                 <div class="span-9 last" id="stream">
-                    <h2>stream</h2>
+                    <div class="streamlink">
+                        project stream
+                    </div>
+                    <hr/>
+                    <a href="http://github.com/timtadh/regex-machines">regex-machines</a>
+                    <hr/>
+                    <a href="http://github.com/timtadh/tdpp">Top Down Predictive Parser</a>
+                    <hr/>
+                    <a href="http://github.com/timtadh/gobuild-fork">gobuild</a>
+                    <hr/>
+                    <a href="http://github.com/timtadh/mpp">mpp</a>
+                    <hr/>
+                    <a href="http://github.com/timtadh/crypt_framework">crypt_framework</a>
+                    <div style="text-align:right"><a href="http://github.com/timtadh/">see more...</a></div>
+                </div>
+                <div class=" span-9 last" id="about">
+                    <img style="float:right" src="imgs/akbar.jpeg" height=50 width=50/>
+                    <h1 class="big">about me</h1>
                 </div>
             </div>
 
             <div row2>
                 <div class="span-14" id="project">
-                    <h2>project</h2>
+                    <div class="bloglink">
+                        featured project :
+                        <a href="http://github.com/timtadh/regex-machines">
+                            regex-machines
+                        </a>
+                    </div>
+                    <hr/>
+                    <img style="float:right" src="imgs/akbar.jpeg" height=200 width=200/>
+                    Name the most widely used bytecode interpreter or virtual machine. Sun's JVM? Adobe's Flash? .NET and Mono? Perl? Python? PHP? These are all certainly popular, but there's one more widely used than all those combined. That bytecode interpreter is Henry Spencer's regular expression library and its many descendants.
+                    <a href="#">read more...</a>
                 </div>
                 <div class="span-1">
                     &nbsp;
                 </div>
-                <div class=" span-9 last" id="about">
-                    <h1 class="big">about me</h1>
+                <div class="span-9 last" id="resume">
+                    <img style="float:left" src="imgs/akbar.jpeg" height=50 width=50/>
+                    <h1 class="big">r é s u m é</h1>
                 </div>
-            </div>
-
-            <div class="span-9 last" id="resume">
-                <h1 class="big">r&nbsp;e&nbsp;s&nbsp;u&nbsp;m&nbsp;e</h1>
-            </div>
-            <div class="span-9 last" id="copyright">
-                <strong>Copyright 2010 Tim Henderson</strong> &nbsp; &nbsp; All Rights Reserved.
+                <div class="span-9 last" id="copyright">
+                    <strong>Copyright 2010 Tim Henderson</strong> </br> All Rights Reserved.
+                </div>
             </div>
         </div>
     </div>

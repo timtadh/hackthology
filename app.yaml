@@ -7,6 +7,9 @@ handlers:
 - url: /css
   static_dir: css
 
+- url: /imgs
+  static_dir: imgs
+
 - url: /.*
   script: hello.py
 
