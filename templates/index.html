@@ -1,61 +1,43 @@
     <style>
-/*         body { margin:20px 0; } */
-/*         .container  { border:10px solid #eee; }  */
-        .container  { padding: 20px 20px 30px 20px; font-size: 16px;}
-/*         .boxpadding { padding: 10px; } */
-
-        hr { margin:5px; border:1px solid #ccc; }
-
-        a {
-            color:#0a0;
-            font-weight:bold;
-            text-decoration:none;
-        }
-        a:hover {
-            color:#0c0;
+        .container  {
+            padding: 20px 20px 30px 20px; font-size: 16px;
+            font-family: "Helvetica Neue", "Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, Verdana, sans-serif;
+            font-weight: lighter;
+            letter-spacing: .08em;
+            text-align: justify;
         }
 
-        .bloglink {
-            font-size: 20px;
-            line-height: 20px;
-            text-align: left;
-        }
-        .streamlink {
-            font-size: 20px;
-            line-height: 20px;
-            text-align: right;
-        }
+        hr { margin:5px; border:1px solid #ccc; position:relative; left:-5px; }
 
-        .postlink {
-            font-size: 40px;
-            line-height: 40px;
-            color:#005;
-        }
-        a.postlink:hover {
-            color:#00a;
-        }
+        a { color:#0a0; text-decoration:none; }
+        a:hover { color:#fc0; }
+        .bold { font-weight: bold; }
+        .bloglink { font-size: 20px; line-height: 20px; text-align: left; }
+        .streamlink { font-size: 20px; line-height: 20px; text-align: right; }
+        .postlink { font-size: 40px; line-height: 40px; letter-spacing: .1em;  }
+        .blacklink { color:#000; }
+        a.blacklink:hover { color:#5686D9; }
 
-/*         #titlebar {  background: #ccf; }  */
-        #titlebar { text-align: center; }
-        .title { font-size: 60px; line-height: 65px; }
+        .title    { font-size: 60px; line-height: 65px; letter-spacing: .4em; font-variant:small-caps;
+                    font-family: Palatino, serif; font-weight: bold;}
         .subtitle { font-size: 20px; line-height: 20px; }
-        .big { font-size: 60px; line-height: 65px; position: relative; top: -10px;  }
+        .big      { font-size: 55px; line-height: 45px; }
 
-/*         #titlebar { border:10px solid #ddd; position: relative; left: -10px; top: -10px} */
-/*         #blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px} */
-/*         #project { border:10px solid #ddd; left: -10px; } */
-/*         #stream { border:10px solid #ddd; right:-10px; } */
-/*         #about     { border:10px solid #ddd; right:-10px; } */
-/*         #resume    { border:10px solid #ddd; right:-10px; } */
+        /*#titlebar { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
+        #blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
+        #project { border:10px solid #ddd; left: -10px; }
+        #stream { border:10px solid #ddd; right:-10px; }
+        #about     { border:10px solid #ddd; right:-10px; }
+        #resume     { border:10px solid #ddd; right:-10px; } */
+
+        #titlebar  { text-align: center; }
         #copyright { background: #fff; text-align:center;}
-        /*#leftcol, #rightcol  { height: 150px;  }*/
-        #blog      { height: 230px; margin-bottom: 3em; }
-        #project   { height: 240px; position: relative; }
-        #stream    { height: 215px; position: relative; margin-bottom: 3em; }
-        #about     { height: 50px; float: right; position: relative; }
-        #resume    { height: 50px; float: right; position: relative; text-align:right;
-                     margin-top: 3em; margin-bottom: 3em;}
-        #copyright { height: 50px; float: right;}
+        #blog      { height: 230px; margin-bottom: 3em; text-align: left; }
+        #project   { height: 215px; position: relative; }
+        #stream    { height: 215px; position: relative; }
+        #about     { height: 50px; float: right; position: relative; top:2.5em; }
+        #resume    { height: 50px; float: right; position: relative; text-align:right; top:4.5em; }
+        #copyright { height: 50px; float: right; position: relative; top: 7em; }
     </style>
 </head>
 <body>
@@ -68,23 +50,21 @@
         <div class="span-24 last" id="container">
             <div row1>
                 <div class="span-14" id="blog">
-                    <div class="boxpadding">
-                        <div class="bloglink">
-                            go to the <a href="http://blog.hackthology.com">Hackthology Blog</a>
-                        </div>
-                        <hr />
-                        <img style="float:left; margin: 0px 10px 10px 0px" src="imgs/akbar.jpeg" height=200 width=200/>
-                        <a class="postlink" href="#">
-                            Regular Expression Matching: the Virtual Machine Approach
-                        </a>
+                    <div class="bold bloglink">
+                        go to the <a href="http://blog.hackthology.com">Hackthology Blog</a>
                     </div>
+                    <hr />
+                    <img style="float:left; margin: 0px 10px 10px 0px" src="imgs/akbar.jpeg" height=200 width=200/>
+                    <a class="postlink blacklink" href="#">
+                        Regular Expression Matching: the Virtual Machine Approach
+                    </a>
                 </div>
                 <div class="span-1">
                     &nbsp;
                 </div>
                 <div class="span-9 last" id="stream">
-                    <div class="streamlink">
-                        project stream
+                    <div class="bold streamlink">
+                        project stream : <a class="bold" href="http://github.com/timtadh/">github</a>
                     </div>
                     <hr/>
                     <a href="http://github.com/timtadh/regex-machines">regex-machines</a>
@@ -96,33 +76,41 @@
                     <a href="http://github.com/timtadh/mpp">mpp</a>
                     <hr/>
                     <a href="http://github.com/timtadh/crypt_framework">crypt_framework</a>
-                    <div style="text-align:right"><a href="http://github.com/timtadh/">see more...</a></div>
+                    <!--<div style="text-align:right">
+                        <a class="bold" href="http://github.com/timtadh/">see more...</a>
+                    </div>-->
                 </div>
                 <div class=" span-9 last" id="about">
                     <img style="float:right" src="imgs/akbar.jpeg" height=50 width=50/>
-                    <h1 class="big">about me</h1>
+                    <div class="big">
+                        <a style="letter-spacing: .1em" class="blacklink" href="#">about me</a>
+                    </div>
                 </div>
             </div>
 
             <div row2>
                 <div class="span-14" id="project">
-                    <div class="bloglink">
+                    <div class="bold bloglink">
                         featured project :
                         <a href="http://github.com/timtadh/regex-machines">
-                            regex-machines
+                            Regex Virtual Machines
                         </a>
                     </div>
                     <hr/>
-                    <img style="float:right" src="imgs/akbar.jpeg" height=200 width=200/>
-                    Name the most widely used bytecode interpreter or virtual machine. Sun's JVM? Adobe's Flash? .NET and Mono? Perl? Python? PHP? These are all certainly popular, but there's one more widely used than all those combined. That bytecode interpreter is Henry Spencer's regular expression library and its many descendants.
-                    <a href="#">read more...</a>
+                    <img style="float:right; margin-left:.5em;" src="imgs/akbar.jpeg" height=180 width=180/>
+                    <p class="dropcap">
+                    Name the most widely used bytecode interpreter or virtual machine. Sun's JVM? Adobe's Flash? .NET and Mono? Perl? Python? PHP? These are all certainly popular, but there's one more widely used than all those combined. That bytecode interpreter is Henry Spencer's regular expression library
+                    <a class="bold" href="#">read more...</a>
+                    </p>
                 </div>
                 <div class="span-1">
                     &nbsp;
                 </div>
                 <div class="span-9 last" id="resume">
                     <img style="float:left" src="imgs/akbar.jpeg" height=50 width=50/>
-                    <h1 class="big">r é s u m é</h1>
+                    <div class="big">
+                        <a style="letter-spacing: .25em" class="blacklink" href="#">résumé</a>
+                    </div>
                 </div>
                 <div class="span-9 last" id="copyright">
                     <strong>Copyright 2010 Tim Henderson</strong> </br> All Rights Reserved.
