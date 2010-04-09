@@ -1,0 +1,210 @@
+<h1>More Distance Based Indexing</h1>
+<p>today "Near Neighbor Search in Large Metric Spaces" by Sergey Brin</p>
+<h2>VP Tree</h2>
+<ul>
+<li>Binary tree that recursively partition data space using<ul>
+<li>vantage points</li>
+<li>distances of data points to vantage points</li>
+</ul>
+</li>
+<li>Internal nodes: (Xvp, M, Rptr, Lptr) where<ul>
+<li>M: median distance amount d(Xvp, Xi)</li>
+</ul>
+</li>
+</ul>
+<h2>Near Neighbor Search in VP Trees</h2>
+<p>Given a query point q, a distance metric d(.,.) and a tolerance factor r,</p>
+<ul>
+<li>Find all datapoints x such that d(x,q) &lt;= r<ol>
+<li>if d(q, x) &lt;= r then x is in the answer set</li>
+<li>if d(q, x) - r &lt;= M then recursively search the left branch</li>
+<li>if d(q, x) + r &gt;= M then recursively search the right branch</li>
+</ol>
+</li>
+</ul>
+<p>all three of these things could be true at once</p>
+<h2>VP Trees [Yianilos 1993] Summary</h2>
+<ul>
+<li>Construction : recursively<ul>
+<li>break the space up using spherical cuts</li>
+<li>pick a point called the vantage point</li>
+<li>consider the median sphere center at the vp</li>
+</ul>
+</li>
+<li>Benefits and Drawbacks:<ul>
+<li>One distance calculation when visiting a node during a search</li>
+<li>Automatically balanced tree</li>
+<li>Extremely asymmetric especially in high-dimensional space
+    -&gt; limits the amount of pruing</li>
+<li>Branching factor of two</li>
+</ul>
+</li>
+</ul>
+<h2>GNAT Geometric Near Neighbor Access Tree</h2>
+<ul>
+<li>Sergey Brin's VLDB 1995</li>
+<li>Data Structure<ul>
+<li>captures the geometry of the data collections</li>
+<li>hierarchically break it down into regions</li>
+</ul>
+</li>
+</ul>
+<p>Typically a generalization of gh-trees [Uhlmann 1991] and Fukunaga's Method</p>
+<h2>Generalized Hyperplane Tree (gh-tree)</h2>
+<ul>
+<li>Construction : recursively<ul>
+<li>at the top node pick two points</li>
+<li>divide the remain points based on closest distance</li>
+</ul>
+</li>
+<li>Benefits and Drawbacks:<ul>
+<li>(+) Symmetric division</li>
+<li>(+) tends to be well balanced in the tree structure</li>
+<li>(-) Two distance computations at every node during a search</li>
+<li>(-) Branching factor of two : limited</li>
+</ul>
+</li>
+<li>
+<p>improved version of gh-tree: Monotonous Bi-Sector Tree [Bugnion et. all, 1993]</p>
+<ul>
+<li>Pick one new point at each new node, reuse points from parent node</li>
+<li>Used for text search especially!</li>
+</ul>
+</li>
+</ul>
+<h2>Most Relevant Work but Old</h2>
+<p>[K. Fukunaga, IEEE Trans. of Comp. 1975]</p>
+<ul>
+<li>Data Structure<ul>
+<li>more than just a metric space (vector space)</li>
+<li>tree structure with an arbitrary branching factor</li>
+</ul>
+</li>
+<li>Building a Tree<ul>
+<li>Divid the data points into k groups (left as a parameter of the structure)</li>
+<li>Computer the mean of each group</li>
+<li>The farthest distance from the mean to a point in the group</li>
+<li>Recursively creat the structure for each group</li>
+</ul>
+</li>
+</ul>
+<h2>GNAT</h2>
+<ul>
+<li>A Generalization of Kukunaga's Method and GH-Trees</li>
+<li>Good query performance<ul>
+<li>Exploits the geometery of the data</li>
+<li>Query time : reduced</li>
+</ul>
+</li>
+<li>Building time of the data structure<ul>
+<li>sharply increased</li>
+<li>(relatively negligible if query dominant, ie as many or more queries as data points)</li>
+<li>Finds the boundary blocks of the group<ul>
+<li>used for pruning</li>
+<li>reduces query time</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Experimental Results<ul>
+<li>Almost always better performance than<ul>
+<li>vp tree</li>
+<li>gh tree</li>
+</ul>
+</li>
+<li>scales better</li>
+</ul>
+</li>
+</ul>
+<h2>Arbitrary Metric space</h2>
+<ul>
+<li>Assumptions<ul>
+<li>Given a Data set Y, and "black box" dist to computre the distance betweeen member of Y</li>
+<li>Y can be preprocessed using dist</li>
+<li>Queries are of the form (x, r): find members of y within istance r of x.</li>
+</ul>
+</li>
+<li>Distribution of the data set in the metric space<ul>
+<li>: more important than the metric space itself</li>
+<li>(in constrast to vector spaces ??)<ul>
+<li>in vector space you can use lines parallel to the axes to partition the data</li>
+</ul>
+</li>
+<li>in metric spaces<ul>
+<li>you have to take account the shape the of the data</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>e.g. Data lies on the 2D surface embedded in 50D space<ul>
+<li>intelligent data structure: query times will behave like in a 2D space</li>
+</ul>
+</li>
+</ul>
+<h2>High Dimensional Metric Space</h2>
+<ul>
+<li>The geometry of a given dataset<ul>
+<li>visualizing high-dimensional data == difficult</li>
+</ul>
+</li>
+</ul>
+<p>How to understand the geometry of given data set</p>
+<ul>
+<li>A Simple Measure<ul>
+<li>Distribution of the distance between random points of data<ul>
+<li>helps to determine the range for finding near neighbors</li>
+</ul>
+</li>
+<li>Probability Density Function<ul>
+<li>see slides was distracted</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>GNAT</h2>
+<p>We know the distribution, we know the distance function, and we know sensible query ranges</p>
+<ul>
+<li>Data structure<ul>
+<li>reflects the hierarchiical intrinsic geometry<ul>
+<li>top node : several split points are chosen</li>
+<li>space is broken into Dirichlet domains based on split points<ul>
+<li>How close the nodes are to the split points</li>
+</ul>
+</li>
+<li>rest of the points are assiged to Drichlet domains they fall into.
+Basically, GNAT has hierarchical Dirichlet domain based structure</li>
+</ul>
+</li>
+<li>Full use of the distances we calculate<ul>
+<li>Prune branches by storing the ranges of distances</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Construction</p>
+<ul>
+<li>Choose k split poitns</li>
+<li>Associate each wof the remain points iwht the closest points</li>
+<li>blah</li>
+<li>blah</li>
+<li>see slides i am loosing the thread of this lecture sorry</li>
+</ul>
+</li>
+<li>
+<p>A Search</p>
+<ul>
+<li>Find all points with distance &lt; r to a give point x<ol>
+<li>let P represnts the set of split points of the current node and pick point p in P</li>
+<li>if dist(x, p) &lt; r add p to the result</li>
+<li>fall al points q &lt;= P
+    if [dist(x, p) - r, dist(x, p) + r]&amp;range(p, d) is empty
+    then remove q from P</li>
+<li>BLAH</li>
+<li>BLAH</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>

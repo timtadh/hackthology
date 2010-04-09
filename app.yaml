@@ -10,6 +10,6 @@ handlers:
 - url: /imgs
   static_dir: imgs
 
-- url: /.*
+- url: /
   script: hello.py
 

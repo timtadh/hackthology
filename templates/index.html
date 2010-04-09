@@ -1,48 +1,10 @@
-    <style>
-        .container  {
-            padding: 20px 20px 30px 20px; font-size: 16px;
-            font-family: "Helvetica Neue", "Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, Verdana, sans-serif;
-            font-weight: lighter;
-            letter-spacing: .08em;
-            text-align: justify;
-        }
-
-        hr { margin:5px; border:1px solid #ccc; position:relative; left:-5px; }
-
-        a { color:#0a0; text-decoration:none; }
-        a:hover { color:#fc0; }
-        .bold { font-weight: bold; }
-        .bloglink { font-size: 20px; line-height: 20px; text-align: left; }
-        .streamlink { font-size: 20px; line-height: 20px; text-align: right; }
-        .postlink { font-size: 40px; line-height: 40px; letter-spacing: .1em;  }
-        .blacklink { color:#000; }
-        a.blacklink:hover { color:#5686D9; }
-
-        .title    { font-size: 60px; line-height: 65px; letter-spacing: .4em; font-variant:small-caps;
-                    font-family: Palatino, serif; font-weight: bold;}
-        .subtitle { font-size: 20px; line-height: 20px; }
-        .big      { font-size: 55px; line-height: 45px; }
-
-        /*#titlebar { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
-        #blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
-        #project { border:10px solid #ddd; left: -10px; }
-        #stream { border:10px solid #ddd; right:-10px; }
-        #about     { border:10px solid #ddd; right:-10px; }
-        #resume     { border:10px solid #ddd; right:-10px; } */
-
-        #titlebar  { text-align: center; }
-        #copyright { background: #fff; text-align:center;}
-        #blog      { height: 230px; margin-bottom: 3em; text-align: left; }
-        #project   { height: 215px; position: relative; }
-        #stream    { height: 215px; position: relative; }
-        #about     { height: 50px; float: right; position: relative; top:2.5em; }
-        #resume    { height: 50px; float: right; position: relative; text-align:right; top:4.5em; }
-        #copyright { height: 50px; float: right; position: relative; top: 7em; }
-    </style>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
 </head>
 <body>
-<!--     <div class="container showgrid"> -->
+    <center>
+<!--     <div class="outcontainer"> -->
     <div class="container">
+<!--     <div class="container"> -->
         <div class="append-bottom span-24 last" id="titlebar">
             <div class="title">Hackthology</div>
             <div class="subtitle">Collected Sayings by Tim Henderson</div>
@@ -54,9 +16,9 @@
                         go to the <a href="http://blog.hackthology.com">Hackthology Blog</a>
                     </div>
                     <hr />
-                    <img style="float:left; margin: 0px 10px 10px 0px" src="imgs/akbar.jpeg" height=200 width=200/>
+                    <img style="float:left; margin: 0px 10px 10px 0px" src="imgs/bptree.png" height=200 width=200/>
                     <a class="postlink blacklink" href="#">
-                        Regular Expression Matching: the Virtual Machine Approach
+                        Lessons Learned While Implementing a B+Tree
                     </a>
                 </div>
                 <div class="span-1">
@@ -97,8 +59,8 @@
                         </a>
                     </div>
                     <hr/>
-                    <img style="float:right; margin-left:.5em;" src="imgs/akbar.jpeg" height=180 width=180/>
-                    <p class="dropcap">
+                    <img style="float:right; margin-left:.5em;" src="imgs/regex.png" height=180 width=180/>
+                    <p class="longtext">
                     Name the most widely used bytecode interpreter or virtual machine. Sun's JVM? Adobe's Flash? .NET and Mono? Perl? Python? PHP? These are all certainly popular, but there's one more widely used than all those combined. That bytecode interpreter is Henry Spencer's regular expression library
                     <a class="bold" href="#">read more...</a>
                     </p>
@@ -107,9 +69,11 @@
                     &nbsp;
                 </div>
                 <div class="span-9 last" id="resume">
-                    <img style="float:left" src="imgs/akbar.jpeg" height=50 width=50/>
+                    <img style="float:left;" src="imgs/resume-snap.png" height=50 width=50/>
                     <div class="big">
-                        <a style="letter-spacing: .25em" class="blacklink" href="#">résumé</a>
+                        <a style="letter-spacing: .25em" class="blacklink" href="imgs/resume.pdf">
+                            résumé
+                        </a>
                     </div>
                 </div>
                 <div class="span-9 last" id="copyright">
@@ -118,3 +82,5 @@
             </div>
         </div>
     </div>
+<!--     </div> -->
+    </center>
