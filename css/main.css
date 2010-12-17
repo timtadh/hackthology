@@ -17,8 +17,7 @@ body {
     text-align: justify;
 }
 
-img {border:2px solid gray}
-
+img, .img {border:2px solid gray; }
 hr { margin:5px; border:1px solid #ccc; position:relative; left:-5px; }
 
 a { color:#0a0; text-decoration:none; }
@@ -28,7 +27,9 @@ a:hover { color:#fc0; }
 .streamlink { font-size: 20px; line-height: 20px; text-align: right; }
 .postlink { font-size: 40px; line-height: 40px; letter-spacing: .08em;  }
 .blacklink { color:#000; }
-a.blacklink:hover { color:#5686D9; }
+a.blacklink:hover { color:#04C; }
+a.img { border:2px solid gray }
+.img:hover { border:2px solid #5686D9; }
 
 .title    { font-size: 60px; line-height: 65px; letter-spacing: .4em; font-variant:small-caps;
             font-family: Palatino, serif; font-weight: bold;}

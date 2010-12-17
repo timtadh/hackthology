@@ -1,11 +1,11 @@
 body, html {
     background: #ddd;
     text-align: center;
-    margin: 0;
+    padding: 10px;
 }
 
 .container  {
-    font-family: "Helvetica Neue", "Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, Verdana, sans-serif;
+/*     font-family: "Helvetica Neue", "Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, Verdana, sans-serif; */
     font-weight: lighter;
     letter-spacing: .08em;
     text-align: justify;
@@ -26,13 +26,15 @@ body, html {
 .title    { font-size: 60px; line-height: 65px; letter-spacing: .1em; font-variant:small-caps;
     font-family: Palatino, serif; font-weight: bold;}
 .subtitle { font-size: 20px; line-height: 20px; }
+.posttitle { color: #000; text-align: left; }
+.posttitle:hover { color: #fc0; }
 
 a { color:#0a0; text-decoration:none; }
 a.title, a.subtitle { color:#000; }
 a:hover { color:#fc0; }
 a img { border: 0; }
 
-.date  { font-size: 1.5em; }
+.date  { font-size: 1.5em; margin-left: 20px;}
 .permalink { position:relative; float:right; top: 1em; text-align:right; }
 div.editbox { visibility: hidden; height: 16px; position:relative; top:-20px; }
 div.post:hover div.editbox { visibility: visible; }
