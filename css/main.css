@@ -11,34 +11,35 @@ body {
     -webkit-border-radius: 1em;
     margin: 10px;
     padding: 20px 20px 30px 20px; font-size: 16px;
-    font-family: "Helvetica Neue", "Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, Verdana, sans-serif;
-    font-weight: lighter;
-    letter-spacing: .08em;
+    font-family: "Ubuntu", "Helvetica Neue", "Lucida Grande", "Bitstream Vera Sans", Helvetica, Arial, Verdana, sans-serif;
+/*     font-weight: lighter; */
+/*     letter-spacing: .08em; */
     text-align: justify;
 }
 
 img, .img {border:2px solid gray; }
 hr { margin:5px; border:1px solid #ccc; position:relative; left:-5px; }
 
-a { color:#0a0; text-decoration:none; }
-a:hover { color:#fc0; }
 .bold { font-weight: bold; }
 .bloglink { font-size: 20px; line-height: 20px; text-align: left; }
 .streamlink { font-size: 20px; line-height: 20px; text-align: right; }
-.postlink { font-size: 40px; line-height: 40px; letter-spacing: .08em;  }
+.postlink { font-size: 50px; line-height: 45px; font-family: "Philosopher", serif;}
 .blacklink { color:#000; }
 a.blacklink:hover { color:#04C; }
 a.img { border:2px solid gray }
 .img:hover { border:2px solid #5686D9; }
 
-.title    { font-size: 60px; line-height: 65px; letter-spacing: .4em; font-variant:small-caps;
-            font-family: Palatino, serif; font-weight: bold;}
+.title    { font-size: 60px; line-height: 65px; letter-spacing: .4em;
+            font-family: "Philosopher", serif; font-weight: light;}
 .subtitle { font-size: 20px; line-height: 20px; }
-.big      { font-size: 55px; line-height: 45px; }
+.big      { font-size: 55px; line-height: 45px;  font-family: "Philosopher", serif; }
 
 p.longtext {
     margin: 0;
 }
+
+
+
 
 /*#titlebar { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
 #blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
