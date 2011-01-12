@@ -17,41 +17,79 @@ body {
     text-align: justify;
 }
 
-img, .img {border:2px solid gray; }
 hr { margin:5px; border:1px solid #ccc; position:relative; left:-5px; }
 
 .bold { font-weight: bold; }
-.bloglink { font-size: 20px; line-height: 20px; text-align: left; }
-.streamlink { font-size: 20px; line-height: 20px; text-align: right; }
-.postlink { font-size: 50px; line-height: 45px; font-family: "Philosopher", serif;}
-.blacklink { color:#000; }
+a.bloglink { font-size: 20px; line-height: 20px; text-align: left; }
+a.streamlink { font-size: 20px; line-height: 20px; text-align: right; }
+a.postlink { font-size: 50px; line-height: 45px; font-family: "Philosopher", serif;}
+a.blacklink { color:#000; }
 a.blacklink:hover { color:#04C; }
-a.img { border:2px solid gray }
-.img:hover { border:2px solid #5686D9; }
+
+img {border:2px solid gray; }
+a img { border: 2px solid gray; }
+a img:hover {border: 2px solid #40c; }
 
 .title    { font-size: 60px; line-height: 65px; letter-spacing: .4em;
             font-family: "Philosopher", serif; font-weight: light;}
 .subtitle { font-size: 20px; line-height: 20px; }
-.big      { font-size: 55px; line-height: 45px;  font-family: "Philosopher", serif; }
-
-p.longtext {
-    margin: 0;
-}
 
 
-
-
-/*#titlebar { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
-#blog { border:10px solid #ddd; position: relative; left: -10px; top: -10px}
-#project { border:10px solid #ddd; left: -10px; }
-#stream { border:10px solid #ddd; right:-10px; }
-#about     { border:10px solid #ddd; right:-10px; }
-#resume     { border:10px solid #ddd; right:-10px; } */
+.copyright { text-align:center; margin-top:15px; }
 
 #titlebar  { text-align: center; }
 #blog      { height: 230px; margin-bottom: 3em; text-align: left; }
-#project   { height: 215px; position: relative; }
-#stream    { height: 215px; position: relative; }
-#about     { height: 50px; float: right; position: relative; top:2.5em; }
-#resume    { height: 50px; float: right; position: relative; text-align:right; top:4.5em; }
-#copyright { height: 50px; float: right; position: relative; text-align:center; top: 7em; }
+
+div.main_article {
+/*     pass */
+}
+
+div.main_article img {
+    float:left;
+    margin: 0px 10px 10px 0px;
+    width: 170px;
+    height: 170px;
+}
+
+div.main_article {
+    text-align: left;
+}
+
+div.feature_article {
+    margin-top: 1em;
+}
+
+div.feature_article img {
+    float:right;
+    margin: 0px 0px 10px 10px;
+    width: 170px;
+    height: 170px;
+}
+
+div.fature_article p { margin: 0; }
+
+div.tiny_articles {
+    margin-top: 2em;
+}
+
+div.tiny_article {
+    margin-top: 1em;
+}
+
+div.tiny_article img {
+    float: left;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+div.tiny_article div.text {
+    font-size: 26px;
+    line-height: 24px;
+    font-family: "Philosopher", serif;
+    margin: 0px;
+    padding-top: 5px;
+    text-align: left;
+}
+
+

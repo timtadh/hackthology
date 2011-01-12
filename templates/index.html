@@ -5,24 +5,51 @@
 <!--     <div class="container"> -->
         {% include "title_bar.html" %}
 <!-- hello -->
-        <div class="span-24 last" id="container">
-            <div row1>
-                <div class="span-14" id="blog">
+        <div id="container">
+            <div class="span-14">
+                <div class="main_article">
                     <div class="bold bloglink">
                         go to the <a href="http://blog.hackthology.com">Hackthology Blog</a>
                     </div>
                     <hr />
-                    <a href="http://blog.hackthology.com/interpreting-the-free-software-movement-as-re">
-                    <img class="img" style="float:left; margin: 0px 10px 10px 0px" src="http://globalnerdy.com/wordpress/wp-content/uploads/2007/06/gnu-and-penguin.jpg" height=200 width=200/>
-                    </a>
-                    <a class="postlink blacklink" href="http://blog.hackthology.com/interpreting-the-free-software-movement-as-re">
-                        Interpreting the Free Software Movement as Religion
+                    <a class="postlink blacklink leftside"
+                        href="http://blog.hackthology.com/interpreting-the-free-software-movement-as-re"
+                    >
+                        <img
+                            src="http://globalnerdy.com/wordpress/wp-content/uploads/2007/06/gnu-and-penguin.jpg"
+                        />
+                        <div class="text">
+                            Interpreting the Free Software Movement as Religion
+                        </div>
                     </a>
                 </div>
-                <div class="span-1">
-                    &nbsp;
+
+                <div class="feature_article">
+                    <div class="bold bloglink">
+                        featured project :
+                        <a href="http://blog.hackthology.com/regular-expression-talk-0">
+                            Regex Virtual Machines
+                        </a>
+                    </div>
+                    <hr/>
+                    <a style="rightside" href="http://blog.hackthology.com/regular-expression-talk-0">
+                        <img src="imgs/regex.png"/>
+                    </a>
+                    <p class="hyphenate">
+                        I gave a talk at CWRU Hacker Society on how to implement a regular expression engine. The inspiration for the talk came from two things: first, I have long held a fascination for regular expressions, and second was an excellent article by Russ Cox which inspired me to create my own engine.
+                        <a class="bold" href="http://blog.hackthology.com/regular-expression-talk-0">
+                            read more...
+                        </a>
+                    </p>
                 </div>
-                <div class="span-9 last" id="stream">
+            </div>
+
+            <div class="span-1">
+                &nbsp;
+            </div>
+
+            <div class=" span-9 last">
+                <div class="github_section">
                     <div class="bold streamlink">
                         project stream : <a class="bold" href="http://github.com/timtadh/">github</a>
                     </div>
@@ -36,56 +63,48 @@
                     <a href="http://github.com/timtadh/mpp">mpp</a>
                     <hr/>
                     <a href="http://github.com/timtadh/crypt_framework">crypt_framework</a>
-                    <!--<div style="text-align:right">
-                        <a class="bold" href="http://github.com/timtadh/">see more...</a>
-                    </div>-->
                 </div>
-                <div class=" span-9 last" id="about">
-                    <img style="float:right" src="imgs/akbar.jpeg" height=50 width=50/>
-                    <div class="big">
-                        <a style="letter-spacing: .1em" class="blacklink" href="about">
-                            about me
+
+                <div class="tiny_articles">
+                    <div class="tiny_article">
+                        <a class="blacklink leftside"
+                            href="http://blog.hackthology.com/how-to-start-a-community"
+                        >
+                            <img src="imgs/hacker.png"/>
+                            <div class="text">
+                                How to Start a Community
+                            </div>
+                        </a>
+                    </div>
+                    <div class="tiny_article">
+                        <a class="blacklink leftside"
+                            href="http://blog.hackthology.com/writing-an-interactive-repl-in-python"
+                        >
+                            <img src="imgs/repl.png"/>
+                            <div class="text">
+                                Writing an interactive REPL in Python
+                            </div>
+                        </a>
+                    </div>
+                    <div class="tiny_article">
+                        <a class="blacklink leftside"
+                            href="http://blog.hackthology.com/lessons-learned-while-implementing-a-btree"
+                        >
+                            <img src="imgs/bptree.png"/>
+                            <div class="text">
+                                Lessons Learned While Implementing a B+Tree
+                            </div>
                         </a>
                     </div>
                 </div>
             </div>
-
-            <div row2>
-                <div class="span-14" id="project">
-                    <div class="bold bloglink">
-                        featured project :
-                        <a href="http://blog.hackthology.com/regular-expression-talk-0">
-                            Regex Virtual Machines
-                        </a>
-                    </div>
-                    <hr/>
-                    <a class="img" style="float:right; margin-left:.5em;" href="http://blog.hackthology.com/regular-expression-talk-0">
-                        <img src="imgs/regex.png" height=180 width=180/>
-                    </a>
-                    <p class="longtext">
-                    I gave a talk at CWRU Hacker Society on how to implement a regular expression engine. The inspiration for the talk came from two things: first, I have long held a fascination for regular expressions, and second was an excellent article by Russ Cox which inspired me to create my own engine.
-                    <a class="bold" href="http://blog.hackthology.com/regular-expression-talk-0">
-                        read more...
-                    </a>
-                    </p>
-                </div>
-                <div class="span-1">
-                    &nbsp;
-                </div>
-                <div class="span-9 last" id="resume">
-                    <img style="float:left;" src="imgs/resume-snap.png" height=50 width=50/>
-                    <div class="big">
-                        <a style="letter-spacing: .25em" class="blacklink" href="resume">
-                            résumé
-                        </a>
-                    </div>
-                </div>
-                <div class="span-9 last" id="copyright">
-                    <strong>Copyright 2010 Tim Henderson</strong> </br> All Rights Reserved.
-                </div>
+            <div class="span-24 last copyright">
+                <hr/>
+                <br/>
+                <strong>Copyright 2010 Tim Henderson</strong>
+                <br/>All Rights Reserved.
             </div>
         </div>
     </div>
-<!--     </div> -->
     </center>
 
