@@ -20,10 +20,6 @@ div.tbarlinks li {
     font-weight: bold;
 }
 
-div.tbarlinks li:hover {
-    background: #ddd;
-}
-
 div.tbarlinks a { color: #000; }
 div.tbarlinks a:hover { color: #04C; }
 

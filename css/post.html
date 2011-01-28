@@ -181,6 +181,17 @@ div.profile {
                 <div class="date">
                     {Month} {DayOfMonth}, {Year}
                 </div>
+                <div class="date">
+                {block:Author}
+                {block:AuthorUser}
+                    By
+                    <a href="{AuthorURL}">
+                        {AuthorName}
+                        <img src="{AuthorPortraitURL-35}" width='12' height='12'/>
+                    </a>
+                {/block:AuthorUser}
+                {/block:Author}
+                </div>
                 <div class="bodytext">
                     {Body}
                 </div>
