@@ -1,9 +1,11 @@
+all: status
+
 clean:
 	cd hackthology && $(MAKE) clean
 	cd timtadh.github.io && $(MAKE) clean
 
-reset:
-	cd timtadh.github.io && $(MAKE) reset
+rm-content:
+	cd timtadh.github.io && $(MAKE) rm-content
 
 nuke: clean
 	cd timtadh.github.io && $(MAKE) nuke
@@ -27,4 +29,4 @@ commit: add
 publish: commit
 	cd timtadh.github.io/ && $(MAKE) publish
 
-.PHONY: clean nuke update publish status reset commit add
+.PHONY: clean nuke update publish status rm-content commit add
