@@ -6,10 +6,10 @@ AUTHOR = u'Tim Henderson'
 SITENAME = u'Hackthology'
 SITEURL = ''
 THEME = 'notmyidea'
-
 TIMEZONE = 'US/NewYork'
-
 DEFAULT_LANG = u'en'
+
+GOOGLE_ANALYTICS = 'UA-20145944-2'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

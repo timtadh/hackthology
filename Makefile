@@ -15,6 +15,9 @@ update:
 status: update
 	cd timtadh.github.io/ && $(MAKE) status
 
+diff: update
+	cd timtadh.github.io/ && $(MAKE) diff
+
 publish: clean update
 	cd timtadh.github.io/ && $(MAKE) publish
 

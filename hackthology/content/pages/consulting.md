@@ -5,7 +5,14 @@ Category: Consulting
 
 
 I available for consulting on a per project basis. I can also offer training
-materials and sessions on a number of topics.
+materials and sessions on a number of topics. I am particularly interested in
+working on projects related to compilers and programming languages. However, I
+have worked on variety of other systems as well including: web services, thick
+clients, databases, distributed computing, map reduce, bioinformatics, web
+security, and software testing and verification.
+
+Please get in touch at :: tadh at case dot edu, subject line should including
+"CONSULTING".
 
 
 # Parsing
@@ -28,22 +35,5 @@ to speed on:
 5. Table Driven Top Down Parsing
 6. Bottom Up Parsing with Yacc and Yacc like systems
 7. Intermediate Representations with Abstract Syntax Trees
-
-please get in touch at :: tadh at case dot edu
-
-
-# Python or Go Consulting
-
-Do you have a project in Python or Go that needs some additional support? I am
-your guy! I have been working in Python since 2003 and I have been working with
-Go since its first public release (2009). I have implemented a number of systems
-including: web services, databases, gui programs, deployment management systems,
-compilers, machine learning algorithms, etc...
-
-
-# Distributed Programming and Systems Programming
-
-Need to setup a Map Reduce System? Need to write your own Map Reduce System?
-Need to write your own database? Let's talk!
 
 
