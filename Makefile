@@ -18,7 +18,13 @@ status: update
 diff: update
 	cd timtadh.github.io/ && $(MAKE) diff
 
-publish: clean update
+add: clean update
+	cd timtadh.github.io/ && $(MAKE) add
+
+commit: add
+	cd timtadh.github.io/ && $(MAKE) commit
+
+publish: commit
 	cd timtadh.github.io/ && $(MAKE) publish
 
-.PHONY: clean nuke update publish status reset
+.PHONY: clean nuke update publish status reset commit add
