@@ -20,7 +20,7 @@ status: update
 diff: update
 	cd timtadh.github.io/ && $(MAKE) diff
 
-add: clean update
+add:
 	cd timtadh.github.io/ && $(MAKE) add
 
 commit:
