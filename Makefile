@@ -23,10 +23,10 @@ diff: update
 add: clean update
 	cd timtadh.github.io/ && $(MAKE) add
 
-commit: add
+commit:
 	cd timtadh.github.io/ && $(MAKE) commit
 
-publish: commit
+publish:
 	cd timtadh.github.io/ && $(MAKE) publish
 
 .PHONY: clean nuke update publish status rm-content commit add

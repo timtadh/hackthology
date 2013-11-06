@@ -16,6 +16,8 @@ FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
+MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'footnotes']
+
 # Blogroll
 #LINKS =  (('Pelican', 'http://getpelican.com/'),
           #('Python.org', 'http://python.org/'),
