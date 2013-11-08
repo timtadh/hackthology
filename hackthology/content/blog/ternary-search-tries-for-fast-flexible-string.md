@@ -46,14 +46,7 @@ will not hash a similar string or a sub string to the same bucket.
 Introducing the Trie
 --------------------
 
-<div style="text-align:center">
-  <a href="/images/Trie1.png">
-    <img
-      alt="Example Binary Search Trie"
-      style="width:720px; "
-      src="/images/Trie1.png"/>
-  </a>
-</div>
+![Example Binary Search Trie](/images/Trie1.png)
 
 Figure 1. **An Example Binary Search Trie**
 
@@ -97,15 +90,7 @@ bits at once.
 Multi-way Tries
 ---------------
 
-
-<div style="text-align:center">
-  <a href="/images/Trie2.png">
-    <img
-      alt="Example R-Way Trie"
-      style="width:720px; "
-      src="/images/Trie2.png"/>
-  </a>
-</div>
+![Example R-Way Trie](/images/Trie2.png)
 
 Figure 2. **An Example R-Way Trie**
 
@@ -134,15 +119,7 @@ the array. Thus, a different structure is needed.
 Ternary Search Tries
 --------------------
 
-
-<div style="text-align:center">
-  <a href="/images/TST1.png">
-    <img
-      alt="Example Ternary Search Trie"
-      style="width:720px; "
-      src="/images/TST1.png"/>
-  </a>
-</div>
+![Example Ternary Search Trie](/images/TST1.png)
 
 Figure 3. **An Example Ternary Search Trie** with strings [abc, abs,
 awe, and].
@@ -161,15 +138,7 @@ While a Multi-way Trie has about R\*N/log~2~(R) pointers, a Ternary
 Search Trie has R + c\*N pointers where c is a small constant, perhaps
 3. Consider the graph of their performance:
 
-
-<div style="text-align:center">
-  <a href="/images/Multiway_vs_Trie.gif">
-    <img
-      alt="Multi-way Trie vs. Ternary Search Trie"
-      style="width:720px; "
-      src="/images/Multiway_vs_Trie.gif"/>
-  </a>
-</div>
+![Multi-way Trie vs. Ternary Search Trie](/images/Multiway_vs_Trie.gif)
 
 Figure 4. **Links in a Multi-way Trie vs. a Ternary Search Trie**
 
@@ -188,14 +157,7 @@ However, this pathological case is rare. In the average case the
 situation can be made much better through a few small improvements to
 the basic structure.
 
-<div style="text-align:center">
-  <a href="/images/TST2.png">
-    <img
-      alt="Improved Ternary Search Trie"
-      style="width:720px; "
-      src="/images/TST2.png"/>
-  </a>
-</div>
+![An Improved Ternary Search Trie](/images/TST2.png)
 
 Figure 5. **An Improved Ternary Search Trie**.
 

@@ -1,0 +1,49 @@
+
+          <!-- begin includes/sidebar.html -->
+          <nav>
+            <h3 class="first"><a href="{{ SITEURL }}/index.html">{{SITENAME.lower()}}/</a></h3>
+            <h3>pages/</h3>
+            <ul>
+            {% if MENUITEMS %}
+              {% for name, uri in MENUITEMS %}
+              <li><a href="{{ uri|format(SITEURL)}}">{{ name }}</a></li>
+              {% endfor %}
+            {% endif %}
+            {% if DISPLAY_PAGES_ON_MENU %}
+              {% for p in PAGES %}
+              <li><a href="{{ SITEURL}}/{{ p.url }}"{% if p == page %} class="active"{% endif %}>{{ p.title.lower() }}/</a></li>
+              {% endfor %}
+            {% endif %}
+            </ul>
+          </nav>
+
+          {% if categories %}
+          <nav>
+            {% for cat, null in categories %}
+              <h3{%- if cat == category %} class="active"{% endif -%}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name.lower() }}/</a></h3>
+            {% endfor %}
+          </nav>
+          {% endif %}
+
+          <nav>
+            <h3>links/</h3>
+            <ul>
+            {% if FEED_ATOM %}
+              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}">Flux ATOM</a></li>
+            {% endif %}
+            {% if FEED_RSS %}
+              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}">Flux RSS</a></li>
+            {% endif %}
+            {% if SOCIAL %}
+              {% for name, url in SOCIAL %}
+              <li><a href="{{ url }}">{{ name.lower() }}/</a></li>
+              {% endfor %}
+            {% endif %}
+            {% if LINKS %}
+              {% for name, url in LINKS %}
+              <li><a href="{{ url }}">{{ name }}</a></li>
+              {% endfor %}
+            {% endif %}
+            </ul>
+          </nav>
+          <!-- end includes/sidebar.html -->

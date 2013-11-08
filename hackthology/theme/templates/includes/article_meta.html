@@ -1,0 +1,17 @@
+<!-- includes/article_meta.html -->
+            <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+            in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+            by <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a>
+            {%- if article.tags %}
+              <br />tags:
+              {%- for tag in article.tags %}
+              <a rel="tag" href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+              {% endfor -%}
+            {% endif -%}
+            {%- if article.translations %}
+              <br />Translations: 
+              [<a href="{{ SITEURL }}/{{ article.url }}">{{ article.lang or DEFAULT_LANG }}</a>]
+              {%- for translation in article.translations %}
+              <a href="{{ SITEURL }}/{{ translation.url }}">{{ translation.lang }}</a>
+              {% endfor -%}
+             {% endif -%}

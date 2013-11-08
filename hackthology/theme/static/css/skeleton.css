@@ -1,0 +1,94 @@
+/* vim: ts=4 sw=4 et: */
+
+html, body {
+    height: 100%;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+#page {
+    max-width: 1024px;
+    min-width: 240px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#page-head,
+#page-body,
+#page-foot {
+    clear: both;
+    margin: 0;
+    padding: 0;
+}
+
+#page-body { margin: 0 1em; }
+
+#page-main, #page-side {
+    border-width: 0;
+}
+
+#page-side {
+    float: right;
+    width: 135px;
+    height: 100%;
+    padding-left: 0%;
+}
+
+#page-main {
+    float: left;
+    height: 100%;
+    width: 620px;
+    padding-left: calc(50% - (620px/2));
+    padding-right: 0%;
+}
+
+
+
+@media screen and (max-width: 1230px) {
+    #page-main {
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 765px) {
+    #page-main,
+    #page-side {
+        clear: both;
+        float: none;
+    }
+
+    #page-side {
+        width: auto;
+        margin-left: calc(50% - (620px/2));
+        border-top: 1px gray dotted;
+    }
+
+
+    #page-main {
+        width: 620px;
+        padding-left: calc(50% - (620px/2));
+    }
+
+    #page-side ul {
+        column-count: auto;
+        -moz-column-count: auto;
+        -webkit-column-count: auto;
+        -o-column-count: auto;
+        -ms-column-count: auto;
+    }
+}
+
+
+
+
+@media screen and (max-width: 620px) {
+    #page-main,
+    #page-side {
+        width: auto;
+        clear: both;
+        float: none;
+        padding: 0px;
+        margin: 0px;
+    }
+}

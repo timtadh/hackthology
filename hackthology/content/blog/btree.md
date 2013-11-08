@@ -79,7 +79,6 @@ it means fewer disk reads to find the value associated with any one key.
   <a href="/images/bptree1.png">
     <img
       alt="Example B+Tree"
-      style="width:720px; "
       src="/images/bptree1.png"/>
   </a>
 </div>
@@ -176,7 +175,6 @@ block in the tree.
   <a href="/images/bptree2.png">
     <img
       alt="Example B+Tree with Duplicate Keys"
-      style="width:720px; "
       src="/images/bptree2.png"/>
   </a>
 </div>

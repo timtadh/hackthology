@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{%- block content %}
+   <p class="first">
+   {% block sayings %}
+   Find here the collected sayings of
+   <a href="{{SITEURL}}/pages/about.html">Tim Henderson</a>. He likes to tinker
+   and crunch crunchy looking leaves.
+   {% endblock %}
+   </p>
+   {% for article in articles_page.object_list %}
+      <article class="post">
+        <header class="post-header">
+          <h1>
+            <a rel="bookmark"
+               href="{{ SITEURL }}/{{ article.url }}"
+               title="perm link {{ article.title }}"
+            >{{ article.title }}</a>
+          </h1>
+        </header>
+      </article>
+    {% set article = False %}
+    {% endfor %}
+{% endblock content -%}

@@ -1,3 +1,6 @@
 [submodule "timtadh.github.io"]
 	path = timtadh.github.io
 	url = git@github.com:timtadh/timtadh.github.io.git
+[submodule "pelican-themes"]
+	path = pelican-themes
+	url = git@github.com:getpelican/pelican-themes.git

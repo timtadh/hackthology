@@ -10,8 +10,10 @@ rm-content:
 nuke: clean
 	cd timtadh.github.io && $(MAKE) nuke
 
-update:
+html:
 	cd hackthology && $(MAKE) html
+
+update: html
 	cp -r hackthology/output/* timtadh.github.io/
 
 status: update
@@ -29,4 +31,4 @@ commit:
 publish:
 	cd timtadh.github.io/ && $(MAKE) publish
 
-.PHONY: clean nuke update publish status rm-content commit add
+.PHONY: clean nuke update publish status rm-content commit add html
