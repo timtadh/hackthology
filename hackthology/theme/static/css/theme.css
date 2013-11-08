@@ -56,18 +56,32 @@ article header h1 {
     margin: 0;
 }
 
-article header h1.full {
-    font-family: 'Share Tech Mono', sans-serif;
+article header h1.full, h1.page {
     font-size: 26px;
-    padding: 0em 0;
+    padding: 0;
     margin: 0;
+    font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
+    font-weight: normal;
 }
 
 h1.page {
-    font-family: 'Share Tech Mono', sans-serif;
-    font-size: 38px;
-    padding: 0em 0;
+    margin-top: .8em;
+}
+
+article header h1.full a {
     margin: 0;
+    padding: 0;
+    font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
+    border: none;
+}
+
+p {
+    font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
+    font-weight: normal;
 }
 
 p.first a {
@@ -97,6 +111,10 @@ nav, nav h3 {
     font-family: 'Share Tech Mono', sans-serif;
 }
 
+nav a {
+    border:none;
+}
+
 
 
 #page-head {
@@ -105,10 +123,15 @@ nav, nav h3 {
 }
 
 #page-head h1 {
-    font-size: 4em;
+    font-size: 6em;
+    font-family: 'Alice', serif;
+    font-weight: normal;
+    margin: .2em;
 }
 
-#page-head h1 a:hover {
+#page-head h1 a, #page-head h1 a:hover {
+    font-family: 'Alice', serif;
+    border: none;
     text-decoration: none;
 }
 
@@ -170,13 +193,18 @@ h1.small-title {
 }
 
 a, a:visited {
-    color: #0000C0;
+    color: black;
+    font-style: normal;
+    font-weight: normal;
+    font-family: 'Share Tech Mono', sans-serif;
+    border-bottom: 1px gray dotted;
     text-decoration: none;
 }
 
 a:hover {
     border: none;
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 1px black solid;
 }
 
 a:active, a:focus {
