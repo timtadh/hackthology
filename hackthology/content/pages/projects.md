@@ -8,7 +8,7 @@ I have worked on number of projects over the years. Here are some that I am
 currently trying to find time to hack on.
 
 
-# Netgrid
+## Netgrid
 
 Netgrid is a distributed map-reduce like computation platform. Written in Go it
 supports iterative jobs which makes it more suitable for a variety of tasks. I
@@ -16,7 +16,7 @@ originally implemented it to support my research objectives in Frequent Subgraph
 Mining. It is not currently open source but I am exploring the possibility.
 
 
-# Slang
+## Slang
 
 Slang is a programming language which I have been working on to help me teach
 the principles of compilation and program analysis. It is currently in an
@@ -28,7 +28,7 @@ code generation.
 More at [github.com/timtadh/slang](https://github.com/timtadh/slang)
 
 
-# File Structures
+## File Structures
 
 One of my hobbies is writing database indices. This project collects the ones I
 have written in Go together in one place. It includes: BTree, B+Tree with
@@ -38,7 +38,7 @@ More at
 [github.com/timtadh/file-structures](https://github.com/timtadh/file-structures)
 
 
-# PyFlowr
+## PyFlowr
 
 A query language for Python Object Hierarchies. It is loosely inspired by
 XQuery/XPath and OQL. It allows schema-less queries of complex Python
@@ -48,7 +48,7 @@ parser for adding more syntax.
 More at [github.com/timtadh/pyflwor](http://github.com/timtadh/pyflwor)
 
 
-# Tree Edit Distance
+## Tree Edit Distance
 
 I have a great implementation of exact tree edit distance using the Zhang-Shasha
 algorithm. People seem to email me fairly regularly about it so someone out
@@ -58,7 +58,7 @@ More at
 [github.com/timtadh/zhang-shasha](https://github.com/timtadh/zhang-shasha)
 
 
-# Command Line Utilities
+## Command Line Utilities
 
 1. [swork](https://github.com/timtadh/swork) A shell environment manager. I use
    this to help manage all my projects.
@@ -71,7 +71,7 @@ More at
 <br>
 
 
-# More on the github
+## More on the github
 
 I have a lot more projects over on my github. These are just some of the
 highlights. Beyond the github, there are my

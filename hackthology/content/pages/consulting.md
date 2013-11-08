@@ -15,7 +15,7 @@ Please get in touch at :: tadh at case dot edu, subject line should including
 "CONSULTING".
 
 
-# Parsing
+## Parsing
 
 Do you have a complex language which needs to be parsed? Don't have the in house
 skill set or the time? Then let's work together on your parsing problem! I have
@@ -23,7 +23,7 @@ written many parsers from scratch as well as implemented regular expression
 engines and general parsing frameworks. Contracts are negotiated on a per
 project basis depending on the complexity of the project.
 
-## Training
+### Training
 
 I also have a variety of training materials ready to help your developers get up
 to speed on:
