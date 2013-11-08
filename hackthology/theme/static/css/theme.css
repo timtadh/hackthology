@@ -10,7 +10,7 @@
 
 
 body {
-    font-family: "Lucida Grande", "Gargi_1.7", "Garuda", "Jamrul", "Loma", "Malayalam", "Mukti Narrow", sans-serif;
+    font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
     font-size: 16px;
     line-height: 1.5em;
     color: #444;
@@ -27,7 +27,7 @@ h1, h2, h3,
 h4, h5, h6,
 .meta {
     color: #222;
-    font-family: "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
+    font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
     line-height: 1.5em;
     margin-top: 1em;
 }
