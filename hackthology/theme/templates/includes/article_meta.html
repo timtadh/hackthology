@@ -1,7 +1,7 @@
 <!-- includes/article_meta.html -->
             <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
             in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
-            by <a href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a>
+            by <a href="{{ SITEURL }}/pages/about.html">{{ article.author }}</a>
             {%- if article.tags %}
               <br />tags:
               {%- for tag in article.tags %}

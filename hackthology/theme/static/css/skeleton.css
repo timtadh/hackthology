@@ -51,7 +51,7 @@ html, body {
     }
 }
 
-@media screen and (max-width: 765px) {
+@media screen and (max-width: 800px) {
     #page-main,
     #page-side {
         clear: both;
@@ -62,6 +62,8 @@ html, body {
         width: auto;
         margin-left: calc(50% - (620px/2));
         border-top: 1px gray dotted;
+        margin-top: 2em;
+        padding-top: 1em;
     }
 
 
@@ -82,7 +84,7 @@ html, body {
 
 
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 660px) {
     #page-main,
     #page-side {
         width: auto;
