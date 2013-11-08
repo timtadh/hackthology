@@ -65,7 +65,7 @@ article header h1.full, h1.page {
 }
 
 h1.page {
-    margin-top: .8em;
+    margin-top: .0em;
 }
 
 article header h1.full a {
@@ -82,6 +82,14 @@ p {
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
     font-weight: normal;
+}
+
+h3.first {
+    margin-top: 0em;
+}
+
+p.first {
+    margin-top: 0em;
 }
 
 p.first a {
