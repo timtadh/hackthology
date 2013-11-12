@@ -6,16 +6,30 @@ AUTHOR = u'Tim Henderson'
 SITENAME = u'Hackthology'
 SITEURL = ''
 THEME = 'theme/'
-TIMEZONE = 'US/NewYork'
+TIMEZONE = 'US/Eastern'
 DEFAULT_LANG = u'en'
 
 GOOGLE_ANALYTICS = 'UA-20145944-2'
 
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
+## (None, i.e. base URL is “/”)  The domain prepended to feed URLs.  Since feed
+## URLs should always be absolute, it is highly recommended to define this (e.g.,
+##    “http://feeds.example.com”). If you have already explicitly defined SITEURL
+##   (see above) and want to use the same domain for your feeds, you can just set:
+##  FEED_DOMAIN = SITEURL. 
+FEED_DOMAIN = SITEURL
+FEED_RSS = 'feeds/rss.xml'
+#FEED_ALL_RSS = 'feeds/rss-all.xml'
+#FEED_ATOM (None, i.e. no Atom feed)   Relative URL to output the Atom feed.
+#FEED_RSS (None, i.e. no RSS)  Relative URL to output the RSS feed.
+#FEED_ALL_ATOM ('feeds/all.atom.xml')  Relative URL to output the all posts Atom feed: this feed will contain all posts regardless of their language.
+#FEED_ALL_RSS (None, i.e. no all RSS)  Relative URL to output the all posts RSS feed: this feed will contain all posts regardless of their language.
+#CATEGORY_FEED_ATOM (‘feeds/%s.atom.xml’[2])   Where to put the category Atom feeds.
+#CATEGORY_FEED_RSS (None, i.e. no RSS)   Where to put the category RSS feeds.
+#TAG_FEED_ATOM (None, i.e. no tag feed)  Relative URL to output the tag Atom feed. It should be defined using a “%s” match in the tag name.
+#TAG_FEED_RSS (None, ie no RSS tag feed)   Relative URL to output the tag RSS feed
+#FEED_MAX_ITEMS  Maximum number of items allowed in a feed. Feed item quantity is unrestricted by default.
 
 MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'footnotes']
 
@@ -40,8 +54,11 @@ DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
           #('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('github.com/timtadh', 'https://github.com/timtadh'),
-          ('Google+', 'https://plus.google.com/109232399292705173597'),)
+SOCIAL = (
+    ('github.com/timtadh', 'https://github.com/timtadh'),
+    ('twitter.com/timtadh', 'https://twitter.com/timtadh'),
+    ('Google+', 'https://plus.google.com/109232399292705173597'),
+)
 
 DEFAULT_PAGINATION = False
 

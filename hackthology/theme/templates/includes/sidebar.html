@@ -29,10 +29,10 @@
             <h3>links/</h3>
             <ul>
             {% if FEED_ATOM %}
-              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}">Flux ATOM</a></li>
+              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_ATOM }}">atom-feed/</a></li>
             {% endif %}
             {% if FEED_RSS %}
-              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}">Flux RSS</a></li>
+              <li><a href="{{ FEED_DOMAIN }}/{{ FEED_RSS }}">rss-feed/</a></li>
             {% endif %}
             {% if SOCIAL %}
               {% for name, url in SOCIAL %}
