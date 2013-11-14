@@ -450,7 +450,7 @@ In code[^5]
 Hopefully if you are still with me you have a grasp on what is going on in the
 Linear Hashing algorithm. The key take aways are:
 
-1. You can slowly extend how much the hash function you use.
+1. You can slowly extend how much of the hash function you use.
 2. You don't have to rehash the whole file to add a bucket, just the bucket that
    collides with the new bucket.
 
