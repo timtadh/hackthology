@@ -8,7 +8,7 @@
     <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
     <link href='http://fonts.googleapis.com/css?family=Alice' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
     <!--[if lte IE 8]><script type="text/javascript" src="{{ SITEURL }}/theme/js/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/skeleton.css" />
     <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/theme.css" />
@@ -30,9 +30,19 @@
         <h1>
           <a href="{{ SITEURL }}/index.html">{{ SITENAME }}</a>
         </h1>
+        <div class="top-nav">
+          <ul>
+          {% if DISPLAY_PAGES_ON_MENU %}
+            {% for p in PAGES %}
+            <li><a href="{{ SITEURL}}/{{ p.url }}"{% if p == page %} class="active"{% endif %}>{{ p.title.lower() }}</a></li>
+            {% endfor %}
+          {% endif %}
+          </ul>
+        </div>
       </header>
       
       <div id="page-body">
+
         <{%- if article %}article class="post" {% else %}section {% endif -%}id="page-main" role="main">
 {% block content %}
 {% endblock content %}

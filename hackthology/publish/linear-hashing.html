@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=endge, chrome=IE8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
+    <title>Hackthology</title>
+    <link href='http://fonts.googleapis.com/css?family=Alice' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Share+Tech+Mono' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <!--[if lte IE 8]><script type="text/javascript" src="http://hackthology.com/theme/js/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="http://hackthology.com/theme/css/skeleton.css" />
+    <link rel="stylesheet" type="text/css" href="http://hackthology.com/theme/css/theme.css" />
+    <link rel="shortcut icon" type="image/png" href="http://hackthology.com/favicon.png" />
+    <!--[if lte IE 8]><link rel="shortcut icon" type="image/x-icon" href="http://hackthology.com/favicon.ico" /><![endif]-->
+    <link rel="alternate" type="application/atom+xml"
+                           title="Hackthology — Flux Atom"
+                           href="http://hackthology.com/" /> 
+    <link rel ="alternate" type="application/rss+xml"
+                           title="Hackthology — Flux RSS"
+                           href="http://hackthology.com/feeds/rss.xml" /> 
+
+    <meta name="author"   content="Tim Henderson" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" media="not print" type="text/css" href="http://hackthology.com/theme/css/pygments.css" /> 
+  </head>
+  <body>
+    <div id="page">
+      <header id="page-head">
+        <h1>
+          <a href="http://hackthology.com/index.html">Hackthology</a>
+        </h1>
+        <div class="top-nav">
+          <ul>
+            <li><a href="http://hackthology.com/pages/about.html">about</a></li>
+            <li><a href="http://hackthology.com/pages/consulting.html">consulting</a></li>
+            <li><a href="http://hackthology.com/pages/projects.html">projects</a></li>
+            <li><a href="http://hackthology.com/pages/research.html">research</a></li>
+            <li><a href="http://hackthology.com/pages/teaching.html">teaching</a></li>
+          </ul>
+        </div>
+      </header>
+      
+      <div id="page-body">
+
+        <article class="post" id="page-main" role="main">
+      <header class="post-header">
+        <h1 class="full">
+          <a rel="bookmark"
+             href="http://hackthology.com/linear-hashing.html"
+             title="perm link Linear Hashing">
+             Linear Hashing
+          </a>
+        </h1>
+        <div class="meta">
+<!-- includes/article_meta.html -->
+          <div class="meta">
+            by <a href="http://hackthology.com/pages/about.html">Tim Henderson</a>
+            <br/> <time datetime="2013-11-13T00:00:00">Wed 13 November 2013</time></div>        </div>
+      </header>
+      <div class="post-content"> 
+        <p>Tonight I am giving a talk<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup> on Linear Hashing,<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup><sup>,</sup><sup id="fnref:3"><a class="footnote-ref" href="#fn:3" rel="footnote">3</a></sup> a hash table suitable
+for secondary storage. It is often used to implement hash indices in databases
+and file systems. Linear Hashing was invented by Witold Litwin in 1980 and has
+been in widespread use since that time. I implemented this file-structure
+earlier this year. You can find <a href="https://github.com/timtadh/file-structures/blob/master/linhash">my implementation on
+github</a>.</p>
+<p>Hopefully this essay gives you a taste for the essentials of Linear Hashing.</p>
+<p><img alt="Linear Hash" src="/images/lin-hash.png" /></p>
+<h1>Hashing, A Refresher</h1>
+<p>In order to understand Linear Hashing one should take a moment to review
+Classical Hashing.<sup id="fnref:4"><a class="footnote-ref" href="#fn:4" rel="footnote">4</a></sup> Briefly, a hash table is a "symbol table" which maps keys
+to values. By "maps" I mean if you give it a key it will give the associated
+value if one exists. Keys must be hashable, which means there must be some way
+to turn them into integers. For a discussion on constructing such hash functions
+I recommend the Hashing Tutorial.<sup id="fnref:4"><a class="footnote-ref" href="#fn:4" rel="footnote">4</a></sup></p>
+<h3>Abstract Data Type</h3>
+<p>If the above description was confusing perhaps this ADT will clarify what I
+mean:</p>
+<div class="highlight"><pre><span class="n">HashTable</span>
+  <span class="n">size</span><span class="p">()</span><span class="o">:</span><span class="kt">int</span> <span class="o">--</span> <span class="n">how</span> <span class="n">many</span> <span class="n">entries</span><span class="o">?</span>
+  <span class="n">has</span><span class="p">(</span><span class="n">key</span><span class="o">:</span><span class="n">Hashable</span><span class="p">)</span><span class="o">:</span><span class="n">boolean</span> <span class="o">--</span> <span class="n">is</span> <span class="n">the</span> <span class="n">key</span> <span class="n">in</span> <span class="n">the</span> <span class="n">table</span><span class="o">?</span>
+  <span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="o">:</span><span class="n">Hashable</span><span class="p">)</span><span class="o">:</span><span class="n">Object</span> <span class="n">throws</span> <span class="n">KeyNotFound</span> <span class="o">--</span> <span class="n">get</span> <span class="n">the</span> <span class="n">associated</span> <span class="n">value</span><span class="p">.</span>
+  <span class="n">put</span><span class="p">(</span><span class="n">key</span><span class="o">:</span><span class="n">Hashable</span><span class="p">,</span> <span class="n">value</span><span class="o">:</span><span class="n">Object</span><span class="p">)</span> <span class="o">--</span> <span class="n">associate</span> <span class="n">a</span> <span class="n">key</span> <span class="n">and</span> <span class="n">value</span><span class="p">.</span>
+
+
+  <span class="n">remove</span><span class="p">(</span><span class="n">key</span><span class="o">:</span><span class="n">Hashable</span><span class="p">)</span> <span class="n">throws</span> <span class="n">KeyNotFound</span> <span class="o">--</span> <span class="n">remove</span> <span class="n">the</span> <span class="n">key</span> <span class="n">from</span> <span class="n">the</span> <span class="n">table</span><span class="p">.</span>
+
+<span class="n">Hashable</span>
+  <span class="n">hash</span><span class="p">()</span><span class="o">:</span><span class="kt">int</span>
+</pre></div>
+
+
+<p>You may have used hash tables by another name in you programming language. For
+instance in Python they are called dictionaries, in Ruby hashs, and in Java they
+are called HashMaps.</p>
+<h2>Implementation</h2>
+<p>Let's walk through a simple hash table implementation using separate chaining
+(also called open hashing). We will do this in the Go programming language. </p>
+<h3>Structs</h3>
+<p>Here is how we are going to represent a hash table:</p>
+<div class="highlight"><pre><span class="kd">type</span> <span class="nx">Hashable</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nx">Equals</span><span class="p">(</span><span class="nx">b</span> <span class="nx">Hashable</span><span class="p">)</span> <span class="kt">bool</span>
+    <span class="nx">Hash</span><span class="p">()</span> <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">entry</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">key</span> <span class="nx">Hashable</span>
+
+
+    <span class="nx">value</span> <span class="kd">interface</span><span class="p">{}</span>
+    <span class="nx">next</span> <span class="o">*</span><span class="nx">entry</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">hash</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">table</span> <span class="p">[]</span><span class="o">*</span><span class="nx">entry</span>
+
+
+    <span class="nx">size</span> <span class="kt">int</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>A <code>hash</code> is a struct with to elements. An array of pointers to <code>entry</code>. The
+entries hold our key value pairs. The way the table works is we convert the key
+into a number which we then clamp to the size of our table. That number will be
+the index of some entry in our table from which we can add, lookup, or remove
+the key.</p>
+<p>The entry struct represents the key value pair and represents a linked list.
+Since covering linked list operations is a bit beyond the scope of this paper,
+let me just present operations on the <code>*entry</code> but with no explanation. The
+function should be obvious even if the implementation is obscure.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">entry</span><span class="p">)</span> <span class="nx">Put</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">,</span> <span class="nx">value</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">entry</span><span class="p">,</span> <span class="nx">appended</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">self</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">&amp;</span><span class="nx">entry</span><span class="p">{</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="kc">nil</span><span class="p">},</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">value</span> <span class="p">=</span> <span class="nx">value</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">,</span> <span class="kc">false</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">next</span><span class="p">,</span> <span class="nx">appended</span> <span class="p">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">Put</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">,</span> <span class="nx">appended</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">entry</span><span class="p">)</span> <span class="nx">Get</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">)</span> <span class="p">(</span><span class="nx">has</span> <span class="kt">bool</span><span class="p">,</span> <span class="nx">value</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">self</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">nil</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">value</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">entry</span><span class="p">)</span> <span class="nx">Remove</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">)</span> <span class="o">*</span><span class="nx">entry</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">self</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nb">panic</span><span class="p">(</span><span class="nx">Errors</span><span class="p">[</span><span class="s">&quot;list-not-found&quot;</span><span class="p">])</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">key</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">next</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">Remove</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nx">self</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h2>Operations on the Hash Table</h2>
+<p>Now for how to implement the different operations. As a reminder we are going to
+convert our key to an index into the table as our first step. Let's make a
+function for that and call it <code>bucket</code></p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">hash</span><span class="p">)</span> <span class="nx">bucket</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+
+
+    <span class="k">return</span> <span class="nx">key</span><span class="p">.</span><span class="nx">Hash</span><span class="p">()</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4>Insertion</h4>
+<p>Putting an object into a hash table is very simple. We grab the bucket and use
+the associate <code>Put</code> method to place our key value pair into the list. If it was
+actually appended onto the list (rather than updating and existing entry) we
+increment the <code>size</code> field.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">hash</span><span class="p">)</span> <span class="nx">Put</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">,</span> <span class="nx">value</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">bucket</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">appended</span> <span class="kt">bool</span>
+
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">],</span> <span class="nx">appended</span> <span class="p">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">].</span><span class="nx">Put</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">appended</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">size</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Now there is one more wrinkle I will return to in a moment which is resizing the
+table when it gets too full.</p>
+<h4>Retrieval</h4>
+<p>Retrieval is just as easy. We grab the bucket and look in the linked list to see
+if it is there or not. If it is, return it.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">hash</span><span class="p">)</span> <span class="nx">Get</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">)</span> <span class="p">(</span><span class="nx">value</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">bucket</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">has</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">].</span><span class="nx">Get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span> <span class="nx">has</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">value</span><span class="p">,</span> <span class="kc">nil</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">Errors</span><span class="p">[</span><span class="s">&quot;not-found&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4>Removal</h4>
+<p>Removal is almost the same as insertion except we call <code>Remove</code> on the linked
+list instead of <code>Put</code> and update the head as before. We check to make sure it
+is in the linked list first as this slightly simplifies the removal algorithm
+above.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">hash</span><span class="p">)</span> <span class="nx">Remove</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">)</span> <span class="p">(</span><span class="nx">value</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">bucket</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="nx">has</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">].</span><span class="nx">Get</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">!</span><span class="nx">has</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">Errors</span><span class="p">[</span><span class="s">&quot;not-found&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">]</span> <span class="p">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">].</span><span class="nx">Remove</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">size</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="nx">value</span><span class="p">,</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4>Expansion</h4>
+<p>The performance of a hash table degrades as it gets too full. Therefore, we have
+to periodically expand the size of the hash table. As long we double the size
+each time all of our operations are asymptotically linear (on average). To
+double the size of the table, we allocate a new table and copy all of the
+entries from the old table to the new. We must be careful when we do this and
+rehash each element. If we don't, we will be unable to find the elements in the
+new table since the <code>bucket</code> function depends on the table size.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">hash</span><span class="p">)</span> <span class="nx">expand</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">table</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">table</span>
+
+    <span class="nx">self</span><span class="p">.</span><span class="nx">table</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="o">*</span><span class="nx">entry</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">table</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">size</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">E</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">table</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="nx">e</span> <span class="o">:=</span> <span class="nx">E</span><span class="p">;</span> <span class="nx">e</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">;</span> <span class="nx">e</span> <span class="p">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">next</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">Put</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">key</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">err</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4>Insert Revisited</h4>
+<p>So when should we expand the hash table? We should expand on insert when the
+number of elements is over a certain threshold. The threshold is often set at
+60% but this setting varies.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="o">*</span><span class="nx">hash</span><span class="p">)</span> <span class="nx">Put</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">,</span> <span class="nx">value</span> <span class="kd">interface</span><span class="p">{})</span> <span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">bucket</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">bucket</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">appended</span> <span class="kt">bool</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">],</span> <span class="nx">appended</span> <span class="p">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">[</span><span class="nx">bucket</span><span class="p">].</span><span class="nx">Put</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">appended</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">size</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">self</span><span class="p">.</span><span class="nx">size</span> <span class="o">*</span> <span class="mi">2</span> <span class="p">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">table</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">expand</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h1>Adapting Hash Tables for Secondary Storage</h1>
+<p><a href="/images/cpu-arch.png"><img alt="CPU and Storage" src="/images/cpu-arch.png" /></a>
+Figure 1. <strong>CPU and Storage</strong></p>
+<p>Unfortunately, the algorithm presented above does work well when using secondary
+storage mediums like hard disks and solid state drives. There are several
+reasons for this:</p>
+<ol>
+<li>Secondary Storage is slower than RAM</li>
+<li>The bus is slower</li>
+<li>Many peripherals hang off of the South Bridge</li>
+<li>Disks may be daisy chained causing bus contention</li>
+</ol>
+<p>To deal with these factors and others when using disks:</p>
+<ol>
+<li>Read and write pages which are blocks of size 4096 bytes.</li>
+<li>Try and read contiguous runs and if writing more than one page write
+   contiguous runs as well.</li>
+<li>Batch writes.</li>
+<li>Don't read one byte at a time, read several blocks and get the byte that you
+   need.</li>
+<li>Employ caching at every layer.</li>
+<li>Measure performance in terms of number of disk accesses (eg. Block read and
+   writes).</li>
+</ol>
+<h2>Back to Hashing</h2>
+<p>The first adjustment to make is to hash into blocks instead of hashing into
+individual array buckets. Each block is then a sorted array of entries.</p>
+<p><a href="/images/block-file.png"><img alt="Block File" src="/images/block-file.png" /></a>
+Figure 2. <strong>Block File</strong></p>
+<p>We could make a fairly straight forward adaption of our separate chained hash
+table above to this restriction. However, there is a problem: what do we do when
+the table needs to be expanded? If the table is static then there is not
+problem, we simply allocate the correct number of blocks right away. But, if we
+have to expand the table every entry will need to be rehashed. This will cause
+us to read from every block from our old table (N reads) and write to every
+block in our new table (2*N writes) -- ouch.</p>
+<p>The solution is of course Linear Hashing.</p>
+<h2>Linear Hashing</h2>
+<p>How does Linear Hashing compare?</p>
+<ol>
+<li>Small mean disk accesses<ol>
+<li>Successful Search<ol>
+<li>.75 utilization ~ 1.05 disk accesses</li>
+<li>.9 utilization ~ 1.35 disk accesses</li>
+</ol>
+</li>
+<li>Unsuccessful Search<ol>
+<li>.75 utilization ~ 1.27 disk accesses</li>
+<li>.9 utilization ~ 2.37 disk accesses</li>
+</ol>
+</li>
+<li>Insert<ol>
+<li>.75 utilization ~ 2.62 disk accesses</li>
+<li>.9 utilization ~ 3.73 disk accesses</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>In comparison a B+Tree of reasonable size might need at least 4 disk access
+   for a search. (Of course a B+Tree will can perform range queries but that
+   isn't the point here)</p>
+</li>
+<li>
+<p>File grows at a linear rate.</p>
+</li>
+<li>
+<p>Little dynamic re-arrangement</p>
+</li>
+<li>
+<p>Does not necessarily need address translation.</p>
+</li>
+<li>
+<p>Simple Algorithm esp. in comparison to B+Trees.</p>
+</li>
+</ol>
+<h3>Explanation of the Algorithm</h3>
+<p>The <strong>key</strong> insight is to not use all the bits of the hash function "H(.)" all
+the time. When the table is small we only use as much of the hash function as
+we need. As the table grows we use more bits. As the table shrinks we use less.</p>
+<p><a href="/images/lin-hash-ex-1.png"><img alt="Linear Hash" src="/images/lin-hash-ex-1.png" /></a>
+Figure 3. <strong>Example</strong></p>
+<p>In the figure, <code>n</code> is the number of blocks, <code>i</code> is the number of bits of the
+hash functions and <code>r</code> is the number of records.</p>
+<p>So to find which bucket a key goes to:</p>
+<div class="highlight"><pre><span class="n">bkt_idx</span> <span class="p">=</span> <span class="kr">let</span>
+  <span class="n">hash</span> <span class="p">=</span> <span class="n">x</span> <span class="n">x</span> <span class="n">x</span> <span class="n">x</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="p">...</span> <span class="n">a_i</span> <span class="cm">(* base 2 expansion of the hash of the key *)</span>
+  <span class="n">m</span> <span class="p">=</span> <span class="n">a_1</span> <span class="n">a_2</span> <span class="p">...</span> <span class="n">a_i</span> <span class="cm">(* just the first i bits *)</span>
+<span class="kr">in</span>
+  <span class="kr">if</span> <span class="n">m</span> <span class="n">&lt;</span> <span class="n">n</span> <span class="kr">then</span>
+    <span class="n">m</span>
+  <span class="kr">else</span>
+    <span class="n">m</span> <span class="n">-</span> <span class="mi">2</span><span class="n">^</span><span class="p">(</span><span class="n">i-</span><span class="mi">1</span><span class="p">)</span> <span class="cm">(* == 0 a_2 a_3 ... a_i *)</span>
+<span class="kr">end</span>
+</pre></div>
+
+
+<p>In go</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="nx">bucket</span><span class="p">(</span><span class="nx">hash</span> <span class="kt">uint</span><span class="p">)</span> <span class="kt">uint</span> <span class="p">{</span>
+    <span class="nx">m</span> <span class="o">:=</span> <span class="nx">hash</span> <span class="o">&amp;</span> <span class="p">((</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="nx">i</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// last i bits of hash as</span>
+                           <span class="c1">// bucket number m</span>
+    <span class="k">if</span> <span class="nx">m</span> <span class="p">&lt;</span> <span class="nx">n</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">m</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">m</span> <span class="p">^</span> <span class="p">(</span><span class="mi">1</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c1">// unset the top bit</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h4>Insertion</h4>
+<p>Insertion is quite simple now that we know how to get the bucket (assuming we
+have implemented the appropriate operations on our buckets). First we get the
+bucket and we put the item into the bucket. If the bucket takes care of chaining
+on an extra block if it full then the only thing that is left is checking
+whether or not an expansion (called a split) is needed.</p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="nx">LinearHash</span><span class="p">)</span> <span class="nx">Insert</span><span class="p">(</span><span class="nx">key</span> <span class="nx">Hashable</span><span class="p">,</span> <span class="nx">value</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">hash</span> <span class="o">:=</span> <span class="nx">key</span><span class="p">.</span><span class="nx">Hash</span><span class="p">()</span>
+    <span class="nx">bkt_idx</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">bucket</span><span class="p">(</span><span class="nx">hash</span><span class="p">)</span>
+    <span class="nx">bkt</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">get_bucket</span><span class="p">(</span><span class="nx">bkt_idx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">bkt</span><span class="p">.</span><span class="nx">Put</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">value</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">err</span>
+    <span class="p">}</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">r</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nx">r</span> <span class="p">&gt;</span> <span class="nx">UTILIZATION</span> <span class="o">*</span> <span class="nx">self</span><span class="p">.</span><span class="nx">n</span> <span class="o">*</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">records_per_block</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">split</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>As I mentioned above, if a bucket is full it should chain out an extra block for
+itself. This can be handled transparently.</p>
+<p><a href="/images/lin-hash-ex-2.png"><img alt="Linear Hash" src="/images/lin-hash-ex-2.png" /></a>
+Figure 4. <strong>Chaining Example</strong></p>
+<h4>Splitting</h4>
+<p>The split mechanism is clever bit of the linear hash algorithm. When the table
+is too full another block is added to the table:</p>
+<p><a href="/images/lin-hash-ex-3.png"><img alt="Linear Hash" src="/images/lin-hash-ex-3.png" /></a>
+Figure 5. <strong>Split Example Part 1</strong></p>
+<p>Note that the bucket we added in the example was </p>
+<div class="highlight"><pre><span class="mi">1</span> <span class="n">a_i</span> <span class="o">==</span> <span class="mi">1</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">a_1</span> <span class="n">a_2</span>
+</pre></div>
+
+
+<p>There are some keys in the old bucket <code>0</code> which is now called <code>00</code> which
+actually belong to bucket <code>10</code>. So in order to make the addition of the new
+bucket correct we need to split bucket <code>00</code>.</p>
+<p><a href="/images/lin-hash-ex-4.png"><img alt="Linear Hash" src="/images/lin-hash-ex-4.png" /></a>
+Figure 5. <strong>Split Example Part 2</strong></p>
+<p>In general if we add</p>
+<div class="highlight"><pre><span class="mi">1</span> <span class="n">a_2</span> <span class="n">a_3</span> <span class="p">...</span> <span class="n">a_i</span>
+</pre></div>
+
+
+<p>We split</p>
+<div class="highlight"><pre><span class="mi">0</span> <span class="n">a_2</span> <span class="n">a_3</span> <span class="p">...</span> <span class="n">a_i</span>
+</pre></div>
+
+
+<p>In code<sup id="fnref:5"><a class="footnote-ref" href="#fn:5" rel="footnote">5</a></sup></p>
+<div class="highlight"><pre><span class="kd">func</span> <span class="p">(</span><span class="nx">self</span> <span class="nx">LinearHash</span><span class="p">)</span> <span class="nx">split</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+    <span class="nx">bkt_idx</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">n</span> <span class="o">%</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="nx">bkt_a</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">get_bucket</span><span class="p">(</span><span class="nx">bkt_idx</span><span class="p">)</span>
+    <span class="nx">bkt_b</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">allocate</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">err</span>
+    <span class="p">}</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nx">n</span> <span class="p">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">blk_a</span><span class="p">.</span><span class="nx">split_into</span><span class="p">(</span><span class="nx">bkt_b</span><span class="p">)</span>
+    <span class="c1">// The split into function is left as</span>
+    <span class="c1">// an exercise for the reader!</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<h1>Conclusion</h1>
+<p>Hopefully if you are still with me you have a grasp on what is going on in the
+Linear Hashing algorithm. The key take aways are:</p>
+<ol>
+<li>You can slowly extend how much the hash function you use.</li>
+<li>You don't have to rehash the whole file to add a bucket, just the bucket that
+   collides with the new bucket.</li>
+</ol>
+<p>If you want to implement the algorithm I suggest reading the description in the
+Garcia-Molina book and taking a look at the original paper. You can also take a
+look at <a href="https://github.com/timtadh/file-structures/blob/master/linhash">my implementation</a>.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Henderson, T. A. D. (2013)
+<a href="http://hackthology.com/pdfs/2013-11-13-linear-hashing-lecture.pdf">Linear Virtual Hashing</a>.
+CWRU Hacker Society. Lecture Notes. November, 2013.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Litwin, W. (1980).
+<a href="http://hackthology.com/pdfs/Litwin-1980-Linear_Hashing.pdf">Linear hashing: a new tool for file and table addressing</a>. In Proceedings of the sixth
+international conference on Very Large Data Bases - Volume 6 (pp.  212–223).
+VLDB Endowment. Retrieved from
+<a href="http://dl.acm.org/citation.cfm?id=1286887.1286911">http://dl.acm.org/citation.cfm?id=1286887.1286911</a>&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Garcia-Molina, H., Ullman J. D., and Widom J. (2002)
+<a href="http://www.worldcat.org/title/database-systems-the-complete-book/oclc/47915796">Database Systems: The Complete Book</a>.
+Prentice Hall. Upper Saddle River, New Jersey. ISBN 0-13-031995-3. Section
+13.4.7 "Linear Hash Tables"&#160;<a class="footnote-backref" href="#fnref:3" rev="footnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Shaffer, C. A. (2007)
+<a href="http://research.cs.vt.edu/AVresearch/hashing/">Hashing Tutorial</a>
+Virginia Tech Algorithm Research Group.&#160;<a class="footnote-backref" href="#fnref:4" rev="footnote" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>Ok, I am not that mean here is how to do the split_into in this file:
+<a href="https://github.com/timtadh/file-structures/blob/master/linhash/bucket/bucket.go">https://github.com/timtadh/file-structures/blob/master/linhash/bucket/bucket.go</a>&#160;<a class="footnote-backref" href="#fnref:5" rev="footnote" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Henderson, T. A. D. (2013) <a href="https://github.com/timtadh/file-structures/blob/master/linhash">Linear Hash
+Implementation</a>&#160;<a class="footnote-backref" href="#fnref:6" rev="footnote" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+      </div>
+      </article> <!-- /#page-main -->
+
+        <aside id="page-side">
+          <!-- begin includes/sidebar.html -->
+          <nav>
+            <h3 class="first"><a href="http://hackthology.com/index.html">hackthology/</a></h3>
+            <h3>pages/</h3>
+            <ul>
+              <li><a href="http://hackthology.com/pages/about.html">about/</a></li>
+              <li><a href="http://hackthology.com/pages/consulting.html">consulting/</a></li>
+              <li><a href="http://hackthology.com/pages/projects.html">projects/</a></li>
+              <li><a href="http://hackthology.com/pages/research.html">research/</a></li>
+              <li><a href="http://hackthology.com/pages/teaching.html">teaching/</a></li>
+            </ul>
+          </nav>
+
+          <nav>
+              <h3 class="active"><a href="http://hackthology.com/category/blog.html">blog/</a></h3>
+          </nav>
+
+          <nav>
+            <h3>links/</h3>
+            <ul>
+              <li><a href="http://hackthology.com/feeds/rss.xml">rss-feed/</a></li>
+              <li><a href="https://github.com/timtadh">github.com/timtadh/</a></li>
+              <li><a href="https://twitter.com/timtadh">twitter.com/timtadh/</a></li>
+              <li><a href="https://plus.google.com/109232399292705173597">google+/</a></li>
+            </ul>
+          </nav>
+          <!-- end includes/sidebar.html --></aside> <!-- /#page-side -->
+      </div>  <!-- /#page-body -->
+
+      <footer id="page-foot">
+        <p> Powered by <a href="http://pelican.readthedocs.org">Pelican</a></p>
+      </footer>
+    </div> <!-- /#page -->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-20145944-2']);
+          _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); 
+        ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

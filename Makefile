@@ -13,8 +13,11 @@ nuke: clean
 html:
 	cd hackthology && $(MAKE) html
 
-update: html
-	cp -r hackthology/output/* timtadh.github.io/
+pub-html:
+	cd hackthology && $(MAKE) pub-html
+
+update: pub-html
+	cp -r hackthology/publish/* timtadh.github.io/
 
 status: update
 	cd timtadh.github.io/ && $(MAKE) status
@@ -31,4 +34,4 @@ commit:
 publish:
 	cd timtadh.github.io/ && $(MAKE) publish
 
-.PHONY: clean nuke update publish status rm-content commit add html
+.PHONY: clean nuke update publish status rm-content commit add html pub-html

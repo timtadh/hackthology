@@ -55,6 +55,9 @@ help:
 html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
+pub-html:
+	$(PELICAN) $(INPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
+
 clean:
 	[ ! -d $(OUTPUTDIR) ] || rm -rf $(OUTPUTDIR)
 
