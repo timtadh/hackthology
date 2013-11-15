@@ -11,6 +11,9 @@ been in widespread use since that time. I implemented this file-structure
 earlier this year. You can find [my implementation on
 github](https://github.com/timtadh/file-structures/blob/master/linhash).
 
+I also have an [in memory version]({filename}linear-hashing-2.md), you probably
+want to take a look at that after you have read the post.
+
 Hopefully this essay gives you a taste for the essentials of Linear Hashing.
 
 ![Linear Hash](/images/lin-hash.png)
@@ -457,8 +460,8 @@ Linear Hashing algorithm. The key take aways are:
 If you want to implement the algorithm I suggest reading the description in the
 Garcia-Molina book and taking a look at the original paper. You can also take a
 look at [my implementation](
-https://github.com/timtadh/file-structures/blob/master/linhash).
-
+https://github.com/timtadh/file-structures/blob/master/linhash) or my other
+implementation, an [in memory version]({filename}linear-hashing-2.md).
 
 
 [^1]: Henderson, T. A. D. (2013)
