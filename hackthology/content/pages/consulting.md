@@ -4,7 +4,7 @@ Date: 2013-11-05
 Category: Consulting
 
 
-I available for consulting on a per project basis. I can also offer training
+I am available for consulting on a per project basis. I can also offer training
 materials and sessions on a number of topics. I am particularly interested in
 working on projects related to compilers and programming languages. However, I
 have worked on variety of other systems as well including: web services, thick

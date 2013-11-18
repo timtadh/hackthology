@@ -18,8 +18,8 @@ Mining. It is not currently open source but I am exploring the possibility.
 
 ## Slang
 
-Slang is a programming language which I have been working on to help me teach
-the principles of compilation and program analysis. It is currently in an
+Slang is a programming language which I have been developing on to help me
+teach the principles of compilation and program analysis. It is currently in an
 unfinished state as it lacks many features I would like it to have the in the
 future. However, it does demonstrate lexing, parsing, intermediate code
 generation, control flow analysis, structural data flow analysis, and machine
@@ -42,7 +42,7 @@ More at
 
 A query language for Python Object Hierarchies. It is loosely inspired by
 XQuery/XPath and OQL. It allows schema-less queries of complex Python
-data structures. It is a fun little qtuery language with an easily extensible
+data structures. It is a fun little query language with an easily extensible
 parser for adding more syntax.
 
 More at [github.com/timtadh/pyflwor](http://github.com/timtadh/pyflwor)
@@ -50,9 +50,9 @@ More at [github.com/timtadh/pyflwor](http://github.com/timtadh/pyflwor)
 
 ## Tree Edit Distance
 
-I have a great implementation of exact tree edit distance using the Zhang-Shasha
-algorithm. People seem to email me fairly regularly about it so someone out
-there is finding it useful.
+I have a great implementation of exact tree edit distance using the
+Zhang-Shasha algorithm. People seem to email me fairly regularly about it so
+someone out there is finding it useful.
 
 More at
 [github.com/timtadh/zhang-shasha](https://github.com/timtadh/zhang-shasha)
@@ -66,7 +66,7 @@ More at
    write command line utilities. I write a lot of these.
 3. [passmash](https://github.com/timtadh/passmash) A site specific password
    munger.
-4. Lots of private little things here and there.
+4. Lots of random utilities here and there.
 
 <br>
 

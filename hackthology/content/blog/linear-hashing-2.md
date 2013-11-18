@@ -5,8 +5,8 @@ Category: Blog
 
 In the [last post]({filename}linear-hashing.md) I described how linear hashing
 works. If you haven't read it yet, you should go read it first. I can wait, this
-post presents a new implementation which is a lot simpiler than the disk based
-version refrenced in the last post.
+post presents a new implementation which is a lot simpler than the disk based
+version referenced in the last post.
 
 In the demonstration version (that would be this one) I represent the buckets as
 binary search trees. If I had been a bit more ambitious I would have represented
