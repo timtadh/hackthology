@@ -276,11 +276,15 @@ table td, table th {
 
 pre {
     font-family: monospace;
-    font-size: 12px;
+    font-size: 12px !important;
     line-height: 1.15em;
     background-color: #F5F5F5;
     padding: 0.5em;
     max-width: 100%;
+}
+
+span.line-number {
+    font-size: 12px !important; /* gist fixup */
 }
 
 figure * { border: none; margin: auto; padding: auto; }
