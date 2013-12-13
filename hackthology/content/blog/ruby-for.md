@@ -4,7 +4,7 @@ Date: 2013-11-21
 Category: Blog
 
 I am taking some time to learn Ruby this fall from [Eloquent
-Ruby](www.worldcat.org/title/eloquent-ruby/oclc/676726142). The second chapter
+Ruby](http://www.worldcat.org/title/eloquent-ruby/oclc/676726142). The second chapter
 on choosing the right control structures has this paragraph (emphasis mine):
 
 > Since the two versions of the “print my fonts” code are essentially
