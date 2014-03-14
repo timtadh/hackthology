@@ -31,13 +31,7 @@
           <a href="{{ SITEURL }}/index.html">{{ SITENAME }}</a>
         </h1>
         <div class="top-nav">
-          <ul>
-          {% if DISPLAY_PAGES_ON_MENU %}
-            {% for p in PAGES %}
-            <li><a href="{{ SITEURL}}/{{ p.url }}"{% if p == page %} class="active"{% endif %}>{{ p.title.lower() }}</a></li>
-            {% endfor %}
-          {% endif %}
-          </ul>
+          {%- include "includes/nav.html" -%}
         </div>
       </header>
       
@@ -48,14 +42,13 @@
 {% endblock content %}
       </{%- if article %}article{% else %}section{% endif -%}> <!-- /#page-main -->
 
-        <aside id="page-side">
-          {%- include "includes/sidebar.html" -%}
-        </aside> <!-- /#page-side -->
       </div>  <!-- /#page-body -->
 
       <footer id="page-foot">
-        <p> {{ FOOTER_TEXT or 'Powered by <a href="http://pelican.readthedocs.org">Pelican</a>' }}</p>
-        {% if GITHUB_URL %}<p><a id="github-link" href="{{ GITHUB_URL}}">Fork me on Github</a></p>{% endif %}
+        <div class="bottom-nav">
+          {%- include "includes/nav.html" -%}
+        </div>
+        <p>Copyright 2014 Tim Henderson. All Rights Reserved.</p>
       </footer>
     </div> <!-- /#page -->
     {% if GOOGLE_ANALYTICS %}

@@ -55,9 +55,9 @@ DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
 
 # Social widget
 SOCIAL = (
-    ('github.com/timtadh', 'https://github.com/timtadh'),
-    ('twitter.com/timtadh', 'https://twitter.com/timtadh'),
-    ('Google+', 'https://plus.google.com/109232399292705173597'),
+    ('github', 'https://github.com/timtadh'),
+    ('twitter', 'https://twitter.com/timtadh'),
+    ('google+', 'https://plus.google.com/109232399292705173597'),
 )
 
 DEFAULT_PAGINATION = False

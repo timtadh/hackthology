@@ -17,14 +17,6 @@
             </ul>
           </nav>
 
-          {% if categories %}
-          <nav>
-            {% for cat, null in categories %}
-              <h3{%- if cat == category %} class="active"{% endif -%}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat.name.lower() }}/</a></h3>
-            {% endfor %}
-          </nav>
-          {% endif %}
-
           <nav>
             <h3>links/</h3>
             <ul>
