@@ -1,4 +1,4 @@
-Title: Proposal: Functional Iteration in Go
+Title: Functional Iteration in Go
 Author: Tim Henderson
 Date: 2013-12-13
 Category: Blog
@@ -33,7 +33,7 @@ solution I like. This new solution uses a functional programming style.
 
     type Iterator func()(item interface{}, next Iterator)
 
-An iterator is function. Calling the function yields the next item in the
+This iterator is a function. Calling the function yields the next item in the
 collection and a continuation function pointer. When the continuation function
 pointer becomes nil, there are no more items left in the collection. Here's an
 example of how to use a functional iterator from a test case in my
@@ -65,34 +65,58 @@ post-order traversal:
 
     ::go
 
-    func PostOrder(node Node, out chan<- interface{}) {
-        if node == nil {
-            return
-        }
-        PostOrder(node.Left(), out)
-        PostOrder(node.Right(), out)
-        out<-node.Value()
+    package main
+
+    import "fmt"
+
+    type Node struct {
+        label int
+        children []Node
     }
 
-    // using it
-    iter := make(chan interface{})
-    go PostOrder(root, iter)
-    for node := range iter {
-        // do something with node
+    func (self *Node) String() string {
+        return fmt.Sprintf("<%v %v>", self.label, self.children)
     }
+
+    func (self *Node) PostOrder() (<-chan int) {
+        ch := make(chan int)
+        go func(yield chan<- int) {
+            var iter func(node *Node)
+            iter = func(node *Node) {
+                if node == nil {
+                    return
+                }
+                for _, child := range node.children {
+                    iter(&child)
+                }
+                yield<-node.label
+            }
+            iter(self)
+            close(yield)
+        }(ch)
+        return ch
+    }
+
+    func main() {
+        root := &Node{5, []Node{Node{3, []Node{Node{1, nil}, Node{4, nil}}}, Node{7, []Node{Node{6, nil}, Node{10, []Node{Node{8, nil}, Node{12, nil}}}}}}}
+        fmt.Println(root)
+        for i := range root.PostOrder() {
+            fmt.Println(i)
+        }
+    }
+
+(try it on the playground <http://play.golang.org/p/kUGDQvWhkb>)
 
 However, what happens if the consumer of the iterator needs to bail out early?
 Like so:
 
     ::go
 
-    iter := make(chan interface{})
-    go PostOrder(root, iter)
-    for node := range iter {
-        if IsBad(node) {
-            return
+    for i := range root.PostOrder() {
+        fmt.Println(i)
+        if i % 2 == 0 {
+            break
         }
-        // do something with node
     }
 
 In this case the go-routine `PostOrder` is running in will leak. Since, it will
@@ -161,13 +185,28 @@ user. This sometimes gets tricky, for instance in post-order iteration.
 
     ::go
 
-    func TraverseTreePostOrder(node types.TreeNode) types.TreeNodeIterator {
+    package main
+
+    import "fmt"
+
+    type Node struct {
+        label int
+        children []Node
+    }
+
+    type IntIterator func()(label int, next IntIterator)
+
+    func (self *Node) String() string {
+        return fmt.Sprintf("<%v %v>", self.label, self.children)
+    }
+
+    func (self *Node) PostOrder() IntIterator {
         type entry struct {
-            tn types.TreeNode
+            tn *Node
             i int
         }
 
-        pop := func (stack []entry) ([]entry, types.TreeNode, int) {
+        pop := func (stack []entry) ([]entry, *Node, int) {
             if len(stack) <= 0 {
                 return stack, nil, 0
             } else {
@@ -176,28 +215,43 @@ user. This sometimes gets tricky, for instance in post-order iteration.
             }
         }
 
+        stack := append(make([]entry, 0, 10), entry{self, 0})
 
-        stack := append(make([]entry, 0, 10), entry{tn_expose_nil(node), 0})
-
-        var tn_iterator types.TreeNodeIterator
-        tn_iterator = func()(tn types.TreeNode, next types.TreeNodeIterator) {
+        var iterator IntIterator
+        iterator = func()(label int, next IntIterator) {
             var i int
+            var tn *Node
 
             if len(stack) <= 0 {
-                return nil, nil
+                return 0, nil
             }
 
             stack, tn, i = pop(stack)
-            for i < tn.ChildCount() {
-                kid := tn.GetChild(i)
+            if tn == nil {
+                return 0, nil
+            }
+            for i < len(tn.children) {
+                kid := &tn.children[i]
                 stack = append(stack, entry{tn, i+1})
                 tn = kid
                 i = 0
             }
-            return tn, tn_iterator
+            return tn.label, iterator
         }
-        return tn_iterator
+        return iterator
+
     }
+
+    func main() {
+        root := &Node{5, []Node{Node{3, []Node{Node{1, nil}, Node{4, nil}}}, Node{7, []Node{Node{6, nil}, Node{10, []Node{Node{8, nil}, Node{12, nil}}}}}}}
+        fmt.Println(root)
+        for i, next := root.PostOrder()(); next != nil; i, next = next() {
+            fmt.Println(i)
+        }
+    }
+
+
+(try it out yourself on the playground <http://play.golang.org/p/M4ivyGL7GM>)
 
 This time, the iterator must keep a stack of items in order to function. The
 top entry contains the next item to process and location in its child list next
@@ -219,6 +273,4 @@ Functional iterators represent a flexible way to implement generic iterators in
 Go. They are easy to use and do not leak resources. There only draw back in
 comparison to other approaches is greater difficulty in constructing the
 iterators. In order solve this libraries of data-structures and iterator
-generators should be constructed. I have begun such a library in my
-[data-structures repository](https://github.com/timtadh/data-structures).
-
+generators should be constructed.
