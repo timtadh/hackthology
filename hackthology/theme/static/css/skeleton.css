@@ -56,21 +56,16 @@ div.top-nav ul li, div.bottom-nav ul li {
 }
 
 @media screen and (max-width: 660px) {
-    #page-main,
-    #page-side {
+    #page-main {
         width: auto;
-        clear: both;
-        float: none;
         padding: 0px;
         margin: 0px;
     }
 
 }
 @media screen and (max-width: 540px) {
-
     div.top-nav {
         visibility: hidden;
         height: 0px;
     }
-
 }
