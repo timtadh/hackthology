@@ -7,7 +7,7 @@ html, body {
 }
 
 #page {
-    max-width: 620px;
+    max-width: 720px;
     min-width: 240px;
     margin: 0 auto;
     padding: 0;
@@ -25,7 +25,6 @@ html, body {
 
 #page-main {
     border-width: 0;
-    width: 620px;
     text-align: justify;
 }
 
@@ -38,7 +37,6 @@ div.top-nav {
 div.top-nav, div.bottom-nav {
     visibility: visible;
     height: 100%;
-    max-width: 620px;
     text-align:center;
     margin-bottom: 2em;
 }

@@ -24,6 +24,10 @@ h4, h5, h6,
     margin-top: 1em;
 }
 
+h2, h3, h4, h5, h6 {
+    text-align: left;
+}
+
 hr {
     visibility: hidden;
     padding-bottom: 1em; 
@@ -239,6 +243,17 @@ span.line-number {
     font-size: 12px !important; /* gist fixup */
 }
 
+div.file-data table.lines {
+    margin: 0px;
+    border: none;
+    line-height: 1.2em;
+}
+@media screen and (min-width: 540px) {
+    div.file-data table.lines {
+        width: 686px !important; /* gist fixup */
+    }
+}
+
 figure * { border: none; margin: auto; padding: auto; }
 
 @media screen and (max-width: 660px) {
@@ -259,6 +274,10 @@ figure * { border: none; margin: auto; padding: auto; }
     }
     article header h1.full, h1.page {
         font-size: 18px;
+    }
+
+    article header h1 {
+        font-size: 12px;
     }
 }
 
