@@ -28,7 +28,7 @@ the software and can lead to changes in functional requirements.
 In order to verify the correct functioning of software, engineers check the
 software to ensure it satisfies the specification. A specification states how
 the software should function. Unfortunately, a complete and accurate
-specification never exists. Engineer carefully determine what to check and based
+specification never exists. Engineers carefully determine what to check and based
 on their estimations on the accuracy and completeness of a specification.
 
 The modern engineer has many techniques that can be used to verify software.
@@ -111,9 +111,10 @@ runs.
 ### Tests on private methods make the test suite brittle
 
 Here the tester needs to use their best judgement on whether the specification
-on some area is in too much flux to formalize a test. They should also use there
+on some area is in too much flux to formalize a test. They should also use their
 judgement on what to check. If the output format is likely to change rather than
-checking it precises can it be checked to ensure it meets certain properties?
+checking the output exactly matches some expected output one should check that
+the output has certain properties.
 
 #### negative example
 
