@@ -1,6 +1,8 @@
 {%- if article.lang %}{% set DEFAULT_LANG = article.lang %}{% endif -%}
 {% extends "base.html" %}
 
+{%- block title %} {{ article.title }} {% endblock title -%}
+
 {% block headers %}
     {{ super() }}
     <meta name="author"   content="{{ article.author or DEFAULT_AUTHOR }}" />
