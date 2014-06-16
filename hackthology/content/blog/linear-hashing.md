@@ -4,17 +4,19 @@ Date: 2013-11-13
 Category: Blog
 
 
-Tonight I am giving a talk[^1] on Linear Hashing,[^2]<sup>,</sup>[^3] a hash table suitable
-for secondary storage. It is often used to implement hash indices in databases
-and file systems. Linear Hashing was invented by Witold Litwin in 1980 and has
-been in widespread use since that time. I implemented this file-structure
-earlier this year. You can find [my implementation on
-github](https://github.com/timtadh/file-structures/blob/master/linhash).
+Linear Hashing[^2]<sup>,</sup>[^3] is a hash table algorithm suitable for
+secondary storage. It is often used to implement hash indices in databases and
+file systems. Linear Hashing was invented by Witold Litwin in 1980 and has been
+in widespread use since that time. I implemented this file-structure earlier
+this year. You can find [my implementation on
+github](https://github.com/timtadh/file-structures/blob/master/linhash). This
+article is based off a talk[^1] I gave at [CWRU Hacker
+Society](http://hacsoc.org).
 
-I also have an [in memory version]({filename}linear-hashing-2.md), you probably
-want to take a look at that after you have read the post.
-
-Hopefully this essay gives you a taste for the essentials of Linear Hashing.
+I also implemented an in memory version of this algorithm. I give a detailed
+break down of each element of the implementation in the follow up
+[post]({filename}linear-hashing-2.md). You should read that article after you
+have finished this one.
 
 ![Linear Hash](/images/lin-hash.png)
 

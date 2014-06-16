@@ -9,11 +9,12 @@ post presents a new implementation which is a lot simpler than the disk based
 version referenced in the last post.
 
 In the demonstration version (that would be this one) I represent the buckets as
-binary search trees. If I had been a bit more ambitious I would have represented
-them as AVL trees or 2-3-4 trees.
-
-Find the all the code in my [goplay repository](
-https://github.com/timtadh/goplay/blob/master/hashtable/linhash.go)
+binary search trees. Find the exact code for this article in my [goplay
+repository](
+https://github.com/timtadh/goplay/blob/master/hashtable/linhash.go). An updated
+and slightly improved version is available in my [data-structures
+repository](http://github.com/timtadh/data-structures) along with several other
+interesting algorithms.
 
 ## Profiling Results
 
