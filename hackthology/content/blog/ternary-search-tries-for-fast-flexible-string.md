@@ -188,8 +188,12 @@ In this post we discussed the theory behind Symbol Tables and the use of
 Tries as a symbol table implementation. The Trie, and in particular the
 TST, is an efficient way to implement a symbol table. A good
 implementation of a TST has comparable performance to a Hash Table.
-However, as we will see in the next post they allow much more flexible
-search operations. Stay tuned.
+
+You can puruse my Go (golang)
+[implementation](https://github.com/timtadh/data-structures/tree/master/trie)
+in
+my [data-structures](http://hackthology.com/data-structures) repository. I also
+wrote a [python implementation](https://github.com/timtadh/tst).
 
  
 
