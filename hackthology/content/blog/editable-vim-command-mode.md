@@ -9,7 +9,10 @@ this places you in editable command mode. If you always want to go to that mode
 you can remap `:` with the following command:
 
 ```vim
-nmap : q:i
+" Always go to history mode
+nnoremap : q:i
+nnoremap / q/i
+nnoremap ? q?i
 ```
 
 Happy Hacking!
