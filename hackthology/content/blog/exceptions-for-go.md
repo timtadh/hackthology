@@ -43,15 +43,12 @@ func DoStuff(a, b, c interface{}) throws error {
 
 ### Adding Exceptions with a Library
 
-I created a [library](https://github.com/timtadh/data-structures/exc) which
-adds support for exceptions to the go programming langauge.
-
-<a href="https://godoc.org/github.com/timtadh/data-structures/exc"><img src="https://godoc.org/github.com/timtadh/data-structures/exc?status.svg" alt="GoDoc"></a>
-
-This library allow you to write go with exceptions and try-catch-finally
-blocks. It is not appropriate for all situations but can simplify some
-application code. Libraries and external APIs should continue to conform to
-the Go standard of returning error values.
+I created a [library](https://github.com/timtadh/data-structures/exc) which adds
+support for exceptions to the go programming language.  This library allow you
+to write go with exceptions and try-catch-finally blocks. It is not appropriate
+for all situations but can simplify some application code. Libraries and
+external APIs should continue to conform to the Go standard of returning error
+values.
 
 Here is an example of the `DoStuff` function where foo, bar and baz all throw
 exceptions instead of returning errors. (We will look at the case where they
@@ -88,7 +85,7 @@ func DoStuff(a, b, c interface{}) error {
 
 Rethrow will chain the Throwable `t` with the new `*Error` created such that
 if/when the exception reaches the top level you know exactly how it was
-created and where it was rethrown.
+created and where it was re-thrown.
 
 #### Throwing Errors
 
@@ -119,13 +116,13 @@ func DoStuff(a, b, c interface{}) { // Throws
 This package also supports: catching user defined exceptions, catching
 multiple exception types, `Close` which works like the "try with resources"
 construct in Java 7+, (multiple) finally blocks, and a choice between
-propogating exceptions with `Unwind` or retrieving the error/exception with
+propagating exceptions with `Unwind` or retrieving the error/exception with
 `Error` and `Exception` functions.
 
 One Gotcha! The `Try()` function creates a `*Block` struct. To execute the
 block you must either call: `Unwind`, `Error`, or `Exception`. `Unwind`
 executes the block, if there is an exception coming out of the block it
-continues to cause the program stack unwind. `Error` and `Exception` excute
+continues to cause the program stack unwind. `Error` and `Exception` execute
 the block, but return the exception as a value to deal with in the usual Go
 way.
 
@@ -133,7 +130,7 @@ way.
 
 Finally blocks are a great feature of exceptions. They allow you to have a block
 of code run unconditionally after a try and catch block even if there was an
-unhandled exception or re-raised exception. In this example I use a finally
+un-handled exception or re-raised exception. In this example I use a finally
 block to log the timing information of the DoStuff function.
 
 ```go
@@ -494,8 +491,5 @@ mail! I know that exceptions are controversal in the Go community. This library
 tries to demonstrate how close `panic` and `recover` are to exceptions and how
 to emulate exceptions using `panic` and `recover`.
 
-Now go read the docs:
-
-<a href="https://godoc.org/github.com/timtadh/data-structures/exc"><img src="https://godoc.org/github.com/timtadh/data-structures/exc?status.svg" alt="GoDoc"></a>
-
+Now go [read the docs](https://godoc.org/github.com/timtadh/data-structures/exc).
 
