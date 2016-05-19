@@ -203,6 +203,281 @@ exc.Try(func() {
 This should work with heirarchies of exceptions allowing your code to declare
 specific exceptions for specific errors.
 
+### How does it work?
+
+Go provides `panic` and `recover` as [built-in
+functions](https://golang.org/ref/spec#Handling_panics). `panic(.)` allows you
+to cause the program to halt and the stack to "unwind". This means stack frame
+by stack frame the each function is halted and any deferred functions are run.
+Let's look at an example:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func a() {
+	defer func() {
+		fmt.Println("defer a")
+	}()
+	fmt.Println("a")
+	b()
+}
+
+func b() {
+	defer func() {
+		fmt.Println("defer b")
+	}()
+	fmt.Println("b")
+	c()
+}
+
+func c() {
+	defer func() {
+		fmt.Println("defer c")
+	}()
+	fmt.Println("c")
+	panic("c panic")
+}
+
+func main() {
+	a()
+}
+```
+
+**Output**:
+
+```
+a
+b
+c
+defer c
+defer b
+defer a
+panic: c panic
+
+goroutine 1 [running]:
+panic(0x128360, 0x1040a140)
+	/usr/local/go/src/runtime/panic.go:481 +0x700
+main.c()
+	/tmp/sandbox797297488/main.go:28 +0x180
+main.b()
+	/tmp/sandbox797297488/main.go:20 +0x140
+main.a()
+	/tmp/sandbox797297488/main.go:12 +0x140
+main.main()
+	/tmp/sandbox797297488/main.go:32 +0x20
+```
+
+(try it on the playground <https://play.golang.org/p/0Vp4jq0978>)
+
+So panic by default kills your program but gives you a nice stack trace. It also
+runs your `defer`ed functions which allows some cleanup to happen. Recognizing
+this was rather limited and their are times even in Go when it is nice to
+recover from what is usually a fatal error (like in webservers) Go also provides
+`recover`.
+
+The `recover` function can be thought of as a limited panic catching function.
+It can only meaingfully be used inside of defer functions. When a `recover` is
+found it will stop the panic (that is stop unwinding the stack) and allow the
+function the `defer`ed `recover` is in to exit normally. Let's look at another
+example:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func a() {
+	defer func() {
+		fmt.Println("defer a")
+	}()
+	fmt.Println("a")
+	b()
+	fmt.Println("end a")
+}
+
+func b() {
+	defer func() {
+		fmt.Println("defer b")
+		recover()
+	}()
+	fmt.Println("b")
+	c()
+	fmt.Println("end b")
+}
+
+func c() {
+	defer func() {
+		fmt.Println("defer c")
+	}()
+	fmt.Println("c")
+	panic("c panic")
+	fmt.Println("end c")
+}
+
+func main() {
+	fmt.Println("start")
+	a()
+	fmt.Println("end")
+}
+```
+
+**Output**:
+
+```
+start
+a
+b
+c
+defer c
+defer b
+end a
+defer a
+end
+```
+
+(Try it on the playground: <https://play.golang.org/p/WTzKywhey2>)
+
+This time, instead of the program crashing it exited normally. Functions, `a`
+and `main`, who invocations occurred before `b` which invoked `recover` exited
+normally. However, using recover like this will stop all errors and not explain
+what the problem is. Luckily, recover reports whether or not a panic was
+recovered and what the argument to the panic was. Here is an example:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func a() {
+	defer func() {
+		fmt.Println("defer a")
+		if e := recover(); e != nil {
+			fmt.Println("recovered", e)
+		}
+		fmt.Println("end defer of a")
+	}()
+	fmt.Println("a")
+	b()
+	fmt.Println("end a")
+}
+
+func b() {
+	defer func() {
+		fmt.Println("defer b")
+		if e := recover(); e != nil {
+			fmt.Println("recovered", e)
+		}
+		fmt.Println("end defer of b")
+	}()
+	fmt.Println("b")
+	c()
+	fmt.Println("end b")
+}
+
+func c() {
+	defer func() {
+		fmt.Println("defer c")
+	}()
+	fmt.Println("c")
+	panic("c panic")
+	fmt.Println("end c")
+}
+
+func main() {
+	fmt.Println("start")
+	a()
+	fmt.Println("end")
+}
+```
+
+**Output**:
+
+```
+start
+a
+b
+c
+defer c
+defer b
+recovered c panic
+end defer of b
+end a
+defer a
+end defer of a
+end
+```
+
+(Try it on the playground: <https://play.golang.org/p/agxBcqgCb8>)
+
+This time the value passed into panic was returned by the call to `recover` in
+`b`. In `a` which contains the same code as `b` to recover the panic nothing is
+returned by `recover`.
+
+#### Implementation
+
+To implement exceptions, `panic` is used to throw the `Throwable` objects. Then
+a special function `exec` is created to execute the `try` functions:
+
+```go
+func (b *Block) exec() (err Throwable) {
+	defer func() {
+		if e := recover(); e != nil {
+			switch exc := e.(type) {
+			case Throwable:
+				err = exc
+			default:
+				panic(e)
+			}
+		}
+	}()
+	b.try()
+	return
+}
+```
+
+This function simply calls the function passed into `Try()`. However, `exec` also
+registers a `defer` which changes the returned value of `exec` if a `Throwable`
+is discovered. Thus, we can throw exceptions with `panic` (no changes
+necessary!) and catch them with `recover`. The final piece is implementing the
+semantics of try, catch, finally. This is accomplished by a function called
+`run`:
+
+```go
+func (b *Block) run() (Throwable) {
+	err := b.exec()
+	if err != nil {
+		t := reflect.TypeOf(err)
+		for _, c := range b.catches {
+			if isa(t, c.exception) {
+				err = Try(func(){c.catch(err)}).exec()
+				break
+			}
+		}
+	}
+	for _, finally := range b.finallies {
+		finally()
+	}
+	return err
+}
+```
+
+The `run` function first executes the `try` and gets the error if any. If there
+is an error it tries to find a catch function to handle it (using the `isa`
+helper function to identify the catcher). Then whether or not a catch function
+was found, all `finally` functions are run in order of declaration. The final
+trick is the `catch` functions are run inside of a `Try` block and `exec`
+directly in case they re-throw exceptions. That is it! Check out the [source
+code](https://github.com/timtadh/data-structures/tree/master/exc) for more
+details.
+
 ## Conclusion
 
 There are good reasons why Go does not include exceptions at the language level.
