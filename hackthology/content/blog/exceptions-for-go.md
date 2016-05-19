@@ -46,7 +46,7 @@ func DoStuff(a, b, c interface{}) throws error {
 I created a [library](https://github.com/timtadh/data-structures/exc) which
 adds support for exceptions to the go programming langauge.
 
-[![GoDoc](https://godoc.org/github.com/timtadh/data-structures/exc?status.svg)](https://godoc.org/github.com/timtadh/data-structures/exc)
+<a href="https://godoc.org/github.com/timtadh/data-structures/exc"><img src="https://godoc.org/github.com/timtadh/data-structures/exc?status.svg" alt="GoDoc"></a>
 
 This library allow you to write go with exceptions and try-catch-finally
 blocks. It is not appropriate for all situations but can simplify some
@@ -205,14 +205,14 @@ specific exceptions for specific errors.
 
 ## Conclusion
 
-There are good reasons why Go does not include exceptions at the langauge level.
+There are good reasons why Go does not include exceptions at the language level.
 However, at times their absence can become annoying. So I created this little
 library that adds them to Go. You probably shouldn't make public APIs based on
 it, but it may help you write certain internal code more clearly. One clear use
 case is during a refactor adding `Throw` call in a deep internal function which
 should have always returned an error. Then at the entry points to the API simply
 wrap up in a `Try().Catch().Error()` which would accomplish the same thing as
-adding an returned error throughout the library.
+adding a returned error throughout the library.
 
 I hope you enjoy this little experiment of mine and don't send me too much hate
 mail! I know that exceptions are controversal in the Go community. This library
@@ -221,5 +221,6 @@ to emulate exceptions using `panic` and `recover`.
 
 Now go read the docs:
 
-[![GoDoc](https://godoc.org/github.com/timtadh/data-structures/exc?status.svg)](https://godoc.org/github.com/timtadh/data-structures/exc)
+<a href="https://godoc.org/github.com/timtadh/data-structures/exc"><img src="https://godoc.org/github.com/timtadh/data-structures/exc?status.svg" alt="GoDoc"></a>
+
 
