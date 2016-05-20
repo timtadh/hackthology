@@ -245,7 +245,6 @@ looks almost identical to composition. The only difference between composition
 and inheritance in Go, is a `struct` which inherits from another `struct` can
 directly access the methods and fields of the parent `struct`.
 
-
 ```go
 type Pet struct {
   name string
@@ -288,7 +287,9 @@ my name is spot and I am a pointer
 So it turns out, while it isn't a headline feature of Go, its ability for
 `struct`s to inherit from `struct` pointers, `struct`s, and `interface`s is
 powerful and flexible. It allows innovative designs that can solve real
-problems.
+problems. For more details checkout the
+[Embedding](https://golang.org/doc/effective_go.html#embedding) section of
+[Effective Go](https://golang.org/doc/effective_go.html).
 
 
 
