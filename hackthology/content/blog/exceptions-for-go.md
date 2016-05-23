@@ -491,5 +491,5 @@ mail! I know that exceptions are controversal in the Go community. This library
 tries to demonstrate how close `panic` and `recover` are to exceptions and how
 to emulate exceptions using `panic` and `recover`.
 
-Now go [read the docs](https://godoc.org/github.com/timtadh/data-structures/exc).
+[Check it out!](https://github.com/timtadh/data-structures/tree/master/exc).
 

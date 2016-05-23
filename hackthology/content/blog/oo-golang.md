@@ -235,13 +235,13 @@ choices
 
 In all cases, the difference from a regular field is the lack of an explicit
 name. However, the field still has a name. It is the name of the embedded type.
-so in the case of `IntegerConstant` the `Match` field is named `Match`. This is
+In the case of `IntegerConstant` the `Match` field is named `Match`. This is
 true whether one embeds a pointer to a struct or a struct by value.
 
 On gotcha of all of these options, you can't have a Field and a method with the
-same name. So if you are inheriting from a `struct` called `Foo` which
-precludes you from having a method called `Foo` and prevents you from
-implementing a "Fooer" interface: `type Fooer interface { Foo() }`.
+same name. A `struct` `Bar` is embedding a `struct` `Foo` precludes `Bar` from
+having a method called `Foo`. It also prevents `Bar` from implementing `type
+Fooer interface { Foo() }`.
 
 
 ### Sharing Data, Code or Both
