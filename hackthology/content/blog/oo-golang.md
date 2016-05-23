@@ -132,7 +132,7 @@ the need for inheritance then how can we use it?
 
 #### Why would you want to use inheritance in go?
 
-One of the obvious alternative designs for the `Token` is to make it and
+One of the obvious alternative designs for the `Token` is to make it an
 interface. This works equally well in both Java and Go:
 
 ```go
@@ -233,7 +233,10 @@ choices
           value uint64
         }
 
-In all cases, the difference from a regular field is 
+In all cases, the difference from a regular field is the lack of an explicit
+name. However, the field still has a name. It is the name of the embedded type.
+so in the case of `IntegerConstant` the `Match` field is named `Match`. This is
+true whether one embeds a pointer to a struct or a struct by value.
 
 On gotcha of all of these options, you can't have a Field and a method with the
 same name. So if you are inheriting from a `struct` called `Foo` which
