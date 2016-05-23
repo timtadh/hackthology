@@ -128,7 +128,7 @@ type IntegerConstant struct {
 ```
 
 This would be the usual way to share code and data in Go. However, if you feel
-the need for inheritance then how can we use it? 
+the need for inheritance then how can we use it?
 
 #### Why would you want to use inheritance in go?
 
@@ -179,7 +179,9 @@ and `*IntegerConstant` satisfy.
 
 One of the problems with the previous design is the manual work in
 `*IntegerConstant` calling `i.token.Type()` and `i.token.Lexeme()`. It turns out
-we can use Go's built in support for inheritance to avoid this work.
+we can use Go's built in support for
+[*embedding*](https://twitter.com/hackthology) to avoid this work. Embedding is
+a limited form of inheritance which allows types to share data and code.
 
 ```go
 type IntegerConstant struct {
@@ -206,14 +208,14 @@ fmt.Println(x.Type(), x.Lexeme())
 So wow! Not only did we not have implement `Type()` and `Value()` but
 `*IntegerConstant` also implements the `Token` interface. Pretty nice.
 
-#### Inheriting from `structs`
+#### "Inheriting" from `structs`
 
-There are three ways to do inheritance in Go. You have already seen one,
-inheriting from an `interface` by putting it as the first member without a field
+There are three ways to do "inheritance" in Go. You have already seen one,
+"inheriting" from an `interface` by putting it as the first member without a field
 name. It turns out your can do the same thing with `struct`s and you have two
 choices
 
-1. Inherit by embedding
+1. Inherit by embedding the `struct` by value
 
         ::go
 
@@ -222,7 +224,7 @@ choices
           value uint64
         }
 
-2. Inherit with a pointer
+2. Inherit by embedding a pointer to a `struct`
 
         ::go
 
@@ -230,6 +232,8 @@ choices
           *Match
           value uint64
         }
+
+In all cases, the difference from a regular field is 
 
 On gotcha of all of these options, you can't have a Field and a method with the
 same name. So if you are inheriting from a `struct` called `Foo` which
@@ -282,14 +286,386 @@ spot
 my name is spot and I am a pointer
 ```
 
+### Limitations of Embedding as Inheritance
+
+In comparison to a language like Java, Go's form of inheritance is quite
+limited. There are multiple designs which can be easy accomplished in Java which
+are not possible in Go. Let's look at some of them.
+
+#### Overriding Methods
+
+In the pet example above, `Dog` "overrides" the `Speak()` method. However, if
+`Pet` had another method `Play()` which invokes `Speak()` that `Dog` does not
+override the `Dog`'s implementation of `Speak()` would not be used:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+type Pet struct {
+	name string
+}
+
+type Dog struct {
+	Pet
+	Breed string
+}
+
+func (p *Pet) Play() {
+	fmt.Println(p.Speak())
+}
+
+func (p *Pet) Speak() string {
+	return fmt.Sprintf("my name is %v", p.name)
+}
+
+func (p *Pet) Name() string {
+	return p.name
+}
+
+func (d *Dog) Speak() string {
+	return fmt.Sprintf("%v and I am a %v", d.Pet.Speak(), d.Breed)
+}
+
+func main() {
+	d := Dog{Pet: Pet{name: "spot"}, Breed: "pointer"}
+	fmt.Println(d.Name())
+	fmt.Println(d.Speak())
+	d.Play()
+}
+```
+(try it on the playground: <https://play.golang.org/p/id-aDKW8L6>)
+
+**Output**:
+```
+spot
+my name is spot and I am a pointer
+my name is spot
+```
+
+Contrast this to Java, in Java it would work as expected!
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    Dog d = new Dog("spot", "pointer");
+    System.out.println(d.Name());
+    System.out.println(d.Speak());
+    d.Play();
+  }
+}
+
+class Pet {
+  public String name;
+
+  public Pet(String name) {
+    this.name = name;
+  }
+
+  public void Play() {
+    System.out.println(Speak());
+  }
+
+  public String Speak() {
+    return String.format("my name is %s", name);
+  }
+
+  public String Name() {
+    return name;
+  }
+}
+
+class Dog extends Pet {
+  public String breed;
+
+  public Dog(String name, String breed) {
+    super(name);
+    this.breed = breed;
+  }
+
+  public String Speak() {
+    return String.format("my name is %s and I am a %s", name, breed);
+  }
+}
+```
+
+**Output**
+```
+$ javac Main.java && java Main
+spot
+my name is spot and I am a pointer
+my name is spot and I am a pointer
+```
+
+This is a pretty big difference as it essentially precludes the use of abstract
+methods as you might want to define them. However, there is a work around:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+type Pet struct {
+	speaker func() string
+	name    string
+}
+
+type Dog struct {
+	Pet
+	Breed string
+}
+
+func NewPet(name string) *Pet {
+	p := &Pet{
+		name: name,
+	}
+	p.speaker = p.speak
+	return p
+}
+
+func (p *Pet) Play() {
+	fmt.Println(p.Speak())
+}
+
+func (p *Pet) Speak() string {
+	return p.speaker()
+}
+
+func (p *Pet) speak() string {
+	return fmt.Sprintf("my name is %v", p.name)
+}
+
+func (p *Pet) Name() string {
+	return p.name
+}
+
+func NewDog(name, breed string) *Dog {
+	d := &Dog{
+		Pet:   Pet{name: name},
+		Breed: breed,
+	}
+	d.speaker = d.speak
+	return d
+}
+
+func (d *Dog) speak() string {
+	return fmt.Sprintf("%v and I am a %v", d.Pet.speak(), d.Breed)
+}
+
+func main() {
+	d := NewDog("spot", "pointer")
+	fmt.Println(d.Name())
+	fmt.Println(d.Speak())
+	d.Play()
+}
+```
+(try it on the playground <https://play.golang.org/p/9iIb2px7jH>)
+
+**Output**:
+```
+spot
+my name is spot and I am a pointer
+my name is spot and I am a pointer
+```
+
+Now, it works "as expected" but it is much more verbose and difficult than in
+Java. You manually have to override the method yourself. Furthermore, it is
+rather fragile because if the struct is initialized incorrectly it will crash
+when `Speak()` is called because `speaker()` will not have been correctly
+initialized.
+
+#### Subtyping
+
+In Java, when the class `Dog` extends `Pet` it *is* a `Pet`. That means in every
+place you need an object of type `Pet` you can use a `Dog` object. `Dog` is
+said to *substitute* for `Pet`. This relationship is known as *subtyping* (`Dog`
+is a *subtype* of `Pet`). This relationship is also called subtype polymorphism
+and it does not exist in the Go programming language for `struct` types.
+
+Let's look at an example:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+type Pet struct {
+	speaker func() string
+	name    string
+}
+
+type Dog struct {
+	Pet
+	Breed string
+}
+
+func NewPet(name string) *Pet {
+	p := &Pet{
+		name: name,
+	}
+	p.speaker = p.speak
+	return p
+}
+
+func (p *Pet) Play() {
+	fmt.Println(p.Speak())
+}
+
+func (p *Pet) Speak() string {
+	return p.speaker()
+}
+
+func (p *Pet) speak() string {
+	return fmt.Sprintf("my name is %v", p.name)
+}
+
+func (p *Pet) Name() string {
+	return p.name
+}
+
+func NewDog(name, breed string) *Dog {
+	d := &Dog{
+		Pet:   Pet{name: name},
+		Breed: breed,
+	}
+	d.speaker = d.speak
+	return d
+}
+
+func (d *Dog) speak() string {
+	return fmt.Sprintf("%v and I am a %v", d.Pet.speak(), d.Breed)
+}
+
+func Play(p *Pet) {
+	p.Play()
+}
+
+func main() {
+	d := NewDog("spot", "pointer")
+	fmt.Println(d.Name())
+	fmt.Println(d.Speak())
+	Play(d)
+}
+```
+(try it out on the playground <https://play.golang.org/p/e1Ujx0VhwK>)
+
+**Output**:
+```
+prog.go:62: cannot use d (type *Dog) as type *Pet in argument to Play
+```
+
+However, not all is lost because subtyping does exist for `interface` types!
+Let's try it out:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+type Pet interface {
+	Name() string
+	Speak() string
+	Play()
+}
+
+type pet struct {
+	speaker func() string
+	name    string
+}
+
+type Dog interface {
+	Pet
+	Breed() string
+}
+
+type dog struct {
+	pet
+	breed string
+}
+
+func NewPet(name string) *pet {
+	p := &pet{
+		name: name,
+	}
+	p.speaker = p.speak
+	return p
+}
+
+func (p *pet) Play() {
+	fmt.Println(p.Speak())
+}
+
+func (p *pet) Speak() string {
+	return p.speaker()
+}
+
+func (p *pet) speak() string {
+	return fmt.Sprintf("my name is %v", p.name)
+}
+
+func (p *pet) Name() string {
+	return p.name
+}
+
+func NewDog(name, breed string) *dog {
+	d := &dog{
+		pet:   pet{name: name},
+		breed: breed,
+	}
+	d.speaker = d.speak
+	return d
+}
+
+func (d *dog) speak() string {
+	return fmt.Sprintf("%v and I am a %v", d.pet.speak(), d.breed)
+}
+
+func Play(p Pet) {
+	p.Play()
+}
+
+func main() {
+	d := NewDog("spot", "pointer")
+	fmt.Println(d.Name())
+	fmt.Println(d.Speak())
+	Play(d)
+}
+```
+(try it on the playground <https://play.golang.org/p/WMH-cr4AJf>)
+
+**Output**:
+```
+spot
+my name is spot and I am a pointer
+my name is spot and I am a pointer
+```
+
+Thus, `interface`s can be used to acheive a form of subtyping. However, if they
+do not change the equation on method overriding. If you want a method overridden
+correctly you still have to use the "trick" I presented above.
+
 ### Conclusion
 
 So it turns out, while it isn't a headline feature of Go, its ability for
-`struct`s to inherit from `struct` pointers, `struct`s, and `interface`s is
-powerful and flexible. It allows innovative designs that can solve real
-problems. For more details checkout the
-[Embedding](https://golang.org/doc/effective_go.html#embedding) section of
+`struct`s to embed `struct` pointers, `struct`s, and `interface`s is powerful
+and flexible. It allows innovative designs that can solve real problems.
+However, in comparison to Java it is limited because of a lack of direct support
+for subtyping and method overriding. It does contain one feature that Java does
+not, the ability to embed an `interface`. For more details on embedding checkout
+the [Embedding](https://golang.org/doc/effective_go.html#embedding) section of
 [Effective Go](https://golang.org/doc/effective_go.html).
 
+----
 
+Thank you to echlebek, Alexander Staubo, spriggan3, and breerly for reading and
+providing thoughtful feedback on this post.
 
