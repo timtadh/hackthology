@@ -190,7 +190,7 @@ a, a:visited {
 a:hover {
     border: none;
     text-decoration: none;
-    border-bottom: 1px black solid;
+    border-bottom: 2px red solid;
 }
 
 a:active, a:focus {
@@ -241,6 +241,12 @@ pre {
 
 code {
   font-size: 15px;
+  padding-top: 0.05em;
+  padding-bottom: 0.05em;
+  padding-left: 0.15em;
+  padding-right: 0.15em;
+  background-color: #F1F1F1;
+  border: 1px solid silver;
 }
 
 span.line-number {
