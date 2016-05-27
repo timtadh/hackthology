@@ -54,7 +54,7 @@ visualize [graphs](https://en.wikipedia.org/wiki/Graph_\(abstract_data_type\)).
       a -> c;
       c -> b;
       d -> c;
-      b -> a;L
+      b -> a;
       b -> e;
       e -> f;
     }
@@ -83,7 +83,7 @@ the previous example would get tokenized:
     EQUAL   | "="
     ID      | "LR"
     SEMI    | ";"
-    ID      | "a"
+    ID      | "\"a\""
     LSQUARE | "["
     ID      | "label"
     EQUAL   | "="
@@ -95,10 +95,9 @@ the previous example would get tokenized:
     SEMI    | ";"
     ID      | "c"
     LSQUARE | "["
-    ID      | "label"
-    ID      | "label"
+    ID      | "<label>"
     EQUAL   | "="
-    ID      | "<u>C</u>"
+    ID      | "<<u>C</u>>"
     RSQUARE | "]"
     SEMI    | ";"
     ID      | "b"
@@ -107,8 +106,8 @@ the previous example would get tokenized:
     .
     RCURLY  | "}"
 
-Note, that like when the English sentence was analyzed spaces, newlines, tabs
-and other extraneous characters where dropped. Only the syntactically important
+Note, that like when the English sentence was analyzed, spaces, newlines, tabs
+and other extraneous characters were dropped. Only the syntactically important
 characters are output.
 
 Each token has two parts: the *type* and the *lexeme*. The type indicates the
@@ -119,7 +118,7 @@ role the token plays. The lexeme is the string the token was extracted from.
 
 To specify how a string should be tokenized a formalism called *regular
 expressions* is used. If you don't already know about regular expressions you
-could start with [Wikipedia
+could start with the [Wikipedia
 page](https://en.wikipedia.org/wiki/Regular_expression). For a more advanced
 introduction see Russ Cox's [articles](https://swtch.com/~rsc/regexp/) or Alex
 Aiken's [video lectures](https://www.youtube.com/watch?v=SRhkfvqeA1M) on the
@@ -134,7 +133,7 @@ characters. The first string, `aaa` has none (and that is ok). The second
 string, `abbbba` has 4 `b` characters. The third string, `aab` has 1 `b`. So all
 three strings satisfy the second requirement. Finally the pattern says a string
 must end in an `a`. The first and the second string both end in `a`. However,
-the third string, `aab`, do not. Therefore, the first and second strings match
+the third string, `aab`, does not. Therefore, the first and second strings match
 the pattern but the third string does not.
 
 #### The Token's for the `dot` Language
@@ -163,14 +162,16 @@ on the right.
     COMMENT = (/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|(//.*$)
     ID = ([a-zA-Z_][a-zA-Z0-9_]*)|("([^\"]|(\\.))*")|ID-HTML
 
-Every token type but `ID` and `COMMENT` a literals: either a keyword or a
+Every token type but `ID` and `COMMENT` are literals: either a keyword or a
 punctuation mark. A comment is defined by a complicated regular expression which
 defines "c-style" range comments or line comments. Since the comment expression
 is defined by a regular expression no nesting is allowed.
 
 The `ID` token is more complicated. It consists of three parts:
 
-1. The usual form as a name `[a-zA-Z_][a-zA-Z0-9_]*`
+1. The "usual form" as a name `[a-zA-Z_][a-zA-Z0-9_]*`. The pattern means a
+   letter (lower case or capital) or underscore followed by 0 or more letters,
+   numbers, or under-scores.
 
 2. A string, `"([^\"]|(\\.))*"`. Thus `"\\\""` and `"asdf\""` are valid but
    `"\\""` is not.
@@ -201,12 +202,12 @@ Lemma](https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages).
 If all tokens were regular (that is specifiable by a regular expression) then
 the full implementation of the lexer could be generated from the regular
 expressions for each of the tokens. Since the `dot` language contains at least
-one token which is non-regular special consideration needs to be taken.
+one token which is non-regular, special consideration needs to be taken.
 
 This turns out to be a fairly common situation in lexer implementation. For
 instance, if you want to support c-style comments such as `/* comment */` which
 support properly nested comments `/* asdf /* asdf */ asdf*/` then the comment
-token will not longer be regular. Furthermore, many languages (such as C)
+token will no longer be regular. Furthermore, many languages (such as C)
 require collaboration between the parser and lexer to properly identify whether
 symbols should be variable names or type names. This can also introduce a degree
 of non-regularity.
@@ -664,7 +665,7 @@ lexer](https://github.com/timtadh/dot/blob/9b5afb350454d8e023e02a0b8b3c828869ec6
 
 ### Using the Lexer
 
-Let's put it all together. Here is a simple which uses the lexer:
+Let's put it all together. Here is a simple example which uses the lexer:
 
 ```go
 package main
@@ -688,7 +689,7 @@ func main() {
   a -> c;
   c -> b;
   d -> c;
-  b -> a;L
+  b -> a;
   b -> e;
   e -> f;
 }`))
@@ -763,7 +764,6 @@ ID      | b          | 9:3-9:3
 ->      | ->         | 9:5-9:6
 ID      | a          | 9:8-9:8
 ;       | ;          | 9:9-9:9
-ID      | L          | 9:10-9:10
 ID      | b          | 10:3-10:3
 ->      | ->         | 10:5-10:6
 ID      | e          | 10:8-10:8
