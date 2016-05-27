@@ -36,9 +36,10 @@ words in natural languages have this property where the context of the overall
 sentence or paragraph determines the role they play in the sentence.
 
 Luckily, the situation is much simpler for computer languages. Most *compilers*,
-which are programs translate computer languages into other computer languages,
-start by lexically analyzing their input. They can also be used in a number of
-other scenarios where a program needs to understand data in textual forms.
+which are programs that translate computer languages into other computer
+languages, start by lexically analyzing their input. They can also be used in a
+number of other scenarios where a program needs to understand data in textual
+forms.
 
 In this article, I am going to write and explain a lexer for the
 [graphviz](http://www.graphviz.org) [dot
@@ -271,7 +272,7 @@ third group is for other packages in your code.
 
 #### Defining the Tokens
 
-Next, I create global variables and initialize them. The contain the literal
+Next, I create global variables and initialize them. They contain the literal
 tokens, the keywords, the token names, and a mapping from the names of the
 tokens to their type ids. Finally, there is a variable `Lexer *lex.Lexer` which
 will hold our `Lexer` object once constructed.
