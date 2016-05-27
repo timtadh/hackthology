@@ -4,7 +4,8 @@ Date: 2016-05-25
 Category: Blog
 
 This article is about [lexmachine](https://github.com/timtadh/lexmachine), a
-library I wrote to help you write great lexers in Go.
+library I wrote to help you write great lexers in Go. If you are looking to
+write a golang lexer or a lexer in golang this article is for you.
 
 A **lexer** is a software component that analyzes a string and breaks it up into its
 component parts. Each part is tagged with what type of thing it is. This is
