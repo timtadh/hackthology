@@ -221,7 +221,7 @@ still leveraging [theory](https://swtch.com/~rsc/regexp/) for most of the work.
 ## The LexMachine
 
 To create a lexer for the `dot` language I am going to use
-[`lexmachine`](https://github.com/timtadh/lexmachine) a library I wrote for
+[lexmachine](https://github.com/timtadh/lexmachine) a library I wrote for
 creating lexers. `lexmachine` handles all the tricky bits of converting regular
 expressions into *Non-Deterministic Finite Automata* (NFA) and using the the NFA
 to tokenize strings. It also provides the aformentioned "escape hatch" to deal
