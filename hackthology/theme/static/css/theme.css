@@ -217,6 +217,7 @@ a.goto {
 
 pre, img, figure, table {
     margin: 1em auto;
+    overflow-x: auto;
     border: 3px solid silver;
 }
 
@@ -236,7 +237,7 @@ pre {
     background-color: #FEFEFE;
     padding: 0.5em;
     max-width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 code {

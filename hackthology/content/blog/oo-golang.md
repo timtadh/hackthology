@@ -3,13 +3,15 @@ Author: Tim Henderson
 Date: 2016-05-20
 Category: Blog
 
-
 The Go (golang) programming language is not a traditional object oriented
 language like Smalltalk or Java. A key feature supporting traditional object
 oriented design is inheritance.  Inheritance supports sharing of code and data
 between related objects. It used to be that inheritance was the dominant design
 for sharing code and data but today another (older) technique called composition
 has seen a resurgence.
+
+> Thank you 李浩 (Hao Li) for translating this article into Mandarin:
+> <a href="/shi-yong-dui-xiang-zai-golangmian-xiang-ji-cheng.html" title="使用对象在Golang面向继承">使用对象在Golang面向继承</a>
 
 Before we jump into how to use inheritance in Go (which has some interesting
 edge cases) let's see how it is used in Java.
