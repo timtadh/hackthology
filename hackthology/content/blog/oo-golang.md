@@ -11,7 +11,7 @@ for sharing code and data but today another (older) technique called composition
 has seen a resurgence.
 
 > Thank you 李浩 (Hao Li) for translating this article into Mandarin:
-> <a href="/shi-yong-dui-xiang-zai-golangmian-xiang-ji-cheng.html" title="使用对象在Golang面向继承">使用对象在Golang面向继承</a>
+> <a href="/golangzhong-de-mian-xiang-dui-xiang-ji-cheng.html" title="Golang中的面向对象继承">Golang中的面向对象继承</a>
 
 Before we jump into how to use inheritance in Go (which has some interesting
 edge cases) let's see how it is used in Java.
@@ -174,8 +174,8 @@ func (i *IntegerConstant) Value() uint64 {
 }
 ```
 
-The Lexer can then easily return return the `Token` interface which both `*Match`
-and `*IntegerConstant` satisfy.
+The Lexer can then easily return the `Token` interface which both `*Match` and
+`*IntegerConstant` satisfy.
 
 #### Simplifying with inheritance
 

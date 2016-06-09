@@ -1,17 +1,18 @@
-Title: 使用对象在Golang面向继承
+Title: Golang中的面向对象继承
 Author: Tim Henderson
 Date: 2016-05-20
 Category: Mandarin
 
 Golang的面向对象机制与Smalltalk或者Java等传统面向对象的编程语言不同。传统面向对象编程语言的一个重要特性是继承机制。因为继承机制支持在关联对象间进行代码复用和数据共享。继承机制曾在代码复用和数据共享的设计模式占据主导地位，但是目前组合这一古老的技术重新焕发了活力。
 
-> 本篇文章转自Tim Henderson的 "Object Oriented Inheritance in Go"， 原文地址是 <http://hackthology.com/object-oriented-inheritance-in-go.html> 。非常感谢李浩用于翻译的文章。
+> 本篇文章转自Tim Henderson的 "Object Oriented Inheritance in Go"， 原文地址是 <http://hackthology.com/object-oriented-inheritance-in-go.html> 。非常感谢李浩和骏奇对于这篇文章的翻译。
 
-在我们探讨如何在Go中实现继承机制之前（该机制会有悖于我们对继承机制的常规印象），我们先看一下Java中如何实现继承机制。
+在我们探讨如何在Go中实现继承机制之前（Golong中的继承机制和其他语言(Java)的继承机制有区别），我们先看一下Java中如何实现继承机制。
 
 ### 继承与组合
 
 让我们先看一下我最喜欢的话题之一：编译器！编译器由管道转换构成，该管道读取text文本并将其转化为机器代码、汇编语言、字节码或者其他的编程语言。管道首先会使用语法分析器对目标变成语言进行语法分析。一般情况下文本会被分解为不同的组成部分，例如：关键词、标识符、标点和数字等等。每个组成部分都会被相应的数据类型标记。例如下面这个Java数据类型：
+
 
 ```java
 public class Main {}
@@ -146,7 +147,7 @@ func (i *IntegerConstant) Value() uint64 {
 }
 ```
 
-这样分析器就可以返回满足Token接口的*Match 和 *IntegerConstant类型。
+这样分析器就可以返回满足*Match 和 *IntegerConstant类型的Token接口。
 
 #### 继承机制的简化版
 
