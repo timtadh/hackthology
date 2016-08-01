@@ -44,7 +44,7 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'footnotes']
     #'html/index.html': {'path': 'index.html'},
 #}
 ARTICLE_EXCLUDES = ['pages','html']
-STATIC_PATHS = ['images', 'pdfs']
+STATIC_PATHS = ['images', 'pdfs', 'tars']
 DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
 
 # Blogroll
