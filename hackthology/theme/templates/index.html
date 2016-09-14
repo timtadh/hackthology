@@ -2,11 +2,8 @@
 
 {%- block content %}
    <p class="first">
-   {% block sayings %}
-   
-   {% endblock %}
    </p>
-   {% for article in articles_page.object_list %}
+   {% for article in articles %}
       {% if article.category.name.lower() == "blog" %}
       <article class="post">
         <header class="post-header">

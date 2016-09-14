@@ -24,10 +24,6 @@ h4, h5, h6,
     margin-top: 1em;
 }
 
-h2, h3, h4, h5, h6 {
-    text-align: left;
-}
-
 hr {
     visibility: hidden;
     padding-bottom: 1em; 
@@ -83,10 +79,6 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Lora', "Century Schoolbook L", "Georgia", "Nimbus Roman No9 L", "Norasi", "Rekha", serif;
-}
-
-h1, h2, h3 {
-    font-weight: normal;
 }
 
 blockquote {
@@ -152,7 +144,17 @@ nav a {
     font-size: 6em;
     font-family: 'Alice', serif;
     font-weight: normal;
-    margin: .2em;
+    margin: 0;
+    padding: 0;
+}
+
+#page-head h3 {
+    font-size: 1.2em;
+    font-family: 'Alice', serif;
+    font-weight: normal;
+    position: relative;
+    top: -1.5em;
+    margin: 0em;
 }
 
 #page-head h1 a, #page-head h1 a:hover {
@@ -279,6 +281,9 @@ figure * { border: none; margin: auto; padding: auto; }
     }
     #page-head h1 {
         font-size: 2.5em;
+    }
+    #page-head h3 {
+        display: none;
     }
     pre {
         font-size: 7px !important;

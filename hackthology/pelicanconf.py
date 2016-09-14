@@ -44,8 +44,8 @@ MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'footnotes']
     #'html/index.html': {'path': 'index.html'},
 #}
 ARTICLE_EXCLUDES = ['pages','html']
-STATIC_PATHS = ['images', 'pdfs', 'tars']
-DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
+STATIC_PATHS = ['images', 'pdfs', 'tars', '.well-known']
+DIRECT_TEMPLATES = (('index', 'articles'))
 
 # Blogroll
 #LINKS =  (('Pelican', 'http://getpelican.com/'),
@@ -58,6 +58,7 @@ SOCIAL = (
     ('github', 'https://github.com/timtadh'),
     ('twitter', 'https://twitter.com/timtadh'),
     ('google+', 'https://plus.google.com/109232399292705173597'),
+    ('keybase', 'https://keybase.io/tadh'),
 )
 
 DEFAULT_PAGINATION = False
