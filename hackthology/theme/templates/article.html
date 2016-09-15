@@ -5,7 +5,9 @@
 
 {% block headers %}
     {{ super() }}
-    <meta name="author"   content="{{ article.author or DEFAULT_AUTHOR }}" />
+    {%- if article.author.name == "tim henderson" %}
+      <meta name="author"   content="{{ article.author or DEFAULT_AUTHOR }}" />
+    {%- endif %}
     <meta name="keywords" content="{{ article.tags|join(', ') }}" />
     <link rel="stylesheet" media="not print" type="text/css" href="{{ SITEURL }}/theme/css/pygments.css" /> 
 {% endblock %}

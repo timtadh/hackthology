@@ -1,7 +1,7 @@
 Title: Publications
 Author: Tim Henderson
 Date: 2014-09-26
-Category: Publications
+Category: Page
 
 Recent peer reviewed publications ordered by publication date.
 
@@ -19,6 +19,7 @@ Dependence Graphs with GRAPLE*.
 [PDF]({filename}/pdfs/swan-2016.pdf).
 [SUPPLEMENT]({filename}/pdfs/swan-2016-supplemental.pdf).
 [CODE](https://github.com/timtadh/graple).
+[WEB]({filename}/papers/2016-swan.md).
 
 Gang Shu, Boya Sun, **Tim A. D. Henderson**, and Andy Podgurski. *JavaPDG: A New
 Platform for Program Dependence Analysis*. [IEEE
