@@ -9,7 +9,10 @@ Recent peer reviewed publications ordered by publication date.
 A. Durmaz\*, **T. A. D. Henderson**\*, D.  Brubaker, and G. Bebek. *Frequent
 Subgraph Mining of Personalized Signaling Pathway Networks Groups Patients with
 Frequently Dysregulated Disease Pathways and Predicts Prognosis.*
-[PSB 2017](http://psb.stanford.edu/). <br/>
+[PSB 2017](http://psb.stanford.edu/).
+[PDF]({filename}/pdfs/psb-2017.pdf).
+[SUPPLEMENT]({filename}/pdfs/psb-2017-supplemental.pdf).
+[WEB]({filename}/papers/2017-psb.md). <br/>
 \* **Co-First Author**
 
 **Tim A. D. Henderson** and Andy Podgurski. *Sampling Code Clones from Program
