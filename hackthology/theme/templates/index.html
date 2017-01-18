@@ -8,12 +8,15 @@
       {% if article.category.name.lower() == "paper" %}
       <article class="post">
         <header class="post-header">
-          <h1>
-            <a rel="bookmark"
+            {{ article.citeauthor }}.
+              <a rel="bookmark"
                href="{{ SITEURL }}/{{ article.url }}"
                title="perm link {{ article.title }}"
-            >{{ article.citation }}</a>
-          </h1>
+              >{{ article.title }}</a>.
+            {{ article.publication}}.
+            {% if article.notes %}
+            <br/> {{ article.notes }}
+            {% endif %}
         </header>
       </article>
       {% endif %}
