@@ -128,12 +128,10 @@ send() {
   echo "$work_id" "$work_item" 1>&3 ## the fifo is fd 3
 }
 
-## Produce the jobs to run. In this case run 10 replicates of each
-## dataset in the list.
+## Produce the jobs to run.
 i=0
 for item in {dataset-A,dataset-B,dataset-C,dataset-D}; do
-  echo "sending $data $i"
-  echo $data $i 1>&3
+  send $i $data
   i=$((i+1))
 done
 ## close the filo
