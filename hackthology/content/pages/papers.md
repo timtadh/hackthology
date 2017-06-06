@@ -6,10 +6,19 @@ Category: Page
 Recent peer reviewed publications ordered by publication date.
 
 
+**Tim A. D. Henderson**. *Frequent Subgraph Analysis and its Software Engineering Applications*.
+[Case Western Reserve University](http://case.edu/). Doctoral Dissertation 2017.
+<br/>
+[PDF]({filename}/pdfs/dissertation.pdf).
+[WEB]({filename}/papers/2017-dissertation.md).
+
+
+
 **Tim A. D. Henderson** and Andy Podgurski.
 *Rethinking Dependence Clones*.
 [IWSC 2017](https://iwsc2017.github.io/).
 <br/>
+[DOI](https://doi.org/10.1109/IWSC.2017.7880512).
 [PDF]({filename}/pdfs/iwsc-2017.pdf).
 [WEB]({filename}/papers/2017-iwsc.md).
 
