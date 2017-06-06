@@ -1,14 +1,14 @@
 Title: Frequent Subgraph Analysis and its Software Engineering Applications
 Author: <a href="http://hackthology.com">Tim Henderson</a>
 Citation: <strong>Tim A. D. Henderson</strong>. <i>Frequent Subgraph Analysis and its Software Engineering Applications</i>. Case Western Reserve University. Doctoral Dissertation. 2017.
-CiteAuthor: <strong>Tim A. D. Henderson</strong>.
+CiteAuthor: <strong>Tim A. D. Henderson</strong>
 Publication: Case Western Reserve University. Doctoral Dissertation. 2017
 Date: 2017-08-18
 Category: Paper
 
 
 **Tim A. D. Henderson**. *Frequent Subgraph Analysis and its Software Engineering Applications*.
-[Case Western Reserve University](http://case.edu/). Doctoral Dissertation 2017.
+[Case Western Reserve University](http://case.edu/). Doctoral Dissertation. 2017.
 <br/>
 [PDF]({filename}/pdfs/dissertation.pdf).
 [WEB]({filename}/papers/2017-dissertation.md).
