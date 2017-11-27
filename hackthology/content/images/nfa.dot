@@ -23,27 +23,27 @@ digraph nfa {
   start [shape="none", label=""]
   start -> 0 [label="start"]
 
-  0 -> 1 [label="@"] 1 [style="bold" xlabel="AT"]
-  0 -> 2 [label="+"] 2 [style="bold" xlabel="PLUS"]
-  0 -> 3 [label="*"] 3 [style="bold" xlabel="STAR"]
-  0 -> 4 [label=<\>] 4 [style="bold" xlabel="SLASH"]
-  0 -> 5 [label="\^"] 5 [style="bold" xlabel="CARROT"]
-  0 -> 6 [label="`"] 6 [style="bold" xlabel="BACKTICK"]
-  0 -> 7 [label="("] 7 [style="bold" xlabel="LPAREN"]
-  0 -> 8 [label=")"] 8 [style="bold" xlabel="RPAREN"]
+  0 -> 1 [label="@"] 1 [style="bold" peripheries=2 xlabel="AT"]
+  0 -> 2 [label="+"] 2 [style="bold" peripheries=2 xlabel="PLUS"]
+  0 -> 3 [label="*"] 3 [style="bold" peripheries=2 xlabel="STAR"]
+  0 -> 4 [label=<\>] 4 [style="bold" peripheries=2 xlabel="SLASH"]
+  0 -> 5 [label="\^"] 5 [style="bold" peripheries=2 xlabel="CARROT"]
+  0 -> 6 [label="`"] 6 [style="bold" peripheries=2 xlabel="BACKTICK"]
+  0 -> 7 [label="("] 7 [style="bold" peripheries=2 xlabel="LPAREN"]
+  0 -> 8 [label=")"] 8 [style="bold" peripheries=2 xlabel="RPAREN"]
 
   // bus
   0  -> 9  [label="b"]
   9  -> 10 [label="u"]
   10 -> 11 [label="s"]
-  11 [style="bold" xlabel="BUS"]
+  11 [style="bold" peripheries=2 xlabel="BUS"]
 
   // chip
   0  -> 12 [label="c"]
   12 -> 13 [label="h"]
   13 -> 14 [label="i"]
   14 -> 15 [label="p"]
-  15 [style="bold" xlabel="CHIP"]
+  15 [style="bold" peripheries=2 xlabel="CHIP"]
 
   // label
   0  -> 16 [label="l"]
@@ -51,7 +51,7 @@ digraph nfa {
   17 -> 18 [label="b"]
   18 -> 19 [label="e"]
   19 -> 20 [label="l"]
-  20 [style="bold" xlabel="LABEL"]
+  20 [style="bold" peripheries=2 xlabel="LABEL"]
 
   // compute
   0  -> 21 [label="c"]
@@ -61,7 +61,7 @@ digraph nfa {
   24 -> 25 [label="u"]
   25 -> 26 [label="t"]
   26 -> 27 [label="e"]
-  27 [style="bold" xlabel="COMPUTE"]
+  27 [style="bold" peripheries=2 xlabel="COMPUTE"]
 
   // ignore
   0  -> 28 [label="i"]
@@ -70,13 +70,13 @@ digraph nfa {
   30 -> 31 [label="o"]
   31 -> 32 [label="r"]
   32 -> 33 [label="e"]
-  33 [style="bold" xlabel="IGNORE"]
+  33 [style="bold" peripheries=2 xlabel="IGNORE"]
 
   // set
   0  -> 34 [label="s"]
   34 -> 35 [label="e"]
   35 -> 36 [label="t"]
-  36 [style="bold" xlabel="SET"]
+  36 [style="bold" peripheries=2 xlabel="SET"]
 
   // - NUMBER: `[0-9]*\.?[0-9]+`
   0  -> 37 [label=""]
@@ -85,17 +85,17 @@ digraph nfa {
   37 -> 39 [label="[0-9]"]
   38 -> 39 [label="[0-9]"]
   39 -> 39 [label="[0-9]"]
-  39 [style="bold" xlabel="NUMBER"]
+  39 [style="bold" peripheries=2 xlabel="NUMBER"]
 
   // - NAME: `[a-zA-Z_][a-zA-Z0-9_]*`
   0  -> 40 [label="[a-zA-Z_]"]
   40 -> 41 [label=""]
   41 -> 41 [label="[a-zA-Z0-9_]"]
-  41 [style="bold" xlabel="NAME"]
+  41 [style="bold" peripheries=2 xlabel="NAME"]
 
   // - NAME: `"[^"]*"`
   0  -> 42 [label="\""]
   42 -> 42 [label="[\^\"]"]
   42 -> 43 [label="\""]
-  43 [style="bold" xlabel="NAME"]
+  43 [style="bold" peripheries=2 xlabel="NAME"]
 }

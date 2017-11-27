@@ -3,8 +3,37 @@ Author: Tim Henderson
 Date: 2017-11-21
 Category: Blog
 
+<style>
+div.dfa-scroller {
+    overflow-x: unset;
+}
+div.dfa-scroller img {
+    margin-left: -25%;
+}
+@media screen and (max-width: 1100px) {
+    div.dfa-scroller {
+        overflow-x: scroll;
+    }
+    div.dfa-scroller img {
+        margin-left: unset;
+    }
+}
+aiv.dfa-scroller {
+	overflow-x: unset;
+}
+div.dfa-scroller img {
+	margin-left: -25%;
+}
+@media screen and (max-width: 1100px) {
+	div.dfa-scroller {
+		overflow-x: scroll;
+	}
+	div.dfa-scroller img {
+		margin-left: unset;
+	}
+}
+</style>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
 
 [Lexmachine](https://github.com/timtadh/lexmachine) is a lexical analysis (or
 tokenization) library for Go (golang) and it just got faster thanks to a new
@@ -178,15 +207,25 @@ If the string matches the Accept light lights up, otherwise the error light
 lights up.
 </div>
 
-Finite state automatons encode their matching "program" as a set of states
-<span class="math">$S$</span>, an alphabet <span class="math">$\Sigma$</span>,
-and a transition function which maps the current state and next symbol to the
-next state. There are several distinguished states: the *starting state*, and one
-or more *accepting states*. At each step through the input string the machine
-reads a character and consults the transition function to determine the next
-state. If at the end of the string the state has reached an *accepting state*
-the string is said to match the automaton.
+<p> Finite state automatons encode their matching "program" as a set of states
+<span class="math">\(S\)</span>, an alphabet <span
+class="math">\(\Sigma\)</span>, and a transition function which maps the current
+state and next symbol to the next state <span class="math">\( T: S \times \Sigma
+\rightarrow S \)</span>. There are several distinguished states: the
+<em>starting state</em>, and one or more <em>accepting states</em>. At each step
+through the input string the machine reads a character and consults the
+transition function to determine the next state. If at the end of the string the
+state has reached an <em>accepting state</em> the string is said to match the
+automaton.
+</p>
 
 ![Non-deterministic Finite Automata](/images/nfa.png)
-<img alt="Deterministic Finite Automata" src="/images/dfa.png" style="width: 150%;left: -25%;position: relative;">
 
+<div style="text-align: center; margin-top: -2em;">
+<div class=dfa-scroller>
+<img alt="Deterministic Finite Automata" src="/images/dfa.png" style="width: 150%;">
+</div>
+<strong>Figure 1.</strong> A Simple Finite State Automaton.<br/>
+If the string matches the Accept light lights up, otherwise the error light
+lights up.
+</div>
