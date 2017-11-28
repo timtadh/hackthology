@@ -80,22 +80,22 @@ digraph nfa {
 
   // - NUMBER: `[0-9]*\.?[0-9]+`
   0  -> 37 [label=""]
-  37 -> 37 [label="[0-9]"]
-  37 -> 38 [label="\\."]
-  37 -> 39 [label="[0-9]"]
-  38 -> 39 [label="[0-9]"]
-  39 -> 39 [label="[0-9]"]
+  37 -> 37 [label="0-9"]
+  37 -> 38 [label="."]
+  37 -> 39 [label="0-9"]
+  38 -> 39 [label="0-9"]
+  39 -> 39 [label="0-9"]
   39 [style="bold" peripheries=2 xlabel="NUMBER"]
 
   // - NAME: `[a-zA-Z_][a-zA-Z0-9_]*`
-  0  -> 40 [label="[a-zA-Z_]"]
+  0  -> 40 [label="a-zA-Z_"]
   40 -> 41 [label=""]
-  41 -> 41 [label="[a-zA-Z0-9_]"]
+  41 -> 41 [label="a-zA-Z0-9_"]
   41 [style="bold" peripheries=2 xlabel="NAME"]
 
   // - NAME: `"[^"]*"`
   0  -> 42 [label="\""]
-  42 -> 42 [label="[\^\"]"]
+  42 -> 42 [label="\\x00-!#-\\xff"]
   42 -> 43 [label="\""]
   43 [style="bold" peripheries=2 xlabel="NAME"]
 }

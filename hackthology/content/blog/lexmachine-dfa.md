@@ -1,6 +1,6 @@
 Title: Faster Tokenization with a DFA Backend for Lexmachine
 Author: Tim Henderson
-Date: 2017-11-21
+Date: 2017-11-27
 Category: Blog
 
 <style>
@@ -159,8 +159,6 @@ Specifically we are going to concern ourselves with the following matters:
    finite automatons (NFA).
 3. How to more deterministic automatons improve on the solution presented by
    NFAs
-4. And a brief sketch describing the conversion from regular expressions to
-   automatons.
 
 ## The Lexical Analysis Problem
 
@@ -219,13 +217,136 @@ state has reached an <em>accepting state</em> the string is said to match the
 automaton.
 </p>
 
+<p>
+When the transition function <span class="math">\(T\)</span> produces multiple
+states for the same input combination the automaton is said to be
+<em>non-deterministic</em>. Figure 2 shows a non-deterministic finite automaton
+(NFA) for our running example for <code>sensors.conf</code>. In the figure,
+the <em>starting state</em> (state 0) may transition on character <code>c</code>
+to states 12, 21, and 40. This may be interpreted as the machine transitioning
+to all of these states simultaneously and maintaining multiple threads of
+execution. Simulations of NFAs must keep track of each independent thread of
+execution.  If an NFA has <span class="math">\(n\)</span> states and a string
+has <span class="math">\(m\)</span> characters it can be matched in <span
+class="math">\(\mathcal{O}(n \cdot m)\)</span> steps.
+</p>
+
 ![Non-deterministic Finite Automata](/images/nfa.png)
+<div style="text-align: center; margin-top: -2em;">
+<strong>Figure 2.</strong> A Non-deterministic Finite Automaton for
+<code>sensors.conf</code>.<br/>
+States with double circles are accepting states. Each accepting state is labeled
+with the category it corresponds to. The starting state is marked.
+</div>
+
+<p>
+This means for larger languages which have more syntactic categories the cost of
+tokenization goes up as more categories are added. Can we do better? We can! If
+we do not allow the transition function <span class="math">\(T\)</span> to
+produce more than one state for each input combination the automaton will be
+deterministic finte automaton (DFA). If the automaton is deterministic then
+simulation is greatly simplified versus a non-deterministic automaton. Recall,
+in the case of NFA simulation non-deterministic steps are modeled by having the
+machine transition to all possible next states at once and keeping track of
+multiple threads of execution. In a DFA, there will always be one (and only one)
+state to transition to -- and therefore only one thread of execution. If there
+is only one thread of execution the simulation can be run in <span
+class="math">\(\mathcal{O}(m)\)</span> steps (where <span
+class="math">\(m\)</span> is the length of string).
+</p>
+
+<p>
+Figure 3 shows the minimal DFA for the NFA given in Figure 2. By coincidence
+there is one fewer states in the DFA than in the NFA. In general, this will not
+be the case. Indeed, in the worst case if the NFA has <span
+class="math">\(n\)</span> states the DFA could have as many as <span
+class="math">\(2^{n}\)</span> states. However, on average the DFA will only have
+<span class="math">\(n^3\)</span> states. Thus, a DFA makes the classic space
+vs. time tradeoff. It uses more space (in the form of a larger transition table
+on average) to get faster execution time.
+</p>
+
+<p>&nbsp;</p>
 
 <div style="text-align: center; margin-top: -2em;">
 <div class=dfa-scroller>
 <img alt="Deterministic Finite Automata" src="/images/dfa.png" style="width: 150%;">
 </div>
-<strong>Figure 1.</strong> A Simple Finite State Automaton.<br/>
-If the string matches the Accept light lights up, otherwise the error light
-lights up.
+<strong>Figure 3.</strong> A Minimal Deterministic Finite Automaton for
+<code>sensors.conf</code>.<br/>
+States with double circles are accepting states. Each accepting state is labeled
+with the category it corresponds to. The starting state is marked.
 </div>
+
+## Practical Results
+
+Does the new DFA backend outperform the NFA backend when tokenizing many
+strings? The answer is yes. As an quick (non-rigorous) example, let's tokenize
+my `sensors.conf` file 1000 times using both the NFA backend and the DFA backend.
+
+**Using the NFA backend**
+
+```bash
+$ go install github.com/timtadh/lexmachine/examples/sensors &&
+> cat /etc/sensors*.conf | (/usr/bin/time -v sensors --nfa )
+        Command being timed: "sensors --nfa"
+        User time (seconds): 3.0
+        System time (seconds): 0.00
+        Percent of CPU this job got: 102%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.97
+        Average shared text size (kbytes): 0
+        Average unshared data size (kbytes): 0
+        Average stack size (kbytes): 0
+        Average total size (kbytes): 0
+        Maximum resident set size (kbytes): 6564
+        Average resident set size (kbytes): 0
+        Major (requiring I/O) page faults: 0
+        Minor (reclaiming a frame) page faults: 1749
+        Voluntary context switches: 1866
+        Involuntary context switches: 473
+        Swaps: 0
+        File system inputs: 0
+        File system outputs: 0
+        Socket messages sent: 0
+        Socket messages received: 0
+        Signals delivered: 0
+        Page size (bytes): 4096
+        Exit status: 0
+```
+
+**Using the DFA backend**
+
+```bash
+$ go install github.com/timtadh/lexmachine/examples/sensors &&
+> cat /etc/sensors*.conf | (/usr/bin/time -v sensors --dfa )
+        Command being timed: "sensors --dfa"
+        User time (seconds): 2.01
+        System time (seconds): 0.00
+        Percent of CPU this job got: 104%
+        Elapsed (wall clock) time (h:mm:ss or m:ss): 0:01.93
+        Average shared text size (kbytes): 0
+        Average unshared data size (kbytes): 0
+        Average stack size (kbytes): 0
+        Average total size (kbytes): 0
+        Maximum resident set size (kbytes): 7680
+        Average resident set size (kbytes): 0
+        Major (requiring I/O) page faults: 0
+        Minor (reclaiming a frame) page faults: 2172
+        Voluntary context switches: 2231
+        Involuntary context switches: 359
+        Swaps: 0
+        File system inputs: 0
+        File system outputs: 0
+        Socket messages sent: 0
+        Socket messages received: 0
+        Signals delivered: 0
+        Page size (bytes): 4096
+        Exit status: 0
+```
+
+Note as predicted by the theory presented above, the NFA backend used less
+memory but took longer to tokenize the file 1000 times. The DFA backend used
+more memory (but not a lot more) and tokenized the file faster than the NFA
+backend.
+
+Intrigued? Try out [lexmachine](https://github.com/timtadh/lexmachine) today!
