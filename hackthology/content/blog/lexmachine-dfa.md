@@ -47,10 +47,10 @@ Lexical analysis is the process of breaking strings up into substrings, called
 also called *tokenization* is the first step in parsing complex file formats,
 programming languages, network protocols, and other information. Let's look at a
 quick example, suppose we wanted to process a custom configuration file format.
-For instance, [sensors.conf](https://linux.die.net/man/5/sensors.conf) which
-describes how libsensors should translate the raw readings hardware monitoring
-chips to real-world values -- such as voltage and temperature. The first part of
-my laptop's sensons.conf starts contains the following:
+For instance, [sensors.conf](https://linux.die.net/man/5/sensors.conf) describes
+how Linux should translate the raw readings hardware monitoring chips to
+real-world values -- such as voltage and temperature. The first part of my
+laptop's `sensors.conf` file begins with the following:
 
 ```conf
 # It is recommended not to modify this file, but to drop your local
@@ -129,7 +129,7 @@ patterns:
 - PLUS: `+`
 - STAR: `*`
 - DASH: `-`
-- SLASH: `\`
+- SLASH: `/`
 - CARROT: `^`
 - BACKTICK: <code>\`</code>
 - LPAREN: `(`
@@ -147,14 +147,14 @@ patterns:
 These patterns define how text in the input should categorized according to the
 rules for the `sensors.conf` file.
 
-# Efficiently Categorizing Substrings with Automatons
+# Efficiently Categorizing Substrings with Automata
 
 Now we turn our attention from *what* lexical analysis is to *how* it works.
 Specifically we are going to concern ourselves with the following matters:
 
 1. How the lexical analysis problem is different than the one solved by standard
-   implementations of regular expression engines (such as the `regexp` standard
-   library package).
+   implementations of regular expression engines (such as the
+   [regexp](https://golang.org/pkg/regexp/) standard library package).
 2. How to solve the lexical analysis problem with non-deterministic
    finite automatons (NFA).
 3. How to more deterministic automatons improve on the solution presented by
@@ -239,18 +239,37 @@ States with double circles are accepting states. Each accepting state is labeled
 with the category it corresponds to. The starting state is marked.
 </div>
 
+To use an NFA for the lexical analysis problem several adjustments need to be
+made.
+
+1. To match prefixes, keep scanning until no new states are found (that is all
+   threads of execution have either reached end of the string or the error
+   state).
+2. Track all accepting states reached during the scanning.
+3. Return the "most relevant" match on state exhaustion by returning the
+   accepting state which matched the longest prefix. Ties are broken by user
+   supplied precedence.
+4. When the user requests the next token, reset the simulation to the starting
+   state and rerun starting at the next character after the previously returned
+   prefix.
+5. After all input has been consumed check all of the input was successfully
+   matched. Return an error otherwise.
+
 <p>
-This means for larger languages which have more syntactic categories the cost of
-tokenization goes up as more categories are added. Can we do better? We can! If
+As languages get more complex the cost of tokenization goes up when using NFAs
+because the cost for matching a regular expression is dependent in the size of
+the NFA (<span class="math">\(\mathcal{O}(n \cdot m)\)</span> where <span
+class="math">\(n\) is the number of states in the NFA and <span
+class="math">\(m\) is the length of the string). Can we do better?  We can! If
 we do not allow the transition function <span class="math">\(T\)</span> to
 produce more than one state for each input combination the automaton will be
-deterministic finte automaton (DFA). If the automaton is deterministic then
+deterministic finite automaton (DFA). If the automaton is deterministic then
 simulation is greatly simplified versus a non-deterministic automaton. Recall,
 in the case of NFA simulation non-deterministic steps are modeled by having the
 machine transition to all possible next states at once and keeping track of
-multiple threads of execution. In a DFA, there will always be one (and only one)
-state to transition to -- and therefore only one thread of execution. If there
-is only one thread of execution the simulation can be run in <span
+multiple threads of execution.  In a DFA, there will always be one (and only
+one) state to transition to -- and therefore only one thread of execution. If
+there is only one thread of execution the simulation can be run in <span
 class="math">\(\mathcal{O}(m)\)</span> steps (where <span
 class="math">\(m\)</span> is the length of string).
 </p>

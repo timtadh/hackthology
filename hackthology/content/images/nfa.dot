@@ -26,7 +26,7 @@ digraph nfa {
   0 -> 1 [label="@"] 1 [style="bold" peripheries=2 xlabel="AT"]
   0 -> 2 [label="+"] 2 [style="bold" peripheries=2 xlabel="PLUS"]
   0 -> 3 [label="*"] 3 [style="bold" peripheries=2 xlabel="STAR"]
-  0 -> 4 [label=<\>] 4 [style="bold" peripheries=2 xlabel="SLASH"]
+  0 -> 4 [label="/"] 4 [style="bold" peripheries=2 xlabel="SLASH"]
   0 -> 5 [label="\^"] 5 [style="bold" peripheries=2 xlabel="CARROT"]
   0 -> 6 [label="`"] 6 [style="bold" peripheries=2 xlabel="BACKTICK"]
   0 -> 7 [label="("] 7 [style="bold" peripheries=2 xlabel="LPAREN"]
