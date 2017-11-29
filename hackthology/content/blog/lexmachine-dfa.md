@@ -18,7 +18,7 @@ div.dfa-scroller img {
         margin-left: unset;
     }
 }
-aiv.dfa-scroller {
+div.dfa-scroller {
 	overflow-x: unset;
 }
 div.dfa-scroller img {
@@ -172,12 +172,12 @@ The lexical analysis problem on the other hand seeks to break up (tokenize) a
 long piece of text based on an ordered set of regular expressions. It does this
 by proceeding from the start of the string and finding the longest *prefix* of
 the string that matches at least one pattern. It then chooses a matching pattern
-with the *highest precidence* and outputs the matched text (*lexeme*) and the
+with the *highest precedence* and outputs the matched text (*lexeme*) and the
 category the pattern defines (*token type*).  Solving the lexical analysis
-problem is possible with a standard regular expression engine is possible but it
-not efficient. The whole piece of text has to be repeatedly scanned for each
-token to decide on the longest prefix match and highest precedence token type to
-use.
+problem with a standard regular expression engine is possible but not efficient.
+With a standard regex engine, the whole piece of text has to be repeatedly
+scanned for each token to decide on the longest prefix match and highest
+precedence token type to use.
 
 However, we can use the theory that is used to implement efficient regular
 expression engines to implement efficient lexical analysis engines. The
