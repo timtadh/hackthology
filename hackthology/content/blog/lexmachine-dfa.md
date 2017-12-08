@@ -44,13 +44,14 @@ and why it is faster. If you want to use lexmachine checkout the
 
 Lexical analysis is the process of breaking strings up into substrings, called
 *lexemes*, and putting them into categories called *tokens*. This process is
-also called *tokenization* is the first step in parsing complex file formats,
-programming languages, network protocols, and other information. Let's look at a
-quick example, suppose we wanted to process a custom configuration file format.
-For instance, [sensors.conf](https://linux.die.net/man/5/sensors.conf) describes
-how Linux should translate the raw readings hardware monitoring chips to
-real-world values -- such as voltage and temperature. The first part of my
-laptop's `sensors.conf` file begins with the following:
+also called *tokenization* and is the first step in parsing complex file
+formats, programming languages, network protocols, and other information. Let's
+look at a quick example, suppose we wanted to process a custom configuration
+file format.  For instance,
+[sensors.conf](https://linux.die.net/man/5/sensors.conf) describes how Linux
+should translate the raw readings hardware monitoring chips to real-world values
+-- such as voltage and temperature. The first part of my laptop's `sensors.conf`
+file begins with the following:
 
 ```conf
 # It is recommended not to modify this file, but to drop your local
@@ -78,7 +79,7 @@ chip "w83792d-*"
     set in8_max  3.0 * 1.10
 ```
 
-Accoring to the [man page](https://linux.die.net/man/5/sensors.conf), there are
+According to the [man page](https://linux.die.net/man/5/sensors.conf), there are
 several syntactic elements in this file: keywords (`chip`, `label`, `set`, ...),
 names (`in0`, `in6_min`, ..., `"lm78-*"`, `"VcoreA"`, ...), floats (`5.0`,
 `0.90`, ...), operators (`+`, `-`, `*`, ...), and comments which start with `#`.
@@ -157,8 +158,7 @@ Specifically we are going to concern ourselves with the following matters:
    [regexp](https://golang.org/pkg/regexp/) standard library package).
 2. How to solve the lexical analysis problem with non-deterministic
    finite automatons (NFA).
-3. How to more deterministic automatons improve on the solution presented by
-   NFAs
+3. How deterministic automatons (DFAs) improve on the solution presented by NFAs
 
 ## The Lexical Analysis Problem
 
