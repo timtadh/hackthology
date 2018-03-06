@@ -61,9 +61,9 @@ public class Token {
 }
 ```
 
-For some tokens, such as numeric constants, it convenient to specialize the
+For some tokens, such as numeric constants, it is convenient to specialize the
 `Token` object to contain some extra information. In the case of numeric
-constants the numerical value of the lexeme is convenient in to store directly in
+constants the numerical value of the lexeme is convenient to store directly in
 the `Token`. The traditional way to accomplish this is to have the numeric
 tokens *inherit* from the `Token` class.
 
