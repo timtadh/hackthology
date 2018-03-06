@@ -294,8 +294,8 @@ my name is spot and I am a pointer
 ### Limitations of Embedding as Inheritance
 
 In comparison to a language like Java, Go's form of inheritance is quite
-limited. There are multiple designs which can be easy accomplished in Java which
-are not possible in Go. Let's look at some of them.
+limited. There are multiple designs which can be easily accomplished in Java
+which are not possible in Go. Let's look at some of them.
 
 #### Overriding Methods
 
