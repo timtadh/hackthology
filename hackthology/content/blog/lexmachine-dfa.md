@@ -33,7 +33,7 @@ div.dfa-scroller img {
 	}
 }
 </style>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 [Lexmachine](https://github.com/timtadh/lexmachine) is a lexical analysis (or
 tokenization) library for Go (golang) and it just got faster thanks to a new

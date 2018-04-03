@@ -5,14 +5,19 @@ Category: Page
 
 Recent peer reviewed publications ordered by publication date.
 
+**Tim A. D. Henderson** and Andy Podgurski.
+*Behavioral Fault Localization by Sampling Suspicious Dynamic Control Flow
+Subgraphs*.  [ICST 2018](http://www.es.mdh.se/icst2018/).
+<br/>
+DOI.
+[PDF]({filename}/pdfs/icst-2018.pdf).
+[WEB]({filename}/papers/2018-icst.md).
 
 **Tim A. D. Henderson**. *Frequent Subgraph Analysis and its Software Engineering Applications*.
 [Case Western Reserve University](http://case.edu/). Doctoral Dissertation. 2017.
 <br/>
 [PDF]({filename}/pdfs/dissertation.pdf).
 [WEB]({filename}/papers/2017-dissertation.md).
-
-
 
 **Tim A. D. Henderson** and Andy Podgurski.
 *Rethinking Dependence Clones*.

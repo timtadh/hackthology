@@ -12,7 +12,7 @@ Cite as:
 > Henderson, Tim A. D. **Cryptography and Complexity**. Unpublished. Case Western Reserve University. MATH 408.  Spring 2012.
 
 <hr/>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 <p>Modern cryptographic systems are built on problems which are assumed to be computationally infeasible. Computational infeasibility means a computation which although computable would take far too many resources to actually compute. Ideally in cryptography one would like to ensure an infeasible computation&#8217;s cost is greater than the reward obtained by computing it. At first glance this seems to be an odd notion to base a cryptographic system on. Don&#8217;t we want our cryptographic systems to be totally secure? They should be unbreakable! &#8220;It may take a long time to break it,&#8221; seems like a poor guarantee of security.</p>
 <p>However, it is the best guarantee which can exist in either an ideal world (from a mathematical perspective) or the physical world. As we shall see later in the survey, if several widely held assumptions turn out to be false we can not even make the guarantee of computational infeasibility.</p>
