@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'http://hackthology.com'
+SITEURL = 'https://hackthology.com'
 FEED_DOMAIN = SITEURL
 DELETE_OUTPUT_DIRECTORY = True
 OUTPUT_PATH = 'publish'

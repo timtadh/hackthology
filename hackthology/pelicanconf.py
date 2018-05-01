@@ -18,7 +18,7 @@ GOOGLE_ANALYTICS = 'UA-20145944-2'
 ##    “http://feeds.example.com”). If you have already explicitly defined SITEURL
 ##   (see above) and want to use the same domain for your feeds, you can just set:
 ##  FEED_DOMAIN = SITEURL. 
-FEED_DOMAIN = 'http://hackthology.com'
+FEED_DOMAIN = 'https://hackthology.com'
 FEED_RSS = 'feeds/rss.xml'
 #FEED_ALL_RSS = 'feeds/rss-all.xml'
 #FEED_ATOM (None, i.e. no Atom feed)   Relative URL to output the Atom feed.
