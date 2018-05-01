@@ -9,7 +9,7 @@ Recent peer reviewed publications ordered by publication date.
 *Behavioral Fault Localization by Sampling Suspicious Dynamic Control Flow
 Subgraphs*.  [ICST 2018](http://www.es.mdh.se/icst2018/).
 <br/>
-DOI.
+[DOI](https://dx.doi.org/10.1109/ICST.2018.00019).
 [PDF]({filename}/pdfs/icst-2018.pdf).
 [WEB]({filename}/papers/2018-icst.md).
 
