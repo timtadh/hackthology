@@ -11,6 +11,12 @@ DEFAULT_LANG = u'en'
 
 GOOGLE_ANALYTICS = 'UA-20145944-2'
 
+PLUGIN_PATHS = ['../pelican-plugins/']
+PLUGINS = ['sitemap']
+
+SITEMAP = {
+    'format': 'xml',
+}
 
 # Feed generation is usually not desired when developing
 ## (None, i.e. base URL is “/”)  The domain prepended to feed URLs.  Since feed
