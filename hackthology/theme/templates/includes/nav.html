@@ -2,7 +2,7 @@
 <ul>
   {% if DISPLAY_PAGES_ON_MENU %}
     <li><a href="{{ SITEURL}}/articles.html">articles</a></li>
-    {% for p in PAGES %}
+    {% for p in pages %}
     <li><a href="{{ SITEURL}}/{{ p.url }}"{% if p == page %} class="active"{% endif %}>{{ p.title.lower() }}</a></li>
     {% endfor %}
   {% endif %}
