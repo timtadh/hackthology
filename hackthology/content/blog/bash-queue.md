@@ -123,7 +123,7 @@ exec 4<&-
 ## utility function to send the jobs to the workers
 send() {
   work_id=$1
-  work_item=$1
+  work_item=$2
   echo sending $work_id $work_item
   echo "$work_id" "$work_item" 1>&3 ## the fifo is fd 3
 }
