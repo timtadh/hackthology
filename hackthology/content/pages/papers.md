@@ -8,7 +8,9 @@ Recent peer reviewed publications ordered by publication date.
 **Tim A. D. Henderson**, Yiğit Küçük, and Andy Podgurski
 *Evaluating Automatic Fault Localization Using Markov Processes*.  [SCAM 2019](http://www.ieee-scam.org/2019/).
 <br/>
+[DOI](http://tba).
 [PDF]({filename}/pdfs/scam-2019.pdf).
+[SUPPLEMENT]({filename}/pdfs/scam-2019-supplement.pdf).
 [WEB]({filename}/papers/2019-scam.md).
 
 

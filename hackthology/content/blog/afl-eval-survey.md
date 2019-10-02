@@ -16,6 +16,13 @@ Category: Blog
 > correct you should read the
 > [pdf version]({filename}/pdfs/how-to-eval-fault-localization.pdf).
 
+<h4>Note</h4>
+> I now have a pulished paper on this topic. You probably want to read that as
+> well.
+>
+> **Tim A. D. Henderson**, Yiğit Küçük, and Andy Podgurski.
+> [Evaluating Automatic Fault Localization Using Markov Processes]({filename}/papers/2019-scam.md). SCAM 2019.
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 <h1 id="introduction">Introduction</h1>
 <p>Automatic fault localization is a software engineering technique to assist a programmer during the debugging process by suggesting suspicious locations that may be related to the root cause of the bug. The big idea behind behind automatic fault localization (or just fault localization) is by pointing the programmer towards the right area of the program the programmer will find the cause of the bug more quickly.</p>
