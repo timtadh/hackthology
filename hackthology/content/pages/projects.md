@@ -114,5 +114,5 @@ More at
 
 I have a lot more projects over on my github. These are just some of the
 highlights. Beyond the github, there are my
-[research projects]({filename}/pages/research.md)
+[research projects]({filename}/pages/papers.md)
 

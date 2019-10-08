@@ -3,7 +3,9 @@
   {% if DISPLAY_PAGES_ON_MENU %}
     <li><a href="{{ SITEURL}}/articles.html">articles</a></li>
     {% for p in pages %}
+    {% if p.title.lower() not in ["projects"] %}
     <li><a href="{{ SITEURL}}/{{ p.url }}"{% if p == page %} class="active"{% endif %}>{{ p.title.lower() }}</a></li>
+    {% endif %}
     {% endfor %}
   {% endif %}
 </ul>

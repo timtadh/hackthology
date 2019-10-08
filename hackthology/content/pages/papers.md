@@ -13,6 +13,12 @@ Recent peer reviewed publications ordered by publication date.
 [SUPPLEMENT]({filename}/pdfs/scam-2019-supplement.pdf).
 [WEB]({filename}/papers/2019-scam.md).
 
+Yiğit Küçük, **Tim A. D. Henderson**, and Andy Podgurski
+*The Impact of Rare Failures on Statistical Fault Localization: the Case of the Defects4J Suite*.  [ICSME 2019](https://icsme2019.github.io/).
+<br/>
+[DOI](http://tba).
+[PDF]({filename}/pdfs/icsme-2019.pdf).
+[WEB]({filename}/papers/2019-icsme.md).
 
 **Tim A. D. Henderson** and Andy Podgurski.
 *Behavioral Fault Localization by Sampling Suspicious Dynamic Control Flow

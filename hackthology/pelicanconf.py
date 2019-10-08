@@ -37,7 +37,17 @@ FEED_RSS = 'feeds/rss.xml'
 #TAG_FEED_RSS (None, ie no RSS tag feed)   Relative URL to output the tag RSS feed
 #FEED_MAX_ITEMS  Maximum number of items allowed in a feed. Feed item quantity is unrestricted by default.
 
-MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'footnotes']
+# MD_EXTENSIONS = ['codehilite(css_class=highlight)', 'extra', 'footnotes']
+
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+        'markdown.extensions.footnotes': {},
+    },
+    'output_format': 'html5',
+}
 
 #TEMPLATE_PAGES = {
   #'index.html': 'output/index.html'

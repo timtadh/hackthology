@@ -3,9 +3,17 @@
 {%- block content %}
    <p class="first">
    </p>
+   <h1>Short Biography</h1>
+   <p>
+      Tim Henderson is a software engineer and researcher. He specializes in
+      testing, fault localization, duplicate code detection, program analysis,
+      graph mining, and databases. Dr.  Henderson recieved a Ph.D. at Case
+      Western Reserve University and was advised by Professor Andy Podgurksi.
+   </p>
    <h1>Selected Publications</h1>
    {% for article in articles %}
-      {% if article.category.name.lower() == "paper" %}
+      {% if article.category.name.lower() == "paper" and
+      article.mainpage.lower() != "hide" %}
       <article class="post">
         <header class="post-header">
             {{ article.citeauthor }}.

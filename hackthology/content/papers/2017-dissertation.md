@@ -5,6 +5,7 @@ CiteAuthor: <strong>Tim A. D. Henderson</strong>
 Publication: Case Western Reserve University. Doctoral Dissertation. 2017
 Date: 2017-08-18
 Category: Paper
+MainPage: show
 
 
 **Tim A. D. Henderson**. *Frequent Subgraph Analysis and its Software Engineering Applications*.
