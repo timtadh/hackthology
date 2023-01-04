@@ -5,10 +5,26 @@ Category: Page
 
 Recent peer reviewed publications ordered by publication date.
 
+**Tim A. D. Henderson**, Bobby Dorward, Eric Nickell, Collin Johnston, and Avi Kondareddy.
+*Flake Aware Culprit Finding*.  [ICST Industry 2023](https://conf.researchr.org/home/icst-2023).
+<br/>
+[DOI](http://tba).
+[PDF]({static}/pdfs/icst-2023.pdf).
+[WEB]({filename}/papers/2023-icst.md).
+
+Yiğit Küçük, **Tim A. D. Henderson**, and Andy Podgurski
+*Improving fault localization by integrating value and predicate based causal inference techniques*.  [ICSE 2021](https://conf.researchr.org/details/icse-2021/icse-2021-papers/72/Improving-Fault-Localization-by-Integrating-Value-and-Predicate-Based-Causal-Inferenc).
+<br/>
+[DOI](https://doi.org/10.1109/ICSE43902.2021.00066).
+[PDF]({static}/pdfs/icse-2021.pdf).
+[SUPPLEMENT]({static}/pdfs/icse-2021-supplement.pdf).
+[ARTIFACT](https://doi.org/10.5281/zenodo.4441439).
+[WEB]({filename}/papers/2021-icse.md).
+
 **Tim A. D. Henderson**, Yiğit Küçük, and Andy Podgurski
 *Evaluating Automatic Fault Localization Using Markov Processes*.  [SCAM 2019](http://www.ieee-scam.org/2019/).
 <br/>
-[DOI](http://tba).
+[DOI](https://doi.org/10.1109/SCAM.2019.00021).
 [PDF]({static}/pdfs/scam-2019.pdf).
 [SUPPLEMENT]({static}/pdfs/scam-2019-supplement.pdf).
 [WEB]({filename}/papers/2019-scam.md).
