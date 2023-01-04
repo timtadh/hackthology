@@ -11,7 +11,7 @@ Yiğit Küçük, **Tim A. D. Henderson**, and Andy Podgurski
 *The Impact of Rare Failures on Statistical Fault Localization: the Case of the Defects4J Suite*.  [ICSME 2019](https://icsme2019.github.io/).
 <br/>
 [DOI](http://tba).
-[PDF]({filename}/pdfs/icsme-2019.pdf).
+[PDF]({static}/pdfs/icsme-2019.pdf).
 [WEB]({filename}/papers/2019-icsme.md).
 
 #### Abstract
@@ -33,4 +33,4 @@ Boosting precision by adding test cases was found to improve overall SFL
 effectiveness. We present our findings and discuss their implications for the
 evaluation and use of SFL metrics.
 
-([Read the rest of the paper as a pdf]({filename}/pdfs/icsme-2019.pdf))
+([Read the rest of the paper as a pdf]({static}/pdfs/icsme-2019.pdf))

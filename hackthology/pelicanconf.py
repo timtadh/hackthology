@@ -73,7 +73,7 @@ DIRECT_TEMPLATES = (('index', 'articles'))
 SOCIAL = (
     ('github', 'https://github.com/timtadh'),
     ('twitter', 'https://twitter.com/timtadh'),
-    ('google+', 'https://plus.google.com/109232399292705173597'),
+    ('linkedin', 'https://www.linkedin.com/in/tadh'),
     ('keybase', 'https://keybase.io/tadh'),
 )
 

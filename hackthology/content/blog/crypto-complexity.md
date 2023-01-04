@@ -5,7 +5,7 @@ Category: Blog
 
 This is a conversion from a latex paper I wrote. If you want all formatting
 correct or the bibliography you should read the
-[pdf version]({filename}/pdfs/crypto-complexity.pdf).
+[pdf version]({static}/pdfs/crypto-complexity.pdf).
 
 Cite as:
 

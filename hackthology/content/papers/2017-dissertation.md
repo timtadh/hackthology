@@ -11,7 +11,7 @@ MainPage: show
 **Tim A. D. Henderson**. *Frequent Subgraph Analysis and its Software Engineering Applications*.
 [Case Western Reserve University](http://case.edu/). Doctoral Dissertation. 2017.
 <br/>
-[PDF]({filename}/pdfs/dissertation.pdf).
+[PDF]({static}/pdfs/dissertation.pdf).
 [WEB]({filename}/papers/2017-dissertation.md).
 
 #### Abstract
@@ -206,5 +206,5 @@ algorithms. The new algorithms improve code clone detection time, fault
 localization latency and accuracy, and enable analysis of larger and more
 complex programs.
 
-[Read the full dissertation]({filename}/pdfs/dissertation.pdf).
+[Read the full dissertation]({static}/pdfs/dissertation.pdf).
 

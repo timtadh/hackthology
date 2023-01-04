@@ -18,7 +18,7 @@ break down of each element of the implementation in the follow up
 [post]({filename}linear-hashing-2.md). You should read that article after you
 have finished this one.
 
-![Linear Hash](/images/lin-hash.png)
+![Linear Hash](images/lin-hash.png)
 
 # Hashing, A Refresher
 
@@ -264,7 +264,7 @@ number of elements is over a certain threshold. The threshold is often set at
 
 # Adapting Hash Tables for Secondary Storage
 
-[![CPU and Storage](/images/cpu-arch.png)](/images/cpu-arch.png)
+[![CPU and Storage](images/cpu-arch.png)](images/cpu-arch.png)
 Figure 1. **CPU and Storage**
 
 Unfortunately, the algorithm presented above does work well when using secondary
@@ -294,7 +294,7 @@ To deal with these factors and others when using disks:
 The first adjustment to make is to hash into blocks instead of hashing into
 individual array buckets. Each block is then a sorted array of entries.
 
-[![Block File](/images/block-file.png)](/images/block-file.png)
+[![Block File](images/block-file.png)](images/block-file.png)
 Figure 2. **Block File**
 
 We could make a fairly straight forward adaption of our separate chained hash
@@ -339,7 +339,7 @@ The **key** insight is to not use all the bits of the hash function "H(.)" all
 the time. When the table is small we only use as much of the hash function as
 we need. As the table grows we use more bits. As the table shrinks we use less.
 
-[![Linear Hash](/images/lin-hash-ex-1.png)](/images/lin-hash-ex-1.png)
+[![Linear Hash](images/lin-hash-ex-1.png)](images/lin-hash-ex-1.png)
 Figure 3. **Example**
 
 In the figure, `n` is the number of blocks, `i` is the number of bits of the
@@ -400,7 +400,7 @@ whether or not an expansion (called a split) is needed.
 As I mentioned above, if a bucket is full it should chain out an extra block for
 itself. This can be handled transparently.
 
-[![Linear Hash](/images/lin-hash-ex-2.png)](/images/lin-hash-ex-2.png)
+[![Linear Hash](images/lin-hash-ex-2.png)](images/lin-hash-ex-2.png)
 Figure 4. **Chaining Example**
 
 #### Splitting
@@ -408,7 +408,7 @@ Figure 4. **Chaining Example**
 The split mechanism is clever bit of the linear hash algorithm. When the table
 is too full another block is added to the table:
 
-[![Linear Hash](/images/lin-hash-ex-3.png)](/images/lin-hash-ex-3.png)
+[![Linear Hash](images/lin-hash-ex-3.png)](images/lin-hash-ex-3.png)
 Figure 5. **Split Example Part 1**
 
 Note that the bucket we added in the example was 
@@ -419,7 +419,7 @@ There are some keys in the old bucket `0` which is now called `00` which
 actually belong to bucket `10`. So in order to make the addition of the new
 bucket correct we need to split bucket `00`.
 
-[![Linear Hash](/images/lin-hash-ex-4.png)](/images/lin-hash-ex-4.png)
+[![Linear Hash](images/lin-hash-ex-4.png)](images/lin-hash-ex-4.png)
 Figure 5. **Split Example Part 2**
 
 In general if we add
@@ -467,12 +467,12 @@ implementation, an [in memory version]({filename}linear-hashing-2.md).
 
 
 [^1]: Henderson, T. A. D. (2013)
-[Linear Virtual Hashing]({filename}/pdfs/2013-11-13-linear-hashing-lecture.pdf).
+[Linear Virtual Hashing]({static}/pdfs/2013-11-13-linear-hashing-lecture.pdf).
 CWRU Hacker Society. Lecture Notes. November, 2013.
 
 [^2]: Litwin, W. (1980).
 [Linear hashing: a new tool for file and table addressing](
-{filename}/pdfs/Litwin-1980-Linear_Hashing.pdf). In Proceedings of the sixth
+{static}/pdfs/Litwin-1980-Linear_Hashing.pdf). In Proceedings of the sixth
 international conference on Very Large Data Bases - Volume 6 (pp.  212–223).
 VLDB Endowment. Retrieved from
 <http://dl.acm.org/citation.cfm?id=1286887.1286911>

@@ -8,13 +8,13 @@ Category: Blog
 > **Tim A. D. Henderson**. *How To Evaluate Statistical Fault Localization*.
 > Blog. 2018.  <https://hackthology.com/how-to-evaluate-statistical-fault-localization.html>
 > <br/>
-> [PDF]({filename}/pdfs/how-to-eval-fault-localization.pdf).
+> [PDF]({static}/pdfs/how-to-eval-fault-localization.pdf).
 > [WEB]({filename}/blog/afl-eval-survey.md).
 
 <h4>Note</h4>
 > This is a conversion from a latex paper I wrote. If you want all formatting
 > correct you should read the
-> [pdf version]({filename}/pdfs/how-to-eval-fault-localization.pdf).
+> [pdf version]({static}/pdfs/how-to-eval-fault-localization.pdf).
 
 <h4>Note</h4>
 > I now have a pulished paper on this topic. You probably want to read that as

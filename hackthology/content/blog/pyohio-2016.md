@@ -7,10 +7,10 @@ Category: Blog
 For [PyOhio](http://pyohio.org/) 2016 I gave a short talk on managing
 infrastructure. You can watch the talk on [youtube](http://youtu.be/4qav2EuXsGU)
 or look at the
-[slides]({filename}/pdfs/managing-infrastructure-with-python.pdf). The talk
+[slides]({static}/pdfs/managing-infrastructure-with-python.pdf). The talk
 starts with a short poem printed below for posterity. I also created a super
 simple demo which I did not have time to show. You can download a [tarball of
-the demo]({filename}/tars/ops-example.tar.gz). To run the demo you are going to
+the demo]({static}/tars/ops-example.tar.gz). To run the demo you are going to
 need vagrant and the "hasicorp/precise64" box. No guarantees it works, I wrote
 it in an hour or so to make sure everything in the presentation was sensible.
 
