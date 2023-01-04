@@ -6,7 +6,7 @@ Category: Page
 Recent peer reviewed publications ordered by publication date.
 
 **Tim A. D. Henderson**, Bobby Dorward, Eric Nickell, Collin Johnston, and Avi Kondareddy.
-*Flake Aware Culprit Finding*.  [ICST Industry 2023](https://conf.researchr.org/home/icst-2023).
+*Flake Aware Culprit Finding*.  [ICST Industry Track 2023](https://conf.researchr.org/home/icst-2023).
 <br/>
 [DOI](http://tba).
 [PDF]({static}/pdfs/icst-2023.pdf).
