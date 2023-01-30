@@ -6,11 +6,12 @@ Category: Page
 Recent peer reviewed publications ordered by publication date.
 
 **Tim A. D. Henderson**, Bobby Dorward, Eric Nickell, Collin Johnston, and Avi Kondareddy.
-*Flake Aware Culprit Finding*.  [ICST Industry Track 2023](https://conf.researchr.org/home/icst-2023).
+*Flake Aware Culprit Finding*.  [ICST Industry Track 2023](https://conf.researchr.org/details/icst-2023/icst-2023-industry/46/Flake-Aware-Culprit-Finding).
 <br/>
 [DOI](http://tba).
 [PDF]({static}/pdfs/icst-2023.pdf).
 [WEB]({filename}/papers/2023-icst.md).
+[Google Research Preprint](https://research.google/pubs/pub52048/).
 
 Yiğit Küçük, **Tim A. D. Henderson**, and Andy Podgurski
 *Improving fault localization by integrating value and predicate based causal inference techniques*.  [ICSE 2021](https://conf.researchr.org/details/icse-2021/icse-2021-papers/72/Improving-Fault-Localization-by-Integrating-Value-and-Predicate-Based-Causal-Inferenc).
