@@ -43,7 +43,7 @@ func DoStuff(a, b, c interface{}) throws error {
 
 ### Adding Exceptions with a Library
 
-I created a [library](https://github.com/timtadh/data-structures/exc) which adds
+I created a [library](https://github.com/timtadh/data-structures/tree/master/exc) which adds
 support for exceptions to the go programming language.  This library allow you
 to write go with exceptions and try-catch-finally blocks. It is not appropriate
 for all situations but can simplify some application code. Libraries and
