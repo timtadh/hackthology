@@ -9,7 +9,7 @@ THEME = 'theme/'
 TIMEZONE = 'US/Eastern'
 DEFAULT_LANG = u'en'
 
-GOOGLE_ANALYTICS = 'UA-20145944-2'
+GOOGLE_ANALYTICS = 'G-JETPQFYXEB'
 
 PLUGIN_PATHS = ['../pelican-plugins/']
 PLUGINS = ['sitemap']
