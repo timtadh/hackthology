@@ -5,10 +5,18 @@ Category: Page
 
 Recent peer reviewed publications ordered by publication date.
 
+**Tim A. D. Henderson**, Avi Kondareddy, Sushmita Azad, and Eric Nickell.
+*SafeRevert: When Can Breaking Changes be Automatically Reverted?*.  [ICST Industry Track 2024](https://conf.researchr.org/details/icst-2024/icst-2024-industry/7/SafeRevert-When-Can-Breaking-Changes-be-Automatically-Reverted-).
+<br/>
+[DOI](http://tba).
+[PDF]({static}/pdfs/icst-2024.pdf).
+[WEB]({filename}/papers/2024-icst.md).
+[Google Research Preprint](http://tba).
+
 **Tim A. D. Henderson**, Bobby Dorward, Eric Nickell, Collin Johnston, and Avi Kondareddy.
 *Flake Aware Culprit Finding*.  [ICST Industry Track 2023](https://conf.researchr.org/details/icst-2023/icst-2023-industry/46/Flake-Aware-Culprit-Finding).
 <br/>
-[DOI](http://tba).
+[DOI](https://doi.dx.org/10.1109/ICST57152.2023.00041).
 [PDF]({static}/pdfs/icst-2023.pdf).
 [WEB]({filename}/papers/2023-icst.md).
 [Google Research Preprint](https://research.google/pubs/pub52048/).
