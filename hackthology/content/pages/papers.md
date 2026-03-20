@@ -6,6 +6,13 @@ Category: Page
 Recent peer reviewed publications ordered by publication date.
 
 
+**Tim A. D. Henderson**, Sushmita Azad, et al.
+*Taming the Variants: Multi-Architecture Continuous Testing at Google*. [ICST 2026](http://tba).
+<br/>
+[DOI](http://tba).
+[PDF]({static}/pdfs/icst-2026.pdf).
+[WEB]({filename}/papers/2026-icst.md).
+
 Avi Kondareddy, Sushmita Azad, Eric Nickell, and **Tim A. D. Henderson**.
 *Speculative Testing at Google with Transition Prediction*.  [ICST Industry Track 2025](https://conf.researchr.org/details/icst-2025/icst-2025-industry/17/Speculative-Testing-at-Google-with-Transition-Prediction).
 <br/>
